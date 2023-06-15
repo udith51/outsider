@@ -65,6 +65,8 @@ const providerHotelSchema = mongoose.Schema(
         timestamps: true
     }
 )
-module.exports = mongoose.model('Provider_Hotel', providerHotelSchema);
-module.exports = mongoose.model('Provider_Catering', providerCateringSchema);
-module.exports = mongoose.model('Provider_Banquet', providerSchema);
+module.exports = {
+    ProviderHotel: mongoose.model('Provider_Hotel', providerHotelSchema),
+    ProviderCatering: mongoose.model('Provider_Catering', providerCateringSchema),
+    ProviderBanquet: mongoose.model('Provider_Banquet', providerSchema)
+}

@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-
+const { ProviderHotel, ProviderCatering, ProviderBanquet } = require("../outsider_backend/models/Provider")
 
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
@@ -24,9 +24,19 @@ mongoose
         console.log("Error");
     })
 
-app.post('/register-provider', async (req, res) => {
-    const newProvider = await new Provider(req.body)
+app.post('/register-provider/:category', async (req, res) => {
+    console.log(req.body);
+    const category = req.params.category.toLowerCase();
+    console.log(category);
+    var newProvider;
     try {
+        if (category === "hotel")
+            newProvider = await new ProviderHotel(req.body)
+        else if (category === "catering")
+            newProvider = await new ProviderCatering(req.body);
+        else if (category === "banquet")
+            newProvider = await new ProviderBanquet(req.body);
+
         const savedProvider = await newProvider.save();
         res.status(200).json(savedProvider);
     } catch (e) {
@@ -36,9 +46,27 @@ app.post('/register-provider', async (req, res) => {
 
 app.get('/provider/:category', async (req, res) => {
     const category = req.params.category;
+    var providers;
+    try {
+        if (category === "hotel")
+            providers = await ProviderHotel.find();
+        else if (category === "catering")
+            providers = await ProviderCatering.find();
+        else if (category === "banquet")
+            providers = await ProviderBanquet.find();
+        res.status(200).json(providers);
+
+    } catch (e) {
+        res.status(500).json(e);
+    }
 })
 
 
-app.listen(8000, () => {
-    console.log('Backend server is running');
+app.listen(3000, () => {
+    try {
+        console.log('Backend server is running');
+    }
+    catch (e) {
+        console.log(e);
+    }
 });
