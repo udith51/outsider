@@ -1,0 +1,110 @@
+.registration{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+.bgImg{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.788), rgba(0, 0, 0, 0.788)), url('../imgs/Register.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.regContents{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50vh;
+}
+
+.regTab{
+    margin-bottom: 30px;
+}
+
+.regTab{
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    font-size: 20px;
+}
+
+.regTab>div{
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.regTab>.provider{
+    border-right: 1px solid #20c0ff96;
+    border-radius: 15px 0 0 15px
+}
+.regTab>.provider-active{
+    border-right: 1px solid #20c0ff96;
+    background-color: #20c0ff96;
+    border-radius: 15px 0 0 15px
+}
+.regTab>.customer{
+    border-radius: 0 15px 15px 0;
+}
+.regTab>.customer-active{
+    border-radius: 0 15px 15px 0;
+    background-color: #20c0ff96;
+}
+
+.regForm{
+    background-color: #20c0ff96;
+    padding: 15px 25px;
+    border-radius: 10px;
+}
+
+.bar{
+    margin-bottom: 15px;
+}
+
+label{
+    margin-bottom: 5px;
+    display: block;
+}
+input{
+    min-width: 360px;
+    height: 28px;
+    padding: 8px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.regSubmit{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    width: max-content;
+    height: max-content;
+    padding: 10px 30px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    color: #0a4e0a;
+    border: 1px solid #57AF57;
+    transition: all 0.3s;
+}
+.regSubmit:hover{
+    background-color:#57AF57;
+    color: black;
+    scale: 1.1;
+}
