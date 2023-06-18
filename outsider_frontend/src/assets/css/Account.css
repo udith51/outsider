@@ -1,4 +1,4 @@
-.registration{
+.account{
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -17,50 +17,47 @@
     background-size: cover;
 }
 
-.regContents{
+.accContents{
     position: absolute;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
-    height: 50vh;
+    /* height: 55vh; */
 }
 
-.regTab{
+.accTab{
     margin-bottom: 30px;
-}
-
-.regTab{
     display: flex;
     align-items: center;
     border-radius: 15px;
     font-size: 20px;
 }
 
-.regTab>div{
+.accTab>div{
     padding: 10px 20px;
     cursor: pointer;
     background-color: white;
 }
 
-.regTab>.provider{
+.accTab>.provider{
     border-right: 1px solid #20c0ff96;
     border-radius: 15px 0 0 15px
 }
-.regTab>.provider-active{
+.accTab>.provider-active{
     border-right: 1px solid #20c0ff96;
     background-color: #20c0ff96;
     border-radius: 15px 0 0 15px
 }
-.regTab>.customer{
+.accTab>.customer{
     border-radius: 0 15px 15px 0;
 }
-.regTab>.customer-active{
+.accTab>.customer-active{
     border-radius: 0 15px 15px 0;
     background-color: #20c0ff96;
 }
 
-.regForm{
+.accForm{
     background-color: #20c0ff96;
     padding: 15px 25px;
     border-radius: 10px;
@@ -84,7 +81,7 @@ input{
     letter-spacing: 1px;
     font-weight: 500;
 }
-.regSubmit{
+.accSubmit{
     display: flex;
     align-items: center;
     margin-left: auto;
@@ -102,9 +99,18 @@ input{
     color: #0a4e0a;
     border: 1px solid #57AF57;
     transition: all 0.3s;
+    margin-bottom: 15px
 }
-.regSubmit:hover{
+.accSubmit:hover{
     background-color:#57AF57;
     color: black;
     scale: 1.1;
+}
+
+.btmText{
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: underline;
+    text-align: center;
+    cursor: pointer;
 }

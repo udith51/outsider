@@ -14,6 +14,9 @@
     padding: 4px;
 }
 
+.navLogo{
+    cursor: pointer;
+}
 .navIcons{
     display: flex;
     align-self: center;
@@ -57,18 +60,26 @@
 .navRight{
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
     cursor: pointer;
     color: grey;
 }
 
 .navPrime{
+    height: 60px;
     width: 70px;
+    background-color: #8F051C;
+    color: #CC8C3D;
+    border-top: 3px solid #CC8C3D;
+    text-align: center;
+    font-weight: 700;
+    padding: 5px 0;
 }
 
 .navAccount{
     position: relative;
-  display: inline-block;
+    display: inline-block;
+    font-weight: 500;
 }
 
 .dropdown-content {
@@ -79,14 +90,14 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-.dropdown-content a {
+.dropdown-content div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {
+.dropdown-content div:hover {
     background-color: #ddd;
     color: #435c10;
 }
@@ -97,4 +108,8 @@
 
 .navAccount:hover .dropbtn {
     color: #435c10;
+}
+
+.navSupport{
+    font-weight: 500;
 }

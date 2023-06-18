@@ -1,13 +1,18 @@
-import React, { useState } from "react";
-import { TRegForm } from "../types";
+import React, { useState, useContext } from "react";
+import { TContextType, TRegForm } from "../types";
+import { Context } from "../App";
 
-const ProviderRegistration: React.FC = () => {
+const Registration: React.FC = () => {
+  const { userType, setAccMode } = useContext(Context) as TContextType;
+
   const [form, setForm] = useState<TRegForm>({
     name: "",
     phone: "",
     email: "",
+    password: "",
     category: "",
   });
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => {
       return {
@@ -16,10 +21,11 @@ const ProviderRegistration: React.FC = () => {
       };
     });
   };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const response = await fetch(
-      `http://localhost:3000/register-provider/${form.category}`,
+      `http://localhost:3000/register-${userType}/${form.category}`,
       {
         method: "POST",
         headers: {
@@ -28,16 +34,16 @@ const ProviderRegistration: React.FC = () => {
         body: JSON.stringify(form),
       }
     );
-    // const val=await response.json();
     console.log(response.statusText);
     setForm(() => ({
       name: "",
       phone: "",
       email: "",
+      password: "",
       category: "",
     }));
   };
-  // const [name,setName]=useState<String>("");
+
   return (
     <form className="" onSubmit={onSubmit}>
       <div className="bar">
@@ -74,21 +80,42 @@ const ProviderRegistration: React.FC = () => {
         />
       </div>
       <div className="bar">
-        <label htmlFor="category">Category</label>
+        <label htmlFor="password">Password</label>
         <input
-          type="text"
-          placeholder="Enter category"
-          value={form.category}
-          name="category"
-          id="category"
+          type="password"
+          placeholder="Enter Password (min 8 characters)"
+          value={form.email}
+          name="password"
+          id="password"
           onChange={onChange}
         />
       </div>
-      <button type="submit" className="regSubmit">
-        Submit
+      {userType === "provider" && (
+        <div className="bar">
+          <label htmlFor="category">Category</label>
+          <input
+            type="text"
+            placeholder="Enter category"
+            value={form.category}
+            name="category"
+            id="category"
+            onChange={onChange}
+          />
+        </div>
+      )}
+      <button type="submit" className="accSubmit">
+        Register
       </button>
+      <div
+        className="btmText"
+        onClick={() => {
+          setAccMode("login");
+        }}
+      >
+        Already a registered user?
+      </div>
     </form>
   );
 };
 
-export default ProviderRegistration;
+export default Registration;

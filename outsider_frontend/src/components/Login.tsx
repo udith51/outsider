@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { TLogForm } from "../types";
+import React, { useState, useContext } from "react";
+import { TContextType, TLogForm } from "../types";
+import { Context } from "../App";
 
 const Login: React.FC = () => {
+  const { setAccMode } = useContext(Context) as TContextType;
+
   const [form, setForm] = useState<TLogForm>({
     email: "",
     password: "",
@@ -15,7 +18,9 @@ const Login: React.FC = () => {
       };
     });
   };
+
   const onSubmit = () => {};
+
   return (
     <form className="" onSubmit={onSubmit}>
       <div className="bar">
@@ -40,9 +45,17 @@ const Login: React.FC = () => {
           onChange={onChange}
         />
       </div>
-      <button type="submit" className="regSubmit">
-        Submit
+      <button type="submit" className="accSubmit">
+        Login
       </button>
+      <div
+        className="btmText"
+        onClick={() => {
+          setAccMode("signup");
+        }}
+      >
+        Not a registered user?
+      </div>
     </form>
   );
 };
