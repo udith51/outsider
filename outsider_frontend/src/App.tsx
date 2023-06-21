@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Support from "./pages/Support";
 import { TContextType } from "./types";
+import InfoProvider from "./pages/InfoProvider";
 
 export const Context = createContext<TContextType | null>(null);
 const App: React.FC = () => {
@@ -15,7 +16,8 @@ const App: React.FC = () => {
   const [userType, setUserType] = useState<string>("");
   return (
     <div className="App">
-      <Context.Provider
+      <InfoProvider />
+      {/* <Context.Provider
         value={{ path, setPath, accMode, setAccMode, userType, setUserType }}
       >
         {path !== "account" && <Navbar />}
@@ -25,7 +27,7 @@ const App: React.FC = () => {
           <Route path="/support" element={<Support />} />
           <Route path="/*" element={<Home />} />
         </Routes>
-      </Context.Provider>
+      </Context.Provider> */}
     </div>
   );
 };

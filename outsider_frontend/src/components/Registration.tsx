@@ -21,7 +21,7 @@ const Registration: React.FC = () => {
       };
     });
   };
-
+  // TODO
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const response = await fetch(

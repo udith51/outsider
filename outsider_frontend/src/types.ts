@@ -11,7 +11,6 @@ export type TLogForm={
     password:string
 }
 
-
 export type TContextType = {
     path: string;
     setPath: React.Dispatch<React.SetStateAction<string>>,
@@ -20,3 +19,27 @@ export type TContextType = {
     userType:string,
     setUserType:React.Dispatch<React.SetStateAction<string>>
 };
+
+export type TInfoProvider={
+    name?:string,
+    city?:string,
+    state?:string,
+
+    add1?:string,
+    add2?:string,
+    zipcode?:number,
+    accomodation?:number,
+    price?:number,
+    facilities?: string[],
+    pictures?:string[],
+
+    basicAmt?:number,
+    premiumAmt?: number,
+    premiumPlusAmt?: number,
+    mocktailAmt?: number,
+
+    standardAmt?: number,
+    deluxeAmt?: number,
+    standardRooms?: number,
+    deluxeRooms?:number
+}   
