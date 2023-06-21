@@ -1,23 +1,25 @@
 const mongoose = require("mongoose");
 
-const providerSchema = mongoose.Schema(
+const providerBanquetSchema = mongoose.Schema(
     {
-        name: String,
-        email: String,
-        phone: String,
-        categories: [String],
+        pId: String,
         banquet: {
             name: String,
             add1: String,
             add2: String,
             city: String,
             state: String,
-            pincode: String,
+            zipcode: String,
             accomodation: Number,
             price: Number,
             facilities: [String],
-            pictures: [String]
+            pictures: [String],
         },
+        reservations: [{
+            cId: String,
+            fDate: Date,
+            tDate: Date,
+        }]
     },
     {
         timestamps: true
@@ -26,18 +28,24 @@ const providerSchema = mongoose.Schema(
 
 const providerCateringSchema = mongoose.Schema(
     {
-        name: String,
-        email: String,
-        phone: String,
+        pId: String,
         catering: {
             basicAmt: Number,
             premiumAmt: Number,
             premiumPlusAmt: Number,
             mocktailAmt: Number,
-            serves: String,
+            serves: Number,
             city: String,
             state: String,
+            pictures: [String]
         },
+        reservations: [{
+            cId: String,
+            serves: Number,
+            service: String,
+            fDate: Date,
+            tDate: Date
+        }]
     },
     {
         timestamps: true
@@ -46,9 +54,7 @@ const providerCateringSchema = mongoose.Schema(
 
 const providerHotelSchema = mongoose.Schema(
     {
-        name: String,
-        email: String,
-        phone: String,
+        pId: String,
         hotel: {
             name: String,
             add1: String,
@@ -57,9 +63,17 @@ const providerHotelSchema = mongoose.Schema(
             state: String,
             pincode: String,
             standardAmt: Number,
-            deluxAmt: Number,
-            rooms: Number,
-        }
+            deluxeAmt: Number,
+            standardRooms: Number,
+            deluxeRooms: Number,
+            pictures: [String]
+        },
+        reservations: [{
+            cId: String,
+            fDate: Date,
+            tDate: Date,
+            rooms: Number
+        }]
     },
     {
         timestamps: true
@@ -68,5 +82,5 @@ const providerHotelSchema = mongoose.Schema(
 module.exports = {
     ProviderHotel: mongoose.model('Provider_Hotel', providerHotelSchema),
     ProviderCatering: mongoose.model('Provider_Catering', providerCateringSchema),
-    ProviderBanquet: mongoose.model('Provider_Banquet', providerSchema)
+    ProviderBanquet: mongoose.model('Provider_Banquet', providerBanquetSchema)
 }
