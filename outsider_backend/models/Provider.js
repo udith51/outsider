@@ -2,19 +2,17 @@ const mongoose = require("mongoose");
 
 const providerBanquetSchema = mongoose.Schema(
     {
-        pId: String,
-        banquet: {
-            name: String,
-            add1: String,
-            add2: String,
-            city: String,
-            state: String,
-            zipcode: String,
-            accomodation: Number,
-            price: Number,
-            facilities: [String],
-            pictures: [String],
-        },
+        id: String,
+        name: String,
+        add1: String,
+        add2: String,
+        city: String,
+        state: String,
+        zipcode: String,
+        accomodation: Number,
+        price: Number,
+        facilities: [String],
+        pictures: [String],
         reservations: [{
             cId: String,
             fDate: Date,
@@ -28,17 +26,15 @@ const providerBanquetSchema = mongoose.Schema(
 
 const providerCateringSchema = mongoose.Schema(
     {
-        pId: String,
-        catering: {
-            basicAmt: Number,
-            premiumAmt: Number,
-            premiumPlusAmt: Number,
-            mocktailAmt: Number,
-            serves: Number,
-            city: String,
-            state: String,
-            pictures: [String]
-        },
+        id: String,
+        name: String,
+        city: String,
+        state: String,
+        basicAmt: Number,
+        premiumAmt: Number,
+        premiumPlusAmt: Number,
+        mocktailAmt: Number,
+        pictures: [String],
         reservations: [{
             cId: String,
             serves: Number,
@@ -54,20 +50,18 @@ const providerCateringSchema = mongoose.Schema(
 
 const providerHotelSchema = mongoose.Schema(
     {
-        pId: String,
-        hotel: {
-            name: String,
-            add1: String,
-            add2: String,
-            city: String,
-            state: String,
-            pincode: String,
-            standardAmt: Number,
-            deluxeAmt: Number,
-            standardRooms: Number,
-            deluxeRooms: Number,
-            pictures: [String]
-        },
+        id: String,
+        name: String,
+        add1: String,
+        add2: String,
+        city: String,
+        state: String,
+        pincode: String,
+        standardAmt: Number,
+        deluxeAmt: Number,
+        standardRooms: Number,
+        deluxeRooms: Number,
+        pictures: [String],
         reservations: [{
             cId: String,
             fDate: Date,
