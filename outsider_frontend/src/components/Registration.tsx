@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import { TContextType, TRegForm } from "../types";
 import { Context } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const Registration: React.FC = () => {
   const { userType, setAccMode } = useContext(Context) as TContextType;
+  const navigate = useNavigate();
 
   const [form, setForm] = useState<TRegForm>({
     name: "",
@@ -13,7 +15,7 @@ const Registration: React.FC = () => {
     category: "",
   });
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: { target: HTMLInputElement | HTMLSelectElement }) => {
     setForm((prev) => {
       return {
         ...prev,
@@ -21,20 +23,27 @@ const Registration: React.FC = () => {
       };
     });
   };
-  // TODO
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch(
-      `http://localhost:3000/register-${userType}/${form.category}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      }
-    );
-    console.log(response.statusText);
+    const response = await fetch(`http://localhost:3000/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...form, userType }),
+    });
+    if (response.statusText === "OK") {
+      const val = await response.json();
+      sessionStorage.setItem("user", JSON.stringify(val));
+      if (val.userType === "provider") navigate("/info");
+      else navigate("/");
+    } else {
+      // TODO
+      const val = await response.json();
+      console.log(val);
+    }
+
     setForm(() => ({
       name: "",
       phone: "",
@@ -44,11 +53,18 @@ const Registration: React.FC = () => {
     }));
   };
 
+  const options = [
+    { value: "banquet", label: "Banquet" },
+    { value: "hotel", label: "Hotel" },
+    { value: "catering", label: "Catering" },
+  ];
+
   return (
     <form className="" onSubmit={onSubmit}>
       <div className="bar">
         <label htmlFor="name">Name</label>
         <input
+          className="aInput"
           type="text"
           placeholder="Enter name"
           value={form.name}
@@ -60,6 +76,7 @@ const Registration: React.FC = () => {
       <div className="bar">
         <label htmlFor="phone">Phone</label>
         <input
+          className="aInput"
           type="text"
           placeholder="Enter Phone"
           value={form.phone}
@@ -71,6 +88,7 @@ const Registration: React.FC = () => {
       <div className="bar">
         <label htmlFor="email">Email</label>
         <input
+          className="aInput"
           type="text"
           placeholder="Enter Email"
           value={form.email}
@@ -82,9 +100,10 @@ const Registration: React.FC = () => {
       <div className="bar">
         <label htmlFor="password">Password</label>
         <input
+          className="aInput"
           type="password"
           placeholder="Enter Password (min 8 characters)"
-          value={form.email}
+          value={form.password}
           name="password"
           id="password"
           onChange={onChange}
@@ -93,14 +112,30 @@ const Registration: React.FC = () => {
       {userType === "provider" && (
         <div className="bar">
           <label htmlFor="category">Category</label>
-          <input
-            type="text"
+          <select
+            className="aInput"
+            name="category"
+            id="category"
+            defaultValue=""
+            onChange={onChange}
+          >
+            <option disabled value="">
+              Select a category
+            </option>
+            {options.map((option) => (
+              <option value={option.value} key={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          {/* <input
+            type=""
             placeholder="Enter category"
             value={form.category}
             name="category"
             id="category"
             onChange={onChange}
-          />
+          /> */}
         </div>
       )}
       <button type="submit" className="accSubmit">

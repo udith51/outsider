@@ -7,7 +7,6 @@
 
 .infoProvider>form{
   width: 60vw;
-  height: 80%;
   background-color: antiquewhite;
   padding: 30px 0;
   overflow-y: scroll;
@@ -39,7 +38,7 @@ input{
   font-weight: 500;
 }
 
-.w33{
+.wEq{
   display: flex;
   align-items: center;
   justify-content: space-between;

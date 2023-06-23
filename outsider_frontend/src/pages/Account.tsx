@@ -11,16 +11,12 @@ const Account: React.FC = () => {
   ) as TContextType;
 
   useEffect(() => {
-    setPath("account");
+    setPath("none");
     setUserType("provider");
     return () => {
       setPath("");
     };
   }, []);
-
-  const handleUserType = (type: string) => {
-    setUserType(type);
-  };
 
   return (
     <div className="account">
@@ -31,7 +27,7 @@ const Account: React.FC = () => {
           <div
             className={userType === "provider" ? "provider-active" : "provider"}
             onClick={() => {
-              handleUserType("provider");
+              setUserType("provider");
             }}
           >
             Provider
@@ -40,7 +36,7 @@ const Account: React.FC = () => {
           <div
             className={userType === "customer" ? "customer-active" : "customer"}
             onClick={() => {
-              handleUserType("customer");
+              setUserType("customer");
             }}
           >
             Customer

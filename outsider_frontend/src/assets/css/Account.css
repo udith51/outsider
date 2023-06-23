@@ -61,6 +61,7 @@
     background-color: #20c0ff96;
     padding: 15px 25px;
     border-radius: 10px;
+    width: 500px;
 }
 
 .bar{
@@ -72,9 +73,9 @@ label{
     display: block;
 }
 
-input{
-    min-width: 360px;
-    height: 28px;
+.aInput{
+    width: 100%;
+    /* height: 28px; */
     padding: 8px;
     outline: none;
     border: none;
