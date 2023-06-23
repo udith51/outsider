@@ -8,26 +8,38 @@ import Account from "./pages/Account";
 import Support from "./pages/Support";
 import { TContextType } from "./types";
 import InfoProvider from "./pages/InfoProvider";
+import Dashboard from "./pages/Dashboard";
 
 export const Context = createContext<TContextType | null>(null);
 const App: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<string>("hotel");
   const [path, setPath] = useState<string>("");
   const [accMode, setAccMode] = useState<string>("");
   const [userType, setUserType] = useState<string>("");
   return (
     <div className="App">
-      <InfoProvider />
-      {/* <Context.Provider
-        value={{ path, setPath, accMode, setAccMode, userType, setUserType }}
+      <Context.Provider
+        value={{
+          path,
+          setPath,
+          accMode,
+          setAccMode,
+          userType,
+          setUserType,
+          activeTab,
+          setActiveTab,
+        }}
       >
-        {path !== "account" && <Navbar />}
+        {path !== "none" && <Navbar />}
         <Routes>
           <Route path="/prime" element={<Prime />} />
           <Route path="/account" element={<Account />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/info" element={<InfoProvider />} />
+          <Route path="/dash" element={<Dashboard />} />
           <Route path="/*" element={<Home />} />
         </Routes>
-      </Context.Provider> */}
+      </Context.Provider>
     </div>
   );
 };

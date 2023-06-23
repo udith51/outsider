@@ -11,10 +11,9 @@ import { TContextType } from "../types";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-
-  const { setAccMode } = useContext(Context) as TContextType;
-
-  const [activeTab, setActiveTab] = useState<String>("tab1");
+  const { activeTab, setActiveTab, setAccMode } = useContext(
+    Context
+  ) as TContextType;
 
   const handleAccount = (mode: string) => {
     setAccMode(mode);
@@ -34,20 +33,20 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="navIcons">
-          <div
-            className={activeTab === "tab1" ? "navActive" : "navIcon"}
+          {/* <div
+            className={activeTab === "decors" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("tab1");
+              setActiveTab("decors");
             }}
           >
             <GiPartyFlags className="w32 h32" />
             <span>Decors</span>
-          </div>
+          </div> */}
 
           <div
-            className={activeTab === "tab2" ? "navActive" : "navIcon"}
+            className={activeTab === "hotel" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("tab2");
+              setActiveTab("hotel");
             }}
           >
             <MdHotel className="w32 h32" />
@@ -55,34 +54,34 @@ const Navbar: React.FC = () => {
           </div>
 
           <div
-            className={activeTab === "tab3" ? "navActive" : "navIcon"}
+            className={activeTab === "catering" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("tab3");
+              setActiveTab("catering");
             }}
           >
             <IoFastFood className="w32 h32" />
-            <span>Food</span>
+            <span>Catering</span>
           </div>
 
           <div
-            className={activeTab === "tab4" ? "navActive" : "navIcon"}
+            className={activeTab === "banquet" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("tab4");
+              setActiveTab("banquet");
             }}
           >
             <BiHomeHeart className="w32 h32" />
             <span>Banquet</span>
           </div>
 
-          <div
-            className={activeTab === "tab5" ? "navActive" : "navIcon"}
+          {/* <div
+            className={activeTab === "travel" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("tab5");
+              setActiveTab("travel");
             }}
           >
             <BsBusFrontFill className="w32 h32" />
             <span>Travel</span>
-          </div>
+          </div> */}
         </div>
 
         <div className="navRight">

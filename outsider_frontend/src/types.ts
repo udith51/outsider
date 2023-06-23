@@ -18,6 +18,8 @@ export type TContextType = {
     setAccMode:React.Dispatch<React.SetStateAction<string>>,
     userType:string,
     setUserType:React.Dispatch<React.SetStateAction<string>>
+    activeTab:string,
+    setActiveTab:React.Dispatch<React.SetStateAction<string>>
 };
 
 export type TInfoProvider={
