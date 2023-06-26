@@ -28,6 +28,7 @@ const InfoProvider: React.FC = () => {
     deluxeAmt: 0,
     standardRooms: 0,
     deluxeRooms: 0,
+    assured: 0,
   });
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +73,7 @@ const InfoProvider: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
+    const assured = Math.floor(Math.random() * 10000);
     const response = await fetch(
       `http://localhost:3000/provider/register/${category}`,
       {
@@ -80,7 +81,7 @@ const InfoProvider: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...form, id }),
+        body: JSON.stringify({ ...form, id, assured }),
       }
     );
     if (response.statusText === "OK") {

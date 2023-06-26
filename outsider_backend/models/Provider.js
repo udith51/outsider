@@ -11,6 +11,7 @@ const providerBanquetSchema = mongoose.Schema(
         zipcode: String,
         accomodation: Number,
         price: Number,
+        assured: Number,
         facilities: [String],
         pictures: [String],
         reservations: [{
@@ -35,6 +36,7 @@ const providerCateringSchema = mongoose.Schema(
         premiumPlusAmt: Number,
         mocktailAmt: Number,
         pictures: [String],
+        assured: Number,
         reservations: [{
             cId: String,
             serves: Number,
@@ -61,6 +63,8 @@ const providerHotelSchema = mongoose.Schema(
         deluxeAmt: Number,
         standardRooms: Number,
         deluxeRooms: Number,
+        assured: Number,
+        facilities: [String],
         pictures: [String],
         reservations: [{
             cId: String,

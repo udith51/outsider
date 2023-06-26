@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../App";
 import { TContextType, TInfoProvider } from "../types";
+import Item from "../components/Item";
+import "../assets/css/Home.css";
 
 const Home: React.FC = () => {
   const user = JSON.parse(sessionStorage.getItem("user") as string)?.userType;
@@ -28,11 +30,14 @@ const Home: React.FC = () => {
     }
   }, [activeTab, user]);
   return (
-    <>
-      {items?.map((item) => {
-        return item.name;
-      })}
-    </>
+    <div className="home">
+      <div className="homeLeft"></div>
+      <div className="homeRight">
+        {items?.map((item) => {
+          return <Item item={item} key={item.add1} />;
+        })}
+      </div>
+    </div>
   );
 };
 

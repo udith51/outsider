@@ -1,0 +1,122 @@
+.item{
+    background-color: #fff;
+    height: 235px;
+    position: relative;
+    margin: 20px;
+    transition: all 0.5s;
+}
+
+.item:hover{
+    -webkit-box-shadow: 0px 0px 9px 1px rgba(128,125,128,1);
+    -moz-box-shadow: 0px 0px 9px 1px rgba(128,125,128,1);
+    box-shadow: 0px 0px 9px 1px rgba(128,125,128,1);
+}
+
+.itemImg{
+    height: 100%;
+    width: 235px;
+    background-color: aquamarine;
+    float: left;
+}
+
+.itemInfo{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.itemName{
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.itemLocation{
+    color: #999999;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.itemAccomodation{
+    color: #FBB4B6;
+    font-size: 15px;
+}
+
+.itemMocktails{
+    color: #333;
+    font-size: 15px;
+}
+.itemFacilities{
+    display: flex;
+}
+
+
+.itemFacility{
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 3px 5px;
+    color: #333;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.itemRight{
+}
+
+.itemPrev{
+    color: #56C247;
+    text-align: right;
+}
+
+.itemPriceInfo{
+    font-size: 13px;
+    text-align: right;
+    margin-top: 30px;
+}
+
+.itemPrice{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.striked{
+    color: #999999;
+    text-decoration: line-through;
+    font-size: 14px
+}
+
+.actual{
+    font-weight: 600;
+    font-size: 24px;
+}
+
+
+
+
+.bottom{
+    position: absolute;
+    bottom:15px;
+    right: 15px;
+    display: flex;
+    gap: 7px;
+}
+
+.itemDetails{
+    padding: 8px 12px;
+    background-color: #EA2330;
+    color: #fff;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.itemCart{
+    padding: 8px 12px;
+    background-color: #419441;
+    color: #fff;
+    border-radius: 7px;
+    cursor: pointer;
+}

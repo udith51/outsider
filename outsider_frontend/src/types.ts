@@ -26,6 +26,7 @@ export type TInfoProvider={
     name?:string,
     city?:string,
     state?:string,
+    assured?:number
 
     add1?:string,
     add2?:string,

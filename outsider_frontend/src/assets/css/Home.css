@@ -1,0 +1,18 @@
+.home{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: #EEEEEE;
+    width: 100vw;
+    height: 100vh;
+}
+
+.homeLeft{
+    flex-grow: 3;
+    padding: 10px;
+}
+
+.homeRight{
+    flex-grow: 7;
+    padding: 10px;
+}
