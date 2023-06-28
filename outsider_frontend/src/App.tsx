@@ -9,6 +9,8 @@ import Support from "./pages/Support";
 import { TContextType } from "./types";
 import InfoProvider from "./pages/InfoProvider";
 import Dashboard from "./pages/Dashboard";
+import Hotel from "./components/Hotel";
+import Details from "./pages/Details";
 
 export const Context = createContext<TContextType | null>(null);
 const App: React.FC = () => {
@@ -18,7 +20,8 @@ const App: React.FC = () => {
   const [userType, setUserType] = useState<string>("");
   return (
     <div className="App">
-      <Context.Provider
+      <Details />
+      {/* <Context.Provider
         value={{
           path,
           setPath,
@@ -39,7 +42,7 @@ const App: React.FC = () => {
           <Route path="/dash" element={<Dashboard />} />
           <Route path="/*" element={<Home />} />
         </Routes>
-      </Context.Provider>
+      </Context.Provider> */}
     </div>
   );
 };
