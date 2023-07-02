@@ -34,4 +34,22 @@ router.get('/all/:category', async (req, res) => {
     }
 })
 
+router.get('/:category/:id', async (req, res) => {
+    try {
+        const category = req.params.category.toLowerCase();
+        var item;
+        if (category === "hotel") {
+            item = await ProviderHotel.findById(req.params.id);
+        } else if (category === "catering") {
+            item = await ProviderCatering.findById(req.params.id);
+        } else if (category === "banquet") {
+            item = await ProviderBanquet
+                .findById(req.params.id);
+        }
+        return res.json(item);
+    } catch (e) {
+        res.status(500).json(e);
+    }
+})
+
 module.exports = router;

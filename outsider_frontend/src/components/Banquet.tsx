@@ -1,17 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/Service.css";
 import banquet from "../assets/imgs/banquet.jpg";
 import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { TInfoProvider } from "../types";
+import { useParams } from "react-router-dom";
 const Banquet: React.FC = () => {
+  const [item, setItem] = useState<TInfoProvider | null>();
   const [date, setDate] = useState(new Date());
   const [halls, setHalls] = useState<number>(1);
+
+  const { category, id } = useParams();
+
+  useEffect(() => {
+    async function getData(): Promise<void> {
+      await fetch(`http://localhost:3000/provider/${category}/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (response) => {
+          const val = await response.json();
+          setItem(val);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+    getData();
+  }, []);
+
   return (
     <div className="banquetMain">
       <div className="banquetTop">
-        <div className="banquetName">NAME</div>
-        <div className="banquetAdd">Address1, Address2, City, State</div>
+        <div className="banquetName">{item?.name?.toUpperCase()}</div>
+        <div className="banquetAdd">
+          {item?.add1}, {item?.add2}, {item?.city}, {item?.state}
+        </div>
       </div>
       <div className="banquetMid">
         <div className="banquetImgs">
@@ -28,7 +54,8 @@ const Banquet: React.FC = () => {
           </div>
           <div className="br"></div>
           <div className="banquetInfo">
-            <b>ACCOMODATION:</b> Upto 1500 people <div className="pb5"></div>
+            <b>ACCOMODATION:</b> Upto {item?.accomodation as string | 1500}{" "}
+            people <div className="pb5"></div>
             <b>TOTAL HALLS:</b> 5
           </div>
           <div className="br"></div>
@@ -70,20 +97,29 @@ const Banquet: React.FC = () => {
             </div>
             <div className="col">
               Enter no. of Halls
-              <input
-                type="number"
-                name="halls"
-                value={halls}
-                onChange={() => {
-                  setHalls((halls) => halls + 1);
-                }}
-                min={1}
-                max={5}
-                className="hallNo"
-              />
+              <div className="count">
+                <div
+                  className="minus"
+                  onClick={() => {
+                    setHalls((halls) => (halls === 1 ? halls : halls - 1));
+                  }}
+                >
+                  -
+                </div>
+                <div className="val">{halls}</div>
+                <div
+                  className="plus"
+                  onClick={() => {
+                    setHalls((halls) => (halls === 5 ? halls : halls + 1));
+                  }}
+                >
+                  +
+                </div>
+              </div>
             </div>
           </div>
           <div className="hallRight">
+            <div className="finalAmt">&#8377; {item?.price}</div>
             <div className="bookNow">BOOK NOW</div>
           </div>
         </div>

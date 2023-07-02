@@ -35,7 +35,7 @@ const App: React.FC = () => {
       >
         {path !== "none" && <Navbar />}
         <Routes>
-          <Route path="/:service/:id" element={<Details />} />
+          <Route path="/:category/:id" element={<Details />} />
           <Route path="/prime" element={<Prime />} />
           <Route path="/account" element={<Account />} />
           <Route path="/support" element={<Support />} />

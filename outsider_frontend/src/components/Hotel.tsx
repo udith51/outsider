@@ -1,20 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/Service.css";
 import hotel from "../assets/imgs/hotel.jpg";
 import { AiOutlineEye, AiOutlineClockCircle } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useParams } from "react-router-dom";
+import { TInfoProvider } from "../types";
 
 const Hotel: React.FC = () => {
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
+  const [item, setItem] = useState<TInfoProvider | null>();
+  const [stStartDate, setStStartDate] = useState<Date>();
+  const [stEndDate, setStEndDate] = useState<Date>();
+  const [dlStartDate, setDlStartDate] = useState<Date>();
+  const [dlEndDate, setDlEndDate] = useState<Date>();
   const [stRooms, setStRooms] = useState<number>(1);
   const [dlRooms, setDlRooms] = useState<number>(1);
+
+  const { category, id } = useParams();
+
+  useEffect(() => {
+    async function getData(): Promise<void> {
+      await fetch(`http://localhost:3000/provider/${category}/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then(async (response) => {
+          const val = await response.json();
+          setItem(val);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+    getData();
+  }, []);
+
   return (
     <div className="hotelMain">
       <div className="hotelTop">
-        <div className="hotelName">NAME</div>
-        <div className="hotelAdd">Address1, Address2, City, State</div>
+        <div className="hotelName">{item?.name?.toUpperCase()}</div>
+        <div className="hotelAdd">
+          {item?.add1}, {item?.add2}, {item?.city}, {item?.state}
+        </div>
       </div>
       <div className="hotelMid">
         <div className="hotelImgs">
@@ -35,7 +63,7 @@ const Hotel: React.FC = () => {
             <b>CHECKOUT:</b> 11:00 A.M.
           </div>
           <div className="br"></div>
-          <div className="hotelAmenities">Amenities</div>
+          <div className="hotelAmenities">AMENITIES</div>
         </div>
       </div>
       <div className="hotelOverview">
@@ -73,9 +101,9 @@ const Hotel: React.FC = () => {
               Enter CheckIn Date
               <DatePicker
                 selectsStart
-                selected={startDate}
-                onChange={(date) => setStartDate(date as Date)}
-                startDate={startDate}
+                selected={stStartDate}
+                onChange={(date) => setStStartDate(date as Date)}
+                startDate={stStartDate}
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
@@ -84,31 +112,45 @@ const Hotel: React.FC = () => {
               Enter CheckOut Date
               <DatePicker
                 selectsEnd
-                selected={endDate}
-                onChange={(date) => setEndDate(date as Date)}
-                endDate={endDate}
-                startDate={startDate}
-                minDate={startDate}
+                selected={stEndDate}
+                onChange={(date) => setStEndDate(date as Date)}
+                endDate={stEndDate}
+                startDate={stStartDate}
+                minDate={stStartDate}
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
             </div>
             <div className="col">
               Enter no. of Rooms
-              <input
-                type="number"
-                name="stRooms"
-                value={stRooms}
-                onChange={() => {
-                  setStRooms((rooms) => rooms + 1);
-                }}
-                min={1}
-                max={5}
-                className="roomNo"
-              />
+              <div className="count">
+                <div
+                  className="minus"
+                  onClick={() => {
+                    setStRooms((rooms) => (rooms === 1 ? rooms : rooms - 1));
+                  }}
+                >
+                  -
+                </div>
+                <div className="val">{stRooms}</div>
+                <div
+                  className="plus"
+                  onClick={() => {
+                    setStRooms((rooms) =>
+                      rooms === item?.standardRooms ? rooms : rooms + 1
+                    );
+                  }}
+                >
+                  +
+                </div>
+              </div>
             </div>
           </div>
           <div className="roomRight">
+            <div className="finalAmt">
+              &#8377; {(item?.standardAmt as number) * stRooms}{" "}
+              <div className="small">/ day</div>
+            </div>
             <div className="bookNow">BOOK NOW</div>
           </div>
         </div>
@@ -122,9 +164,9 @@ const Hotel: React.FC = () => {
               Enter CheckIn Date
               <DatePicker
                 selectsStart
-                selected={startDate}
-                onChange={(date) => setStartDate(date as Date)}
-                startDate={startDate}
+                selected={dlStartDate}
+                onChange={(date) => setDlStartDate(date as Date)}
+                startDate={dlStartDate}
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
@@ -133,32 +175,45 @@ const Hotel: React.FC = () => {
               Enter CheckOut Date
               <DatePicker
                 selectsEnd
-                selected={endDate}
-                onChange={(date) => setEndDate(date as Date)}
-                endDate={endDate}
-                startDate={startDate}
-                minDate={startDate}
+                selected={dlEndDate}
+                onChange={(date) => setDlEndDate(date as Date)}
+                endDate={dlEndDate}
+                startDate={dlStartDate}
+                minDate={dlStartDate}
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
             </div>
             <div className="col">
               Enter no. of Rooms
-              <input
-                type="number"
-                name="dlRooms"
-                value={dlRooms}
-                onChange={() => {
-                  setDlRooms((rooms) => rooms + 1);
-                }}
-                min={1}
-                max={5}
-                className="roomNo"
-              />
+              <div className="count">
+                <div
+                  className="minus"
+                  onClick={() => {
+                    setDlRooms((rooms) => (rooms === 1 ? rooms : rooms - 1));
+                  }}
+                >
+                  -
+                </div>
+                <div className="val">{dlRooms}</div>
+                <div
+                  className="plus"
+                  onClick={() => {
+                    setDlRooms((rooms) =>
+                      rooms === item?.deluxeRooms ? rooms : rooms + 1
+                    );
+                  }}
+                >
+                  +
+                </div>
+              </div>
             </div>
           </div>
           <div className="roomRight">
-            PRICE
+            <div className="finalAmt">
+              &#8377; {(item?.deluxeAmt as number) * dlRooms}{" "}
+              <div className="small">/ day</div>
+            </div>
             <div className="bookNow">BOOK NOW</div>
           </div>
         </div>

@@ -129,8 +129,22 @@
 .roomRight, .hallRight{
     flex: 2;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.finalAmt{
+    font-size: 20px;
+    color: brown;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+}
+
+.small{
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .bookNow{
@@ -144,4 +158,31 @@
 }
 .bookNow:hover{
     scale: 1.05;
+}
+
+.count{
+    width: 164px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+.minus,.plus{
+    height: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #435c10;
+    color: #fff;
+}
+
+.val{
+    height: 100%;
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

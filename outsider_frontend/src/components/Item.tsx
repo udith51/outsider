@@ -24,7 +24,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
   }, []);
 
   const handleClick = () => {
-    navigate(`/${activeTab}/${item.id}`);
+    navigate(`/${activeTab}/${item._id}`);
   };
   return (
     <div className="item">
