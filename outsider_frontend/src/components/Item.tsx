@@ -4,19 +4,28 @@ import "../assets/css/Item.css";
 import { HiLocationMarker } from "react-icons/hi";
 import { TiTick } from "react-icons/ti";
 import { Context } from "../App";
+import { useNavigate } from "react-router-dom";
 
 interface ItemProps {
   item: TInfoProvider;
 }
 
 const Item: React.FC<ItemProps> = ({ item }) => {
+  console.log(item);
+
   const { activeTab } = useContext(Context) as TContextType;
   const [price, setPrice] = useState(0);
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (activeTab === "hotel") setPrice(item.standardAmt as number);
     else if (activeTab === "banquet") setPrice(item.price as number);
     else if (activeTab === "catering") setPrice(item.basicAmt as number);
   }, []);
+
+  const handleClick = () => {
+    navigate(`/${activeTab}/${item.id}`);
+  };
   return (
     <div className="item">
       <div className="itemImg"></div>
@@ -61,7 +70,9 @@ const Item: React.FC<ItemProps> = ({ item }) => {
         </div>
       </div>
       <div className="bottom">
-        <div className="itemDetails">View Details</div>
+        <div className="itemDetails" onClick={handleClick}>
+          View Details
+        </div>
         <div className="itemCart">Add to Bookings</div>
       </div>
     </div>

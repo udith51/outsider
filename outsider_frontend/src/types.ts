@@ -23,6 +23,7 @@ export type TContextType = {
 };
 
 export type TInfoProvider={
+    id?:number
     name?:string,
     city?:string,
     state?:string,

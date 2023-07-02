@@ -20,8 +20,8 @@ const App: React.FC = () => {
   const [userType, setUserType] = useState<string>("");
   return (
     <div className="App">
-      <Details />
-      {/* <Context.Provider
+      {/* <Details /> */}
+      <Context.Provider
         value={{
           path,
           setPath,
@@ -35,6 +35,7 @@ const App: React.FC = () => {
       >
         {path !== "none" && <Navbar />}
         <Routes>
+          <Route path="/:service/:id" element={<Details />} />
           <Route path="/prime" element={<Prime />} />
           <Route path="/account" element={<Account />} />
           <Route path="/support" element={<Support />} />
@@ -42,7 +43,7 @@ const App: React.FC = () => {
           <Route path="/dash" element={<Dashboard />} />
           <Route path="/*" element={<Home />} />
         </Routes>
-      </Context.Provider> */}
+      </Context.Provider>
     </div>
   );
 };

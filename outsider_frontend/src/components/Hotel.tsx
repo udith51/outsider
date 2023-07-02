@@ -1,9 +1,15 @@
-import React from "react";
-import "../assets/css/Hotel.css";
+import React, { useState } from "react";
+import "../assets/css/Service.css";
 import hotel from "../assets/imgs/hotel.jpg";
 import { AiOutlineEye, AiOutlineClockCircle } from "react-icons/ai";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Hotel: React.FC = () => {
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
+  const [stRooms, setStRooms] = useState<number>(1);
+  const [dlRooms, setDlRooms] = useState<number>(1);
   return (
     <div className="hotelMain">
       <div className="hotelTop">
@@ -57,15 +63,104 @@ const Hotel: React.FC = () => {
       <b>CHOOSE ROOM:</b>
       <div className="pb20"></div>
       <div className="hotelRoom">
+        <b>STANDARD ROOM</b>
         <div className="hotelStandard">
-          <div className="roomLeft">PIC</div>
-          <div className="roomMid">FROM TO ROOMS</div>
-          <div className="roomRight">BOOK</div>
+          <div className="roomLeft">
+            <img src={hotel} alt="" className="imgSml" />
+          </div>
+          <div className="roomMid">
+            <div className="col">
+              Enter CheckIn Date
+              <DatePicker
+                selectsStart
+                selected={startDate}
+                onChange={(date) => setStartDate(date as Date)}
+                startDate={startDate}
+                placeholderText="MM/DD/YYYY"
+                className="date"
+              />
+            </div>
+            <div className="col">
+              Enter CheckOut Date
+              <DatePicker
+                selectsEnd
+                selected={endDate}
+                onChange={(date) => setEndDate(date as Date)}
+                endDate={endDate}
+                startDate={startDate}
+                minDate={startDate}
+                placeholderText="MM/DD/YYYY"
+                className="date"
+              />
+            </div>
+            <div className="col">
+              Enter no. of Rooms
+              <input
+                type="number"
+                name="stRooms"
+                value={stRooms}
+                onChange={() => {
+                  setStRooms((rooms) => rooms + 1);
+                }}
+                min={1}
+                max={5}
+                className="roomNo"
+              />
+            </div>
+          </div>
+          <div className="roomRight">
+            <div className="bookNow">BOOK NOW</div>
+          </div>
         </div>
+        <b>DELUXE ROOM</b>
         <div className="hotelDeluxe">
-          <div className="roomLeft"></div>
-          <div className="roomMid"></div>
-          <div className="roomRight"></div>
+          <div className="roomLeft">
+            <img src={hotel} alt="" className="imgSml" />
+          </div>
+          <div className="roomMid">
+            <div className="col">
+              Enter CheckIn Date
+              <DatePicker
+                selectsStart
+                selected={startDate}
+                onChange={(date) => setStartDate(date as Date)}
+                startDate={startDate}
+                placeholderText="MM/DD/YYYY"
+                className="date"
+              />
+            </div>
+            <div className="col">
+              Enter CheckOut Date
+              <DatePicker
+                selectsEnd
+                selected={endDate}
+                onChange={(date) => setEndDate(date as Date)}
+                endDate={endDate}
+                startDate={startDate}
+                minDate={startDate}
+                placeholderText="MM/DD/YYYY"
+                className="date"
+              />
+            </div>
+            <div className="col">
+              Enter no. of Rooms
+              <input
+                type="number"
+                name="dlRooms"
+                value={dlRooms}
+                onChange={() => {
+                  setDlRooms((rooms) => rooms + 1);
+                }}
+                min={1}
+                max={5}
+                className="roomNo"
+              />
+            </div>
+          </div>
+          <div className="roomRight">
+            PRICE
+            <div className="bookNow">BOOK NOW</div>
+          </div>
         </div>
       </div>
     </div>
