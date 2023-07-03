@@ -6,15 +6,15 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 
 const Account: React.FC = () => {
-  const { setPath, accMode, userType, setUserType } = useContext(
+  const { setPath, accMode, userType, setUserType, setShowCart } = useContext(
     Context
   ) as TContextType;
 
   useEffect(() => {
-    setPath("none");
+    setShowCart(false);
     setUserType("provider");
     return () => {
-      setPath("");
+      setShowCart(true);
     };
   }, []);
 

@@ -295,7 +295,7 @@ const InfoProvider: React.FC = () => {
             </div>
           </div>
         )}
-        <button type="submit">Submit</button>
+        <button type="submit" className="infoSub">Submit</button>
       </form>
     </div>
   );

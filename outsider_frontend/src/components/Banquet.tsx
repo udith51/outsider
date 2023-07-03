@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/css/Service.css";
 import banquet from "../assets/imgs/banquet.jpg";
 import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { TInfoProvider } from "../types";
+import { TCartItem, TContextType, TInfoProvider } from "../types";
 import { useParams } from "react-router-dom";
+import { Context } from "../App";
 const Banquet: React.FC = () => {
+  const { setShowCart, setCartItem } = useContext(Context) as TContextType;
+
   const [item, setItem] = useState<TInfoProvider | null>();
   const [date, setDate] = useState(new Date());
   const [halls, setHalls] = useState<number>(1);
@@ -30,6 +33,20 @@ const Banquet: React.FC = () => {
     }
     getData();
   }, []);
+
+  const addToCart = () => {
+    const rsv: TCartItem = {
+      id: item?._id as number,
+      providerId: item?.id as number,
+      name: item?.name as string,
+      category: category as string,
+      halls,
+      date,
+      price: item?.price,
+    };
+    setCartItem((items) => [...items, rsv]);
+    setShowCart(true);
+  };
 
   return (
     <div className="banquetMain">
@@ -120,8 +137,11 @@ const Banquet: React.FC = () => {
           </div>
           <div className="hallRight">
             <div className="finalAmt">&#8377; {item?.price}</div>
-            <div className="bookNow">BOOK NOW</div>
           </div>
+        </div>
+        <div className="pb20"></div>
+        <div className="bookNow" onClick={addToCart}>
+          BOOK NOW
         </div>
       </div>
     </div>

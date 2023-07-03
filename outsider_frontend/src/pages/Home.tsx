@@ -3,10 +3,11 @@ import { Context } from "../App";
 import { TContextType, TInfoProvider } from "../types";
 import Item from "../components/Item";
 import "../assets/css/Home.css";
+import Cart from "../components/Cart";
 
 const Home: React.FC = () => {
   const user = JSON.parse(sessionStorage.getItem("user") as string)?.userType;
-  const { activeTab } = useContext(Context) as TContextType;
+  const { activeTab, showCart } = useContext(Context) as TContextType;
   const [items, setItems] = useState<TInfoProvider[] | null>();
 
   useEffect(() => {
@@ -29,15 +30,22 @@ const Home: React.FC = () => {
       getData();
     }
   }, [activeTab, user]);
+
   return (
-    <div className="home">
-      <div className="homeLeft"></div>
-      <div className="homeRight">
-        {items?.map((item) => {
-          return <Item item={item} key={item.add1} />;
-        })}
-      </div>
-    </div>
+    <>
+      {showCart ? (
+        <Cart />
+      ) : (
+        <div className="home">
+          <div className="homeLeft"></div>
+          <div className="homeRight">
+            {items?.map((item) => {
+              return <Item item={item} key={item.add1} />;
+            })}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

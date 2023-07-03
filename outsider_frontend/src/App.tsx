@@ -6,7 +6,7 @@ import Prime from "./pages/Prime";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Support from "./pages/Support";
-import { TContextType } from "./types";
+import { TCartItem, TContextType, TInfoProvider } from "./types";
 import InfoProvider from "./pages/InfoProvider";
 import Dashboard from "./pages/Dashboard";
 import Hotel from "./components/Hotel";
@@ -18,6 +18,8 @@ const App: React.FC = () => {
   const [path, setPath] = useState<string>("");
   const [accMode, setAccMode] = useState<string>("");
   const [userType, setUserType] = useState<string>("");
+  const [showCart, setShowCart] = useState<boolean>(false);
+  const [cartItem, setCartItem] = useState<TCartItem[]>([]);
   return (
     <div className="App">
       {/* <Details /> */}
@@ -31,9 +33,13 @@ const App: React.FC = () => {
           setUserType,
           activeTab,
           setActiveTab,
+          showCart,
+          setShowCart,
+          cartItem,
+          setCartItem,
         }}
       >
-        {path !== "none" && <Navbar />}
+        {!showCart && <Navbar />}
         <Routes>
           <Route path="/:category/:id" element={<Details />} />
           <Route path="/prime" element={<Prime />} />

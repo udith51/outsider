@@ -68,7 +68,7 @@ input{
   width: 48%;
 }
 
-button{
+.infoSub{
   display: flex;
   align-items: center;
   margin-left: auto;
@@ -88,7 +88,7 @@ button{
   transition: all 0.3s;
   margin-bottom: 15px
 }
-button:hover{
+.infoSub:hover{
   background-color:#57AF57;
   color: black;
   scale: 1.1;

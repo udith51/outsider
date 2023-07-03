@@ -29,51 +29,52 @@ const Item: React.FC<ItemProps> = ({ item }) => {
   return (
     <div className="item">
       <div className="itemImg"></div>
-      <div className="itemInfo">
-        <div className="itemLeft">
-          <div className="itemName">{item.name}</div>
-          <div className="itemLocation">
-            <>
-              <HiLocationMarker />
-            </>
-            <>
-              {item.city}, {item.state}
-            </>
-          </div>
-          {activeTab === "catering" && item.mocktailAmt && (
-            <div className="itemMocktails">
-              Mocktails <TiTick />
+      <div className="sb">
+        <div className="itemInfo">
+          <div className="itemLeft">
+            <div className="itemName">{item.name}</div>
+            <div className="itemLocation">
+              <>
+                <HiLocationMarker />
+              </>
+              <>
+                {item.city}, {item.state}
+              </>
             </div>
-          )}
-          {activeTab === "banquet" && (
-            <div className="itemAccomodation">
-              Accomodates: {item.accomodation}
-            </div>
-          )}
-          {activeTab === "hotel" && (
-            <div className="itemFacilities">
-              {item.facilities?.map((facility) => {
-                return <div className="itemFacility">{facility}</div>;
-              })}
-            </div>
-          )}
-        </div>
-        <div className="itemRight">
-          <div className="itemPrev">
-            Assured by: <b>{item.assured ? item.assured : 1278}</b>
+            {activeTab === "catering" && item.mocktailAmt && (
+              <div className="itemMocktails">
+                Mocktails <TiTick />
+              </div>
+            )}
+            {activeTab === "banquet" && (
+              <div className="itemAccomodation">
+                Accomodates: {item.accomodation}
+              </div>
+            )}
+            {activeTab === "hotel" && (
+              <div className="itemFacilities">
+                {item.facilities?.map((facility) => {
+                  return <div className="itemFacility">{facility}</div>;
+                })}
+              </div>
+            )}
           </div>
-          <div className="itemPriceInfo">Starting from</div>
-          <div className="itemPrice">
-            <div className="striked">&#8377; {price + 1000}</div>
-            <div className="actual">&#8377; {price}</div>
+          <div className="itemRight">
+            <div className="itemPrev">
+              Assured by: <b>{item.assured ? item.assured : 1278}</b>
+            </div>
+            <div className="itemPriceInfo">Starting from</div>
+            <div className="itemPrice">
+              <div className="striked">&#8377; {price + 1000}</div>
+              <div className="actual">&#8377; {price}</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bottom">
-        <div className="itemDetails" onClick={handleClick}>
-          View Details
+        <div className="bottom">
+          <div className="itemDetails" onClick={handleClick}>
+            View Details
+          </div>
         </div>
-        <div className="itemCart">Add to Bookings</div>
       </div>
     </div>
   );

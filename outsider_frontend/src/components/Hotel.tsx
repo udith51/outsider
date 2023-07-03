@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/css/Service.css";
 import hotel from "../assets/imgs/hotel.jpg";
 import { AiOutlineEye, AiOutlineClockCircle } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useParams } from "react-router-dom";
-import { TInfoProvider } from "../types";
+import { TCartItem, TContextType, TInfoProvider } from "../types";
+import { Context } from "../App";
 
 const Hotel: React.FC = () => {
+  const { setCartItem, setShowCart } = useContext(Context) as TContextType;
+
   const [item, setItem] = useState<TInfoProvider | null>();
   const [stStartDate, setStStartDate] = useState<Date>();
   const [stEndDate, setStEndDate] = useState<Date>();
   const [dlStartDate, setDlStartDate] = useState<Date>();
   const [dlEndDate, setDlEndDate] = useState<Date>();
-  const [stRooms, setStRooms] = useState<number>(1);
-  const [dlRooms, setDlRooms] = useState<number>(1);
+  const [stRooms, setStRooms] = useState<number>(0);
+  const [dlRooms, setDlRooms] = useState<number>(0);
 
   const { category, id } = useParams();
 
@@ -35,6 +38,27 @@ const Hotel: React.FC = () => {
     }
     getData();
   }, []);
+
+  const addToCart = () => {
+    const rsv: TCartItem = {
+      id: item?._id as number,
+      providerId: item?.id as number,
+      name: item?.name as string,
+      category: category as string,
+      stRooms,
+      dlRooms,
+      stStartDate: stStartDate as Date,
+      stEndDate: stEndDate as Date,
+      dlStartDate: dlStartDate as Date,
+      dlEndDate: dlEndDate as Date,
+      standardAmt: item?.standardAmt as number,
+      deluxeAmt: item?.deluxeAmt as number,
+    };
+    console.log(rsv);
+
+    setCartItem((items) => [...items, rsv]);
+    setShowCart(true);
+  };
 
   return (
     <div className="hotelMain">
@@ -127,7 +151,7 @@ const Hotel: React.FC = () => {
                 <div
                   className="minus"
                   onClick={() => {
-                    setStRooms((rooms) => (rooms === 1 ? rooms : rooms - 1));
+                    setStRooms((rooms) => (rooms === 0 ? rooms : rooms - 1));
                   }}
                 >
                   -
@@ -148,10 +172,9 @@ const Hotel: React.FC = () => {
           </div>
           <div className="roomRight">
             <div className="finalAmt">
-              &#8377; {(item?.standardAmt as number) * stRooms}{" "}
+              &#8377; {(item?.standardAmt as number) * (stRooms | 1)}{" "}
               <div className="small">/ day</div>
             </div>
-            <div className="bookNow">BOOK NOW</div>
           </div>
         </div>
         <b>DELUXE ROOM</b>
@@ -190,7 +213,7 @@ const Hotel: React.FC = () => {
                 <div
                   className="minus"
                   onClick={() => {
-                    setDlRooms((rooms) => (rooms === 1 ? rooms : rooms - 1));
+                    setDlRooms((rooms) => (rooms === 0 ? rooms : rooms - 1));
                   }}
                 >
                   -
@@ -211,11 +234,14 @@ const Hotel: React.FC = () => {
           </div>
           <div className="roomRight">
             <div className="finalAmt">
-              &#8377; {(item?.deluxeAmt as number) * dlRooms}{" "}
+              &#8377; {(item?.deluxeAmt as number) * (dlRooms | 1)}{" "}
               <div className="small">/ day</div>
             </div>
-            <div className="bookNow">BOOK NOW</div>
           </div>
+        </div>
+        <div className="pb20"></div>
+        <div className="bookNow" onClick={addToCart}>
+          CONFIRM DETAILS
         </div>
       </div>
     </div>

@@ -20,10 +20,14 @@ export type TContextType = {
     setUserType:React.Dispatch<React.SetStateAction<string>>
     activeTab:string,
     setActiveTab:React.Dispatch<React.SetStateAction<string>>
+    showCart:boolean,
+    setShowCart:React.Dispatch<React.SetStateAction<boolean>>
+    cartItem:TCartItem[] ,
+    setCartItem:React.Dispatch<React.SetStateAction<TCartItem[] >>
 };
 
 export type TInfoProvider={
-    _id?:Number,
+    _id?:number,
     id?:number,
     name?:string,
     city?:string,
@@ -48,3 +52,21 @@ export type TInfoProvider={
     standardRooms?: number,
     deluxeRooms?:number
 }   
+
+export type TCartItem={
+    id:number,
+    providerId:number
+    name: string,
+    category:string,
+    stRooms?:number,
+    dlRooms?:number,
+    stStartDate?:Date,
+    stEndDate?:Date,
+    dlStartDate?:Date,
+    dlEndDate?:Date,
+    standardAmt?:number,
+    deluxeAmt?:number,
+    halls?:number,
+    date?:Date,
+    price?:number
+}
