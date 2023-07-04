@@ -9,3 +9,8 @@ body, * {
 ::-webkit-scrollbar {
   width: 0px;
 }
+
+.App{
+  width: 100vw;
+  min-height: 100vh;
+}

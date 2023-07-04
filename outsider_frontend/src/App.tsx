@@ -11,6 +11,7 @@ import InfoProvider from "./pages/InfoProvider";
 import Dashboard from "./pages/Dashboard";
 import Hotel from "./components/Hotel";
 import Details from "./pages/Details";
+import Success from "./pages/Success";
 
 export const Context = createContext<TContextType | null>(null);
 const App: React.FC = () => {
@@ -22,7 +23,6 @@ const App: React.FC = () => {
   const [cartItem, setCartItem] = useState<TCartItem[]>([]);
   return (
     <div className="App">
-      {/* <Details /> */}
       <Context.Provider
         value={{
           path,
@@ -42,6 +42,7 @@ const App: React.FC = () => {
         {!showCart && <Navbar />}
         <Routes>
           <Route path="/:category/:id" element={<Details />} />
+          <Route path="/success" element={<Success />} />
           <Route path="/prime" element={<Prime />} />
           <Route path="/account" element={<Account />} />
           <Route path="/support" element={<Support />} />

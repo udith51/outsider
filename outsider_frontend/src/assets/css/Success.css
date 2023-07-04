@@ -1,0 +1,55 @@
+.success{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.successWrapper{
+    text-align: center;
+    width: 70%;
+    border-radius: 25px;
+    background-color: #DCDCDC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 20px;
+    padding: 40px;
+}
+
+.successWrapper .icon {
+    color: #435c10;
+    font-size: 40px;
+}
+
+.successWrapper h2{
+    text-transform: capitalize;
+    margin-top: 15px;
+    font-weight: 900;
+    font-size: 40px;
+    color:#324d67;
+}
+.successWrapper .description{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px;
+}
+
+.successBtn{
+    width: 300px;
+    background-color: #435c10;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s;
+    margin-top: 40px;
+}
+
+.successBtn:hover{
+    scale: 1.05;
+}

@@ -71,6 +71,13 @@ const Hotel: React.FC = () => {
       <div className="hotelMid">
         <div className="hotelImgs">
           <img src={hotel} alt="hotel-img" className="hotelMainImg" />
+          <div className="imgRoll">
+            <img src={hotel} className="imgItem" />
+            <img src={hotel} className="imgItem" />
+            <img src={hotel} className="imgItem" />
+            <img src={hotel} className="imgItem" />
+            <img src={hotel} className="imgItem" />
+          </div>
         </div>
         <div className="hotelRight">
           <div className="hotelView pb5">
