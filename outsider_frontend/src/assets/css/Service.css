@@ -66,7 +66,7 @@
     padding: 20px 0;
 }
 
-.hotelView, .hotelBooked, .banquetView, .banquetBooked{
+.hotelView, .hotelBooked, .banquetView, .banquetBooked ,.cateringView, .cateringBooked{
     display: flex;
     align-items: center;
     gap: 5px;
@@ -100,12 +100,12 @@
     padding-bottom: 10px;
 }
 
-.hotelRoom, .banquetBooking, .cateringbooking{
+.hotelRoom, .banquetBooking, .cateringBooking{
     background-color: #fff;
     padding: 20px;
 }
 
-.hotelStandard, .hotelDeluxe, .hall{
+.hotelStandard, .hotelDeluxe, .hall, .cateringBasic, .cateringPremium, .cateringPremiumPlus{
     border: 1px solid #999;
     margin-bottom: 20px;
     padding: 20px;
@@ -114,8 +114,21 @@
     max-height: 200px;
 }
 
-.roomLeft, .hallLeft{
+.roomLeft, .hallLeft, .cateringServiceLeft{
     flex: 3;
+}
+
+.cateringServiceLeft{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cateringServiceLeft>.col{
+    width: 45%;
+    color: #605e5e;
+    font-weight: 500;
 }
 
 .imgSml{
@@ -124,7 +137,7 @@
     object-fit:contain
 }
 
-.roomMid, .hallMid{
+.roomMid, .hallMid, .cateringServiceMid{
     flex: 4;
     display: flex;
     align-items: center;
@@ -133,11 +146,11 @@
     gap: 10px;
 }
 
-.hallMid>.col, .roomMid>.col{
+.hallMid>.col, .roomMid>.col, .cateringServiceMid>.col{
     width: 80%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     font-weight: 500;
     flex-wrap: wrap;
 }
@@ -152,7 +165,7 @@
     width: 165px;
 }
 
-.roomRight, .hallRight{
+.roomRight, .hallRight, .cateringServiceRight{
     flex: 2;
     display: flex;
     flex-direction: column;

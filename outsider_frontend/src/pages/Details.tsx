@@ -7,6 +7,7 @@ import Cart from "../components/Cart";
 import { Context } from "../App";
 import { TContextType } from "../types";
 import Navbar from "../components/Navbar";
+import Catering from "../components/Catering";
 
 const Details: React.FC = () => {
   const { showCart } = useContext(Context) as TContextType;
@@ -32,6 +33,7 @@ const Details: React.FC = () => {
       >
         {category === "hotel" && <Hotel />}
         {category === "banquet" && <Banquet />}
+        {category === "catering" && <Catering />}
       </div>
       {showCart && <Cart />}
     </>

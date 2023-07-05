@@ -119,7 +119,7 @@ const Hotel: React.FC = () => {
         served at the restaurant.
       </div>
       <div className="pb20"></div>
-      <b>CHOOSE ROOM:</b>
+      <b>CHOOSE ROOM</b>
       <div className="pb20"></div>
       <div className="hotelRoom">
         <b>STANDARD ROOM</b>

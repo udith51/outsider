@@ -68,5 +68,17 @@ export type TCartItem={
     deluxeAmt?:number,
     halls?:number,
     date?:Date,
-    price?:number
+    price?:number,
+    bsGuests?:number,
+    prGuests?:number,
+    prPGuests?:number,
+    basicAmt?:number,
+    premiumAmt?:number,
+    premiumPlusAmt?:number,
+    bsStartDate?:Date,
+    bsEndDate?:Date,
+    prStartDate?:Date,
+    prEndDate?:Date,
+    prPStartDate?:Date,
+    prPEndDate?:Date,
 }

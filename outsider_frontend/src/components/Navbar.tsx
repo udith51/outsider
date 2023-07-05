@@ -24,6 +24,10 @@ const Navbar: React.FC = () => {
   const handleCart = () => {
     setShowCart(true);
   };
+  const handleTab = (tab: string) => {
+    setActiveTab(tab);
+    navigate("/");
+  };
 
   return (
     <div className="navbar">
@@ -51,7 +55,7 @@ const Navbar: React.FC = () => {
           <div
             className={activeTab === "hotel" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("hotel");
+              handleTab("hotel");
             }}
           >
             <MdHotel className="w32 h32" />
@@ -61,7 +65,7 @@ const Navbar: React.FC = () => {
           <div
             className={activeTab === "catering" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("catering");
+              handleTab("catering");
             }}
           >
             <IoFastFood className="w32 h32" />
@@ -71,7 +75,7 @@ const Navbar: React.FC = () => {
           <div
             className={activeTab === "banquet" ? "navActive" : "navIcon"}
             onClick={() => {
-              setActiveTab("banquet");
+              handleTab("banquet");
             }}
           >
             <BiHomeHeart className="w32 h32" />
