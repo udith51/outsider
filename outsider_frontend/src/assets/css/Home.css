@@ -3,8 +3,9 @@
     align-items: flex-start;
     justify-content: center;
     background-color: #EEEEEE;
+    padding-top: 80px;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .homeLeft{

@@ -1,32 +1,32 @@
-.hotelMain,.banquetMain{
+.hotelMain,.banquetMain,.cateringMain{
     width: 80%;
     margin: auto;
-    padding: 20px 0;
+    /* padding: 20px 0; */
 }
 
-.hotelName,.banquetName{
+.hotelName,.banquetName,.cateringName{
     font-weight: 600;
     font-size: 22px;
     margin-bottom: 5px;
 }
 
-.hotelAdd,.banquetAdd{
+.hotelAdd,.banquetAdd,.cateringAdd{
     color: #999999;
     font-size: 16px;
 }
 
-.hotelTop,.banquetTop{
+.hotelTop,.banquetTop,.cateringTop{
     margin-bottom: 30px;
 }
 
-.hotelMid,.banquetMid{
+.hotelMid,.banquetMid,.cateringMid{
     background-color: #fff;
     padding: 20px;
     display: flex;
     gap: 20px;
 }
 
-.hotelImgs,.banquetImgs{
+.hotelImgs,.banquetImgs,.cateringImgs{
     flex:7;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
     width: 70%;
 }
 
-.hotelMainImg,.banquetMainImg{
+.hotelMainImg,.banquetMainImg,.cateringImgs{
     width: 100%;
     object-fit: cover;
     flex: 2;
@@ -60,7 +60,7 @@
     object-fit: cover;
 }
 
-.hotelRight,.banquetRight{
+.hotelRight,.banquetRight,.cateringRight{
     flex: 3;
     font-size: 18px;
     padding: 20px 0;
@@ -91,7 +91,7 @@
     background-color: #9999995e;
 }
 
-.hotelOverview,.banquetOverview{
+.hotelOverview,.banquetOverview,.cateringOverview{
     background-color: #fff;
     padding: 20px;
 }
@@ -100,7 +100,7 @@
     padding-bottom: 10px;
 }
 
-.hotelRoom, .banquetBooking{
+.hotelRoom, .banquetBooking, .cateringbooking{
     background-color: #fff;
     padding: 20px;
 }
@@ -175,11 +175,14 @@
 
 .bookNow{
     background-color: #435c10;
-    padding: 5px 10px;
+    padding: 10px 25px;
     border-radius: 5px;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+    width: max-content;
+    text-align: center;
+    margin: auto;
     transition: all 0.5s;
 }
 .bookNow:hover{

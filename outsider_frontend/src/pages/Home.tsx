@@ -1,14 +1,16 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "../App";
 import { TContextType, TInfoProvider } from "../types";
 import Item from "../components/Item";
 import "../assets/css/Home.css";
 import Cart from "../components/Cart";
+import Navbar from "../components/Navbar";
 
 const Home: React.FC = () => {
   const user = JSON.parse(sessionStorage.getItem("user") as string)?.userType;
   const { activeTab, showCart } = useContext(Context) as TContextType;
   const [items, setItems] = useState<TInfoProvider[] | null>();
+  const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
     async function getData(): Promise<void> {
@@ -31,20 +33,25 @@ const Home: React.FC = () => {
     }
   }, [activeTab, user]);
 
+  useEffect(() => {
+    if (showCart) {
+      ref.current?.classList.add("ovHidden");
+    } else {
+      ref.current?.classList.remove("ovHidden");
+    }
+  }, [showCart]);
   return (
     <>
-      {showCart ? (
-        <Cart />
-      ) : (
-        <div className="home">
-          <div className="homeLeft"></div>
-          <div className="homeRight">
-            {items?.map((item) => {
-              return <Item item={item} key={item.add1} />;
-            })}
-          </div>
+      <Navbar />
+      <div className="home" ref={ref as React.MutableRefObject<HTMLDivElement>}>
+        <div className="homeLeft"></div>
+        <div className="homeRight">
+          {items?.map((item) => {
+            return <Item item={item} key={item.add1} />;
+          })}
         </div>
-      )}
+      </div>
+      {showCart && <Cart />}
     </>
   );
 };

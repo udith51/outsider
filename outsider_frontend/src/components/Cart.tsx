@@ -10,8 +10,6 @@ const Cart: React.FC = () => {
   const { cartItem, setShowCart } = useContext(Context) as TContextType;
   console.log(cartItem.length);
 
-  const total = 2;
-
   return (
     <div className="cartWrapper">
       <div className="cartContainer">

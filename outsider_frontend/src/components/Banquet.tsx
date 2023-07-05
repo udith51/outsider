@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "../assets/css/Service.css";
 import banquet from "../assets/imgs/banquet.jpg";
 import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
@@ -8,6 +8,8 @@ import { TCartItem, TContextType, TInfoProvider } from "../types";
 import { useParams } from "react-router-dom";
 import { Context } from "../App";
 const Banquet: React.FC = () => {
+  const screenRef = useRef();
+
   const { setShowCart, setCartItem } = useContext(Context) as TContextType;
 
   const [item, setItem] = useState<TInfoProvider | null>();
@@ -35,6 +37,7 @@ const Banquet: React.FC = () => {
   }, []);
 
   const addToCart = () => {
+    window.scrollTo(0, 0);
     const rsv: TCartItem = {
       id: item?._id as number,
       providerId: item?.id as number,

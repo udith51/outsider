@@ -10,14 +10,19 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 
 const Navbar: React.FC = () => {
+  const user = JSON.parse(sessionStorage.getItem("user") as string)?.userType;
   const navigate = useNavigate();
-  const { activeTab, setActiveTab, setAccMode } = useContext(
+  const { activeTab, setActiveTab, setAccMode, setShowCart } = useContext(
     Context
   ) as TContextType;
 
   const handleAccount = (mode: string) => {
     setAccMode(mode);
     navigate("/account");
+  };
+
+  const handleCart = () => {
+    setShowCart(true);
   };
 
   return (
@@ -122,6 +127,12 @@ const Navbar: React.FC = () => {
           >
             Support
           </div>
+          {user === "customer" && (
+            <div className="navCart" onClick={handleCart}>
+              {" "}
+              My Cart
+            </div>
+          )}
         </div>
       </div>
     </div>

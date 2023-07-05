@@ -1,15 +1,13 @@
 import "../src/assets/css/App.css";
 import React, { useState, createContext } from "react";
-import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Prime from "./pages/Prime";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Support from "./pages/Support";
-import { TCartItem, TContextType, TInfoProvider } from "./types";
+import { TCartItem, TContextType } from "./types";
 import InfoProvider from "./pages/InfoProvider";
 import Dashboard from "./pages/Dashboard";
-import Hotel from "./components/Hotel";
 import Details from "./pages/Details";
 import Success from "./pages/Success";
 
@@ -39,7 +37,7 @@ const App: React.FC = () => {
           setCartItem,
         }}
       >
-        {!showCart && <Navbar />}
+        {/* {!showCart && <Navbar />} */}
         <Routes>
           <Route path="/:category/:id" element={<Details />} />
           <Route path="/success" element={<Success />} />
