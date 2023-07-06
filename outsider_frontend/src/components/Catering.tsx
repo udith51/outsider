@@ -19,6 +19,21 @@ const Catering: React.FC = () => {
   const [bsGuests, setBsGuests] = useState<number>(0);
   const [prGuests, setPrGuests] = useState<number>(0);
   const [prPGuests, setPrPGuests] = useState<number>(0);
+  const [bsSerAmt, setBsSerAmt] = useState<number>(0);
+  const [prSerAmt, setPrSerAmt] = useState<number>(0);
+  const [prPSerAmt, setPrPSerAmt] = useState<number>(0);
+
+  useEffect(() => {
+    setBsSerAmt(() => {
+      return bsGuests * (item?.basicAmt as number);
+    });
+    setPrSerAmt(() => {
+      return prGuests * (item?.premiumAmt as number);
+    });
+    setPrPSerAmt(() => {
+      return prPGuests * (item?.premiumPlusAmt as number);
+    });
+  }, [bsGuests, prGuests, prPGuests]);
 
   const { category, id } = useParams();
 
@@ -182,7 +197,7 @@ const Catering: React.FC = () => {
           </div>
           <div className="cateringServiceRight">
             <div className="finalAmt">
-              &#8377; {(item?.basicAmt as number) * (bsGuests | 1)}{" "}
+              &#8377; {bsSerAmt ? bsSerAmt : (item?.basicAmt as number)}{" "}
               <div className="small">/ meal</div>
             </div>
           </div>
@@ -251,7 +266,7 @@ const Catering: React.FC = () => {
           </div>
           <div className="cateringServiceRight">
             <div className="finalAmt">
-              &#8377; {(item?.premiumAmt as number) * (prGuests | 1)}{" "}
+              &#8377; {prSerAmt ? prSerAmt : (item?.premiumAmt as number)}{" "}
               <div className="small">/ meal</div>
             </div>
           </div>
@@ -321,7 +336,7 @@ const Catering: React.FC = () => {
           </div>
           <div className="cateringServiceRight">
             <div className="finalAmt">
-              &#8377; {(item?.premiumPlusAmt as number) * (prPGuests | 1)}{" "}
+              &#8377; {prPSerAmt ? prPSerAmt : (item?.premiumPlusAmt as number)}{" "}
               <div className="small">/ meal</div>
             </div>
           </div>

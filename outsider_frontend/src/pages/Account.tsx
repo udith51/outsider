@@ -13,9 +13,6 @@ const Account: React.FC = () => {
   useEffect(() => {
     setShowCart(false);
     setUserType("provider");
-    return () => {
-      setShowCart(true);
-    };
   }, []);
 
   return (

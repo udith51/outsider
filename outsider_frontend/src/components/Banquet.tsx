@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/css/Service.css";
 import banquet from "../assets/imgs/banquet.jpg";
 import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
@@ -8,15 +8,20 @@ import { TCartItem, TContextType, TInfoProvider } from "../types";
 import { useParams } from "react-router-dom";
 import { Context } from "../App";
 const Banquet: React.FC = () => {
-  const screenRef = useRef();
-
   const { setShowCart, setCartItem } = useContext(Context) as TContextType;
 
   const [item, setItem] = useState<TInfoProvider | null>();
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date>(new Date());
   const [halls, setHalls] = useState<number>(1);
+  const [hallAmt, setHallAmt] = useState<number>(0);
 
   const { category, id } = useParams();
+
+  useEffect(() => {
+    setHallAmt(() => {
+      return halls * (item?.price as number);
+    });
+  }, [halls]);
 
   useEffect(() => {
     async function getData(): Promise<void> {
@@ -139,7 +144,9 @@ const Banquet: React.FC = () => {
             </div>
           </div>
           <div className="hallRight">
-            <div className="finalAmt">&#8377; {item?.price}</div>
+            <div className="finalAmt">
+              &#8377; {hallAmt ? hallAmt : item?.price}
+            </div>
           </div>
         </div>
         <div className="pb20"></div>

@@ -18,8 +18,26 @@ const Hotel: React.FC = () => {
   const [dlEndDate, setDlEndDate] = useState<Date>();
   const [stRooms, setStRooms] = useState<number>(0);
   const [dlRooms, setDlRooms] = useState<number>(0);
+  const [stRoomAmt, setStRoomAmt] = useState<number>(
+    item?.standardAmt as number
+  );
+  const [dlRoomAmt, setDlRoomAmt] = useState<number>(item?.deluxeAmt as number);
+  console.log(item?.deluxeAmt);
 
   const { category, id } = useParams();
+
+  useEffect(() => {
+    setDlRoomAmt(() => {
+      return dlRooms === 0
+        ? (item?.deluxeAmt as number)
+        : dlRooms * (item?.deluxeAmt as number);
+    });
+    setStRoomAmt(() => {
+      return stRooms === 0
+        ? (item?.standardAmt as number)
+        : stRooms * (item?.standardAmt as number);
+    });
+  }, [dlRooms, stRooms]);
 
   useEffect(() => {
     async function getData(): Promise<void> {
@@ -179,7 +197,7 @@ const Hotel: React.FC = () => {
           </div>
           <div className="roomRight">
             <div className="finalAmt">
-              &#8377; {(item?.standardAmt as number) * (stRooms | 1)}{" "}
+              &#8377; {stRoomAmt ? stRoomAmt : (item?.standardAmt as number)}{" "}
               <div className="small">/ day</div>
             </div>
           </div>
@@ -241,7 +259,7 @@ const Hotel: React.FC = () => {
           </div>
           <div className="roomRight">
             <div className="finalAmt">
-              &#8377; {(item?.deluxeAmt as number) * (dlRooms | 1)}{" "}
+              &#8377; {dlRoomAmt ? dlRoomAmt : (item?.deluxeAmt as number)}{" "}
               <div className="small">/ day</div>
             </div>
           </div>
