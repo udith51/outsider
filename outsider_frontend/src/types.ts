@@ -11,8 +11,19 @@ export type TLogForm={
     password:string
 }
 
+export type TUser={
+    name:string,
+        email:string,
+        id:string,
+        category:string,
+        phone:string,
+        userType:string
+}
+
 export type TContextType = {
-    path: string;
+    user:TUser|undefined,
+    setUser:React.Dispatch<React.SetStateAction<TUser|undefined>>,
+    path: string,
     setPath: React.Dispatch<React.SetStateAction<string>>,
     accMode:string,
     setAccMode:React.Dispatch<React.SetStateAction<string>>,

@@ -4,7 +4,7 @@ import { Context } from "../App";
 import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
-  const { userType, setAccMode } = useContext(Context) as TContextType;
+  const { userType, setAccMode, setUser } = useContext(Context) as TContextType;
   const navigate = useNavigate();
 
   const [form, setForm] = useState<TLogForm>({
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
     });
     if (response.status === 200) {
       const val = await response.json();
-      sessionStorage.setItem("user", JSON.stringify(val));
+      setUser(val);
       if (val.userType === "provider") navigate("/dash");
       else navigate("/");
     } else {

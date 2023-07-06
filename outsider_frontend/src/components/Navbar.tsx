@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../assets/css/Navbar.css";
 import { GiPartyFlags } from "react-icons/gi";
 import { MdHotel } from "react-icons/md";
@@ -10,11 +10,9 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 
 const Navbar: React.FC = () => {
-  const user = JSON.parse(sessionStorage.getItem("user") as string)?.userType;
   const navigate = useNavigate();
-  const { activeTab, setActiveTab, setAccMode, setShowCart } = useContext(
-    Context
-  ) as TContextType;
+  const { activeTab, setActiveTab, setAccMode, setShowCart, user, setUser } =
+    useContext(Context) as TContextType;
 
   const handleAccount = (mode: string) => {
     setAccMode(mode);
@@ -102,26 +100,40 @@ const Navbar: React.FC = () => {
           >
             JOIN PRIME
           </div>
-
-          <div className="navAccount">
-            <div className="dropbtn">My Account</div>
-            <div className="dropdown-content">
-              <div
-                onClick={() => {
-                  handleAccount("signup");
-                }}
-              >
-                Sign Up
-              </div>
-              <div
-                onClick={() => {
-                  handleAccount("login");
-                }}
-              >
-                Login
+          {!user ? (
+            <div className="navAccount">
+              <div className="dropbtn">My Account</div>
+              <div className="dropdown-content">
+                <div
+                  onClick={() => {
+                    handleAccount("signup");
+                  }}
+                >
+                  Sign Up
+                </div>
+                <div
+                  onClick={() => {
+                    handleAccount("login");
+                  }}
+                >
+                  Login
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="navAccount">
+              <div className="dropbtn">Hi {user.name}</div>
+              <div className="dropdown-content">
+                <div
+                  onClick={() => {
+                    setUser(undefined);
+                  }}
+                >
+                  Log Out
+                </div>
+              </div>
+            </div>
+          )}
 
           <div
             className="navSupport"
@@ -131,7 +143,7 @@ const Navbar: React.FC = () => {
           >
             Support
           </div>
-          {user === "customer" && (
+          {user?.userType === "customer" && (
             <div className="navCart" onClick={handleCart}>
               {" "}
               My Cart

@@ -7,8 +7,7 @@ import Cart from "../components/Cart";
 import Navbar from "../components/Navbar";
 
 const Home: React.FC = () => {
-  const user = JSON.parse(sessionStorage.getItem("user") as string)?.userType;
-  const { activeTab, showCart } = useContext(Context) as TContextType;
+  const { activeTab, showCart, user } = useContext(Context) as TContextType;
   const [items, setItems] = useState<TInfoProvider[] | null>();
   const ref = useRef<HTMLDivElement>();
 
@@ -43,15 +42,22 @@ const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="home" ref={ref as React.MutableRefObject<HTMLDivElement>}>
-        <div className="homeLeft"></div>
-        <div className="homeRight">
-          {items?.map((item) => {
-            return <Item item={item} key={item.add1} />;
-          })}
-        </div>
-      </div>
-      {showCart && <Cart />}
+      {user && (
+        <>
+          <div
+            className="home"
+            ref={ref as React.MutableRefObject<HTMLDivElement>}
+          >
+            <div className="homeLeft"></div>
+            <div className="homeRight">
+              {items?.map((item) => {
+                return <Item item={item} key={item._id} />;
+              })}
+            </div>
+          </div>
+          {showCart && <Cart />}
+        </>
+      )}
     </>
   );
 };

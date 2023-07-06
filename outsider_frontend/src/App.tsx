@@ -5,7 +5,7 @@ import Prime from "./pages/Prime";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Support from "./pages/Support";
-import { TCartItem, TContextType } from "./types";
+import { TCartItem, TContextType, TUser } from "./types";
 import InfoProvider from "./pages/InfoProvider";
 import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
@@ -14,6 +14,7 @@ import Success from "./pages/Success";
 export const Context = createContext<TContextType | null>(null);
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("hotel");
+  const [user, setUser] = useState<TUser>();
   const [path, setPath] = useState<string>("");
   const [accMode, setAccMode] = useState<string>("");
   const [userType, setUserType] = useState<string>("");
@@ -23,6 +24,8 @@ const App: React.FC = () => {
     <div className="App">
       <Context.Provider
         value={{
+          user,
+          setUser,
           path,
           setPath,
           accMode,

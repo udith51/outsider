@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../assets/css/InfoProvider.css";
-import { TInfoProvider } from "../types";
+import { TContextType, TInfoProvider } from "../types";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../App";
 
 const InfoProvider: React.FC = () => {
-  const cat = JSON.parse(sessionStorage.getItem("user") as string).category;
-  const id = JSON.parse(sessionStorage.getItem("user") as string).id;
-  const category = cat.charAt(0).toUpperCase() + cat.slice(1);
+  const { user } = useContext(Context) as TContextType;
+  const cat = user?.category as string;
+  const id = user?.id;
+  const category = cat?.charAt(0).toUpperCase() + cat?.slice(1);
   const navigate = useNavigate();
 
   const [form, setForm] = useState<TInfoProvider>({
@@ -295,7 +297,9 @@ const InfoProvider: React.FC = () => {
             </div>
           </div>
         )}
-        <button type="submit" className="infoSub">Submit</button>
+        <button type="submit" className="infoSub">
+          Submit
+        </button>
       </form>
     </div>
   );

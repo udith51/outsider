@@ -4,7 +4,7 @@ import { Context } from "../App";
 import { useNavigate } from "react-router-dom";
 
 const Registration: React.FC = () => {
-  const { userType, setAccMode } = useContext(Context) as TContextType;
+  const { userType, setAccMode, setUser } = useContext(Context) as TContextType;
   const navigate = useNavigate();
 
   const [form, setForm] = useState<TRegForm>({
@@ -35,7 +35,8 @@ const Registration: React.FC = () => {
     });
     if (response.statusText === "OK") {
       const val = await response.json();
-      sessionStorage.setItem("user", JSON.stringify(val));
+
+      setUser(val);
       if (val.userType === "provider") navigate("/info");
       else navigate("/");
     } else {
