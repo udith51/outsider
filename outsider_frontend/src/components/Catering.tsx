@@ -115,20 +115,25 @@ const Catering: React.FC = () => {
       <div className="cateringOverview">
         <b>OVERVIEW</b>
         <div className="pb5"></div>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
-        natus blanditiis quasi at non quia sit neque, incidunt consequatur
-        necessitatibus. Alias deleniti inventore, id adipisci nesciunt iusto
-        recusandae dolores facere laudantium quaerat. Sunt reiciendis blanditiis
-        totam ut a ratione temporibus doloremque excepturi, dignissimos nisi
-        animi deleniti inventore fuga error aut quam voluptas aperiam ullam sed
-        tenetur mollitia quia facilis optio eaque. Culpa, explicabo labore sequi
-        nisi hic omnis? Nesciunt quasi aliquam animi accusamus aperiam
-        exercitationem dolor sit qui aliquid! Perspiciatis explicabo
-        consequuntur non labore assumenda, iste consectetur ex nobis
-        exercitationem cupiditate nulla, corrupti fugiat. Voluptates sunt eum
-        distinctio quia, dolores quod facilis architecto molestiae provident.
-        Eaque distinctio tenetur ullam, sit dolor eligendi exercitationem
-        dolorem assumenda iste eius eum esse voluptas cum?
+        {item?.description || (
+          <div className="">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
+            natus blanditiis quasi at non quia sit neque, incidunt consequatur
+            necessitatibus. Alias deleniti inventore, id adipisci nesciunt iusto
+            recusandae dolores facere laudantium quaerat. Sunt reiciendis
+            blanditiis totam ut a ratione temporibus doloremque excepturi,
+            dignissimos nisi animi deleniti inventore fuga error aut quam
+            voluptas aperiam ullam sed tenetur mollitia quia facilis optio
+            eaque. Culpa, explicabo labore sequi nisi hic omnis? Nesciunt quasi
+            aliquam animi accusamus aperiam exercitationem dolor sit qui
+            aliquid! Perspiciatis explicabo consequuntur non labore assumenda,
+            iste consectetur ex nobis exercitationem cupiditate nulla, corrupti
+            fugiat. Voluptates sunt eum distinctio quia, dolores quod facilis
+            architecto molestiae provident. Eaque distinctio tenetur ullam, sit
+            dolor eligendi exercitationem dolorem assumenda iste eius eum esse
+            voluptas cum?
+          </div>
+        )}
       </div>
       <div className="pb20"></div>
       <b>CHOOSE SERVICE</b>

@@ -90,19 +90,24 @@ const Banquet: React.FC = () => {
       <div className="banquetOverview">
         <b>OVERVIEW</b>
         <div className="pb5"></div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nisi
-        possimus modi. Repellendus facilis eius autem, facere dolore distinctio
-        placeat quas magni, mollitia amet quidem nisi asperiores natus libero
-        numquam? Reprehenderit, hic eius aliquid dignissimos quibusdam at quae
-        quis facere aperiam non ratione, ut maxime sed dolorum possimus aut
-        quisquam neque quasi sapiente quia fuga! Quasi error veniam magnam quam!
-        Perferendis ut unde distinctio libero vel nisi blanditiis architecto eos
-        officiis a est, error sint officia, doloribus dolore quaerat nam magni
-        praesentium. Neque alias similique molestiae illo itaque voluptatum
-        eius? Aspernatur asperiores voluptatum sit enim, alias nihil
-        reprehenderit animi quas consequuntur? Commodi necessitatibus odit
-        voluptatem itaque minima. Possimus laudantium deleniti perferendis
-        culpa! Praesentium placeat eius sequi. Pariatur, dolor? Qui, quaerat.
+        {item?.description || (
+          <div className="">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+            nisi possimus modi. Repellendus facilis eius autem, facere dolore
+            distinctio placeat quas magni, mollitia amet quidem nisi asperiores
+            natus libero numquam? Reprehenderit, hic eius aliquid dignissimos
+            quibusdam at quae quis facere aperiam non ratione, ut maxime sed
+            dolorum possimus aut quisquam neque quasi sapiente quia fuga! Quasi
+            error veniam magnam quam! Perferendis ut unde distinctio libero vel
+            nisi blanditiis architecto eos officiis a est, error sint officia,
+            doloribus dolore quaerat nam magni praesentium. Neque alias
+            similique molestiae illo itaque voluptatum eius? Aspernatur
+            asperiores voluptatum sit enim, alias nihil reprehenderit animi quas
+            consequuntur? Commodi necessitatibus odit voluptatem itaque minima.
+            Possimus laudantium deleniti perferendis culpa! Praesentium placeat
+            eius sequi. Pariatur, dolor? Qui, quaerat.
+          </div>
+        )}
       </div>
       <div className="pb20"></div>
       <div className="banquetBooking">

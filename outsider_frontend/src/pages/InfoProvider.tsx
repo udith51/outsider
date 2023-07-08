@@ -17,6 +17,7 @@ const InfoProvider: React.FC = () => {
     add2: "",
     city: "",
     state: "",
+    description: "",
     zipcode: 0,
     accomodation: 0,
     price: 0,
@@ -33,7 +34,9 @@ const InfoProvider: React.FC = () => {
     assured: 0,
   });
 
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     if (e.target.value.length) {
       e.target.style.border = "0.5";
       e.target.style.borderColor = "green";
@@ -49,6 +52,7 @@ const InfoProvider: React.FC = () => {
         [e.target.name]: e.target.value,
       };
     });
+    console.log(form);
 
     if (e.target.name === "zipcode" && e.target.value.length === 6) {
       await fetch(`https://api.postalpincode.in/pincode/${e.target.value}`)
@@ -161,6 +165,25 @@ const InfoProvider: React.FC = () => {
               onChange={handleChange}
             />
           </div>
+        </div>
+
+        <div className="bar">
+          <label htmlFor="description">{category} Description</label>
+          <textarea
+            id="description"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            placeholder="Enter description in 200 words"
+          />
+          {/* <input
+            type="text"
+            id="description"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            placeholder="Enter description in 100 words"
+          /> */}
         </div>
 
         {category === "Banquet" && (

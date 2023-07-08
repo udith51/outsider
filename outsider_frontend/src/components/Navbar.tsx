@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
             </div>
           ) : (
             <div className="navAccount">
-              <div className="dropbtn">Hi {user.name}</div>
+              <div className="dropbtn">Hi {user.name.split(" ")[0]}</div>
               <div className="dropdown-content">
                 <div
                   onClick={() => {

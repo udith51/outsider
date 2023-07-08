@@ -118,23 +118,28 @@ const Hotel: React.FC = () => {
       <div className="hotelOverview">
         <b>OVERVIEW</b>
         <div className="pb5"></div>
-        Situated within walking distance from Colva, one of the finest beaches,
-        The Golden Palms offers guests luxurious accommodation. Previously known
-        as Pearl Oceanique Resort, this 4-star property features everything from
-        a fully-equipped gymnasium to state-of-the-art conference halls,
-        business centre, swimming pool and parking area. /n/nThere are 50
-        well-appointed rooms available with cosy beds and large windows spanning
-        from floor to ceiling. Impressive portraits, beautiful curtains and
-        elegant light fittings adorn the interiors of the rooms. Rooms at ground
-        floor are open to the private lawn, while rooms at the first floor have
-        balconies that overlook the pool. Air-conditioner, working desk, LCD TV,
-        mini-refrigerator, tea/coffee maker and Wi-Fi internet are some of the
-        amenities that are available in each room./n/nBuilt in an area of 1305
-        sq ft, the on-site restaurant called The Bamboo Top is one of the main
-        highlights of the hotel. Wood and glass panels on the walls beautify the
-        interiors of the restaurant. Apart from mouth-watering delicacies, a
-        variety of domestic and international alcoholic beverages are also
-        served at the restaurant.
+        {item?.description || (
+          <div className="">
+            Situated within walking distance from Colva, one of the finest
+            beaches, The Golden Palms offers guests luxurious accommodation.
+            Previously known as Pearl Oceanique Resort, this 4-star property
+            features everything from a fully-equipped gymnasium to
+            state-of-the-art conference halls, business centre, swimming pool
+            and parking area. /n/nThere are 50 well-appointed rooms available
+            with cosy beds and large windows spanning from floor to ceiling.
+            Impressive portraits, beautiful curtains and elegant light fittings
+            adorn the interiors of the rooms. Rooms at ground floor are open to
+            the private lawn, while rooms at the first floor have balconies that
+            overlook the pool. Air-conditioner, working desk, LCD TV,
+            mini-refrigerator, tea/coffee maker and Wi-Fi internet are some of
+            the amenities that are available in each room./n/nBuilt in an area
+            of 1305 sq ft, the on-site restaurant called The Bamboo Top is one
+            of the main highlights of the hotel. Wood and glass panels on the
+            walls beautify the interiors of the restaurant. Apart from
+            mouth-watering delicacies, a variety of domestic and international
+            alcoholic beverages are also served at the restaurant.
+          </div>
+        )}
       </div>
       <div className="pb20"></div>
       <b>CHOOSE ROOM</b>
