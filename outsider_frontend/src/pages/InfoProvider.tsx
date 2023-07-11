@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/css/InfoProvider.css";
 import { TContextType, TInfoProvider } from "../types";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,22 @@ const InfoProvider: React.FC = () => {
   const id = user?.id;
   const category = cat?.charAt(0).toUpperCase() + cat?.slice(1);
   const navigate = useNavigate();
+  const [oldUser, setOldUser] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function details() {
+      await fetch(`http://localhost:3000/provider/info/${category}/${id}`)
+        .then((val) => {
+          return val.json();
+        })
+        .then((res) => {
+          setForm(res[0]);
+          setOldUser(true);
+        })
+        .catch((e) => console.log(e));
+    }
+    details();
+  }, []);
 
   const [form, setForm] = useState<TInfoProvider>({
     name: "",
@@ -79,24 +95,45 @@ const InfoProvider: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const assured = Math.floor(Math.random() * 10000);
-    const response = await fetch(
-      `http://localhost:3000/provider/register/${category}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...form, id, assured }),
+    if (!oldUser) {
+      const assured = Math.floor(Math.random() * 10000);
+      const response = await fetch(
+        `http://localhost:3000/provider/register/${category}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...form, id, assured }),
+        }
+      );
+      if (response.statusText === "OK") {
+        const val = await response.json();
+        console.log(val);
+        navigate("/dash");
+      } else {
+        const val = await response.json();
+        console.log(val);
       }
-    );
-    if (response.statusText === "OK") {
-      const val = await response.json();
-      console.log(val);
-      navigate("/dash");
     } else {
-      const val = await response.json();
-      console.log(val);
+      const response = await fetch(
+        `http://localhost:3000/provider/info/${category}/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...form }),
+        }
+      );
+      if (response.statusText === "OK") {
+        const val = await response.json();
+        console.log(val);
+        navigate("/dash");
+      } else {
+        const val = await response.json();
+        console.log(val);
+      }
     }
   };
 
@@ -321,7 +358,7 @@ const InfoProvider: React.FC = () => {
           </div>
         )}
         <button type="submit" className="infoSub">
-          Submit
+          {oldUser ? "Update" : "Save"}
         </button>
       </form>
     </div>

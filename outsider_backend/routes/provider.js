@@ -18,6 +18,42 @@ router.post('/register/:category', async (req, res) => {
     }
 })
 
+router.get('/info/:category/:id', async (req, res) => {
+    try {
+        const category = req.params.category.toLowerCase();
+        var provider;
+        if (category === "hotel")
+            provider = await ProviderHotel.find({ id: req.params.id })
+        else if (category === "catering")
+            provider = await ProviderCatering.find({ id: req.params.id });
+        else if (category === "banquet")
+            provider = await ProviderBanquet.find({ id: req.params.id });
+        console.log(provider);
+        return res.status(200).json(provider);
+    } catch (e) {
+        return res.status(500).json(e);
+    }
+})
+
+router.put('/info/:category/:id', async (req, res) => {
+    try {
+        const updatedObj = req.body;
+        console.log(updatedObj);
+        const { category } = req.params;
+        var provider;
+        if (category === "hotel")
+            provider = await ProviderHotel.updateOne({ id: req.params.id }, { $set: updatedObj })
+        else if (category === "catering")
+            provider = await ProviderCatering.updateOne({ id: req.params.id }, { $set: updatedObj });
+        else if (category === "banquet")
+            provider = await ProviderBanquet.updateOne({ id: req.params.id }, { $set: updatedObj });
+        console.log(provider);
+        return res.status(200).json(provider);
+    } catch (e) {
+        return res.status(500).json(e);
+    }
+})
+
 router.get('/all/:category', async (req, res) => {
     try {
         const category = req.params.category.toLowerCase();

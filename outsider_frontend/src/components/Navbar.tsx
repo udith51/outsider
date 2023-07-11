@@ -127,6 +127,7 @@ const Navbar: React.FC = () => {
                 <div
                   onClick={() => {
                     setUser(undefined);
+                    navigate("/");
                   }}
                 >
                   Log Out
