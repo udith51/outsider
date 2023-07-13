@@ -9,11 +9,11 @@
 }
 
 .homeLeft{
-    flex-grow: 3;
-    padding: 10px;
+    flex: 1;
+    padding: 30px 0px 30px 10px;
 }
 
 .homeRight{
-    flex-grow: 7;
+    flex: 4;
     padding: 10px;
 }

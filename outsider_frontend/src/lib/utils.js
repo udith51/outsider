@@ -22,3 +22,9 @@ export const runFireworks = () => {
         confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
     }, 250);
 }
+
+export const hotelAmenities = ["Parking", "Gym", "Lounge", "Swimming Pool", "Garden", "Centralized A.C.", "Bar", "Jacuzzi", "WiFi", "Room Service", "Laundry Service"]
+
+export const cateringAmenities = ["Jain Food", "Appetizer Station", "Salad Bar", "Sushi Bar", "Pasta Station", "Seafood Bar", "Cheese and Charcuterie Station", "Beverage Bar", "Dessert Station"]
+
+export const banquetAmenities = ["AV Equipment", "Parking", "Restrooms", "Stage", "Microphone", "Power Backup/Generator", "Garden", "Roof Top"]

@@ -20,6 +20,8 @@ const App: React.FC = () => {
   const [userType, setUserType] = useState<string>("");
   const [showCart, setShowCart] = useState<boolean>(false);
   const [cartItem, setCartItem] = useState<TCartItem[]>([]);
+  const [assured, setAssured] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
   return (
     <div className="App">
       <Context.Provider
@@ -38,6 +40,10 @@ const App: React.FC = () => {
           setShowCart,
           cartItem,
           setCartItem,
+          assured,
+          setAssured,
+          search,
+          setSearch,
         }}
       >
         {/* {!showCart && <Navbar />} */}

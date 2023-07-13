@@ -10,7 +10,9 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 
 const Navbar: React.FC = () => {
+  
   const navigate = useNavigate();
+
   const { activeTab, setActiveTab, setAccMode, setShowCart, user, setUser } =
     useContext(Context) as TContextType;
 

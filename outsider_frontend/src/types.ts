@@ -34,7 +34,11 @@ export type TContextType = {
     showCart:boolean,
     setShowCart:React.Dispatch<React.SetStateAction<boolean>>
     cartItem:TCartItem[] ,
-    setCartItem:React.Dispatch<React.SetStateAction<TCartItem[] >>
+    setCartItem:React.Dispatch<React.SetStateAction<TCartItem[] >>,
+    assured:boolean,
+    setAssured:React.Dispatch<React.SetStateAction<boolean>>,
+    search:string,
+    setSearch:React.Dispatch<React.SetStateAction<string>>
 };
 
 export type TInfoProvider={

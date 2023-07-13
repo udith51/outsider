@@ -14,7 +14,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
   console.log(item);
 
   const { activeTab } = useContext(Context) as TContextType;
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState<number>(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,7 +54,11 @@ const Item: React.FC<ItemProps> = ({ item }) => {
             {activeTab === "hotel" && (
               <div className="itemFacilities">
                 {item.facilities?.map((facility) => {
-                  return <div className="itemFacility">{facility}</div>;
+                  return (
+                    <div className="itemFacility" key={facility}>
+                      {facility}
+                    </div>
+                  );
                 })}
               </div>
             )}

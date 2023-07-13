@@ -5,9 +5,12 @@ import Item from "../components/Item";
 import "../assets/css/Home.css";
 import Cart from "../components/Cart";
 import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 
 const Home: React.FC = () => {
-  const { activeTab, showCart, user } = useContext(Context) as TContextType;
+  const { activeTab, showCart, user, assured } = useContext(
+    Context
+  ) as TContextType;
   const [items, setItems] = useState<TInfoProvider[] | null>();
   const ref = useRef<HTMLDivElement>();
 
@@ -48,10 +51,17 @@ const Home: React.FC = () => {
             className="home"
             ref={ref as React.MutableRefObject<HTMLDivElement>}
           >
-            <div className="homeLeft"></div>
+            <div className="homeLeft">
+              <Sidebar />
+            </div>
             <div className="homeRight">
               {items?.map((item) => {
-                return <Item item={item} key={item._id} />;
+                if (assured) {
+                  if (item.assured ? item.assured >= 5000 : 0)
+                    return <Item item={item} key={item._id} />;
+                } else {
+                  return <Item item={item} key={item._id} />;
+                }
               })}
             </div>
           </div>
