@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
 const Home: React.FC = () => {
-  const { activeTab, showCart, user, assured } = useContext(
+  const { activeTab, showCart, user, assured, search } = useContext(
     Context
   ) as TContextType;
   const [items, setItems] = useState<TInfoProvider[] | null>();
@@ -56,11 +56,20 @@ const Home: React.FC = () => {
             </div>
             <div className="homeRight">
               {items?.map((item) => {
-                if (assured) {
-                  if (item.assured ? item.assured >= 5000 : 0)
+                if (
+                  (item?.name?.toLowerCase() as string).search(
+                    search.toLowerCase()
+                  ) !== -1 ||
+                  (item?.city?.toLowerCase() as string).search(
+                    search.toLowerCase()
+                  ) !== -1
+                ) {
+                  if (assured) {
+                    if (item.assured ? item.assured >= 5000 : 0)
+                      return <Item item={item} key={item._id} />;
+                  } else {
                     return <Item item={item} key={item._id} />;
-                } else {
-                  return <Item item={item} key={item._id} />;
+                  }
                 }
               })}
             </div>
