@@ -7,7 +7,9 @@ import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 
 const Catering: React.FC = () => {
-  const { setCartItem, setShowCart } = useContext(Context) as TContextType;
+  const { setCartItem, setShowCart, user } = useContext(
+    Context
+  ) as TContextType;
 
   const [item, setItem] = useState<TInfoProvider | null>();
   const [bsStartDate, setBsStartDate] = useState<Date>();
@@ -54,11 +56,16 @@ const Catering: React.FC = () => {
     }
     getData();
   }, []);
+  console.log(item);
 
   const addToCart = () => {
     const rsv: TCartItem = {
-      id: item?._id as number,
+      customerId: user?.id as number,
+      customerName: user?.name as string,
+      customerEmail: user?.email as string,
+      customerPhone: user?.phone as string,
       providerId: item?.id as number,
+      id: item?._id as number,
       name: item?.name as string,
       category: category as string,
       bsGuests,

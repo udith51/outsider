@@ -8,7 +8,9 @@ import { TCartItem, TContextType, TInfoProvider } from "../types";
 import { useParams } from "react-router-dom";
 import { Context } from "../App";
 const Banquet: React.FC = () => {
-  const { setShowCart, setCartItem } = useContext(Context) as TContextType;
+  const { setShowCart, setCartItem, user } = useContext(
+    Context
+  ) as TContextType;
 
   const [item, setItem] = useState<TInfoProvider | null>();
   const [date, setDate] = useState<Date>(new Date());
@@ -43,9 +45,15 @@ const Banquet: React.FC = () => {
 
   const addToCart = () => {
     window.scrollTo(0, 0);
+    console.log(user);
+
     const rsv: TCartItem = {
-      id: item?._id as number,
+      customerId: user?.id as number,
+      customerName: user?.name as string,
+      customerEmail: user?.email as string,
+      customerPhone: user?.phone as string,
       providerId: item?.id as number,
+      id: item?._id as number,
       name: item?.name as string,
       category: category as string,
       halls,

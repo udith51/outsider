@@ -14,7 +14,16 @@ const Cart: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleConfirmation = () => {
+  const handleConfirmation = async () => {
+    const response = await fetch(`http://localhost:3000/reserve`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cartItem }),
+    });
+    console.log(cartItem);
+
     navigate("/success");
     setShowCart(false);
     setCartItem([]);

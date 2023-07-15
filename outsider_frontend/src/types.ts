@@ -14,7 +14,7 @@ export type TLogForm={
 export type TUser={
     name:string,
         email:string,
-        id:string,
+        id:number,
         category:string,
         phone:string,
         userType:string
@@ -56,7 +56,8 @@ export type TInfoProvider={
     accomodation?:number,
     price?:number,
     facilities?: string[],
-    pictures?:string[],
+    // pictures?:string[],
+    pictures?: File
 
     basicAmt?:number,
     premiumAmt?: number,
@@ -70,8 +71,12 @@ export type TInfoProvider={
 }   
 
 export type TCartItem={
+    customerId:number,
+    customerName:string,
+    customerEmail:string,
+    customerPhone:string,
+    providerId:number,
     id:number,
-    providerId:number
     name: string,
     category:string,
     stRooms?:number,

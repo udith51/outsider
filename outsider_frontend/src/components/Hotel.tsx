@@ -9,7 +9,10 @@ import { TCartItem, TContextType, TInfoProvider } from "../types";
 import { Context } from "../App";
 
 const Hotel: React.FC = () => {
-  const { setCartItem, setShowCart } = useContext(Context) as TContextType;
+  const { setCartItem, setShowCart, user } = useContext(
+    Context
+  ) as TContextType;
+  console.log(user);
 
   const [item, setItem] = useState<TInfoProvider | null>();
   const [stStartDate, setStStartDate] = useState<Date>();
@@ -22,7 +25,6 @@ const Hotel: React.FC = () => {
     item?.standardAmt as number
   );
   const [dlRoomAmt, setDlRoomAmt] = useState<number>(item?.deluxeAmt as number);
-  console.log(item?.deluxeAmt);
 
   const { category, id } = useParams();
 
@@ -59,8 +61,12 @@ const Hotel: React.FC = () => {
 
   const addToCart = () => {
     const rsv: TCartItem = {
-      id: item?._id as number,
+      customerId: user?.id as number,
+      customerName: user?.name as string,
+      customerEmail: user?.email as string,
+      customerPhone: user?.phone as string,
       providerId: item?.id as number,
+      id: item?._id as number,
       name: item?.name as string,
       category: category as string,
       stRooms,
