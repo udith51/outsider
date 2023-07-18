@@ -55,7 +55,7 @@ const Banquet: React.FC = () => {
       providerId: item?.id as number,
       id: item?._id as number,
       name: item?.name as string,
-      category: category as string,
+      category: "banquet",
       halls,
       date,
       price: item?.price,

@@ -36,8 +36,14 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       <div className="dashTabs">
-        <div className="dashTab">RECENT BOOKINGS</div>
-        <div className="dashTab">UPCOMING BOOKINGS</div>
+        <div
+          className="dashTab"
+          onClick={() => {
+            navigate("/bookings");
+          }}
+        >
+          BOOKINGS
+        </div>
         <div
           className="dashTab"
           onClick={() => {

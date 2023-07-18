@@ -22,11 +22,14 @@ const Cart: React.FC = () => {
       },
       body: JSON.stringify({ cartItem }),
     });
-    console.log(cartItem);
-
-    navigate("/success");
-    setShowCart(false);
-    setCartItem([]);
+    // console.log(cartItem);
+    if (response.statusText === "OK") {
+      navigate("/success");
+      setShowCart(false);
+      setCartItem([]);
+    } else {
+      console.log(response);
+    }
   };
 
   return (

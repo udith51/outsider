@@ -10,6 +10,7 @@ import InfoProvider from "./pages/InfoProvider";
 import Dashboard from "./pages/Dashboard";
 import Details from "./pages/Details";
 import Success from "./pages/Success";
+import Booking from "./pages/Booking";
 
 export const Context = createContext<TContextType | null>(null);
 const App: React.FC = () => {
@@ -49,6 +50,7 @@ const App: React.FC = () => {
         {/* {!showCart && <Navbar />} */}
         <Routes>
           <Route path="/:category/:id" element={<Details />} />
+          <Route path="/bookings" element={<Booking />} />
           <Route path="/success" element={<Success />} />
           <Route path="/prime" element={<Prime />} />
           <Route path="/account" element={<Account />} />

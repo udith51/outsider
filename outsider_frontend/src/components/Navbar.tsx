@@ -10,11 +10,18 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 
 const Navbar: React.FC = () => {
-  
   const navigate = useNavigate();
 
-  const { activeTab, setActiveTab, setAccMode, setShowCart, user, setUser } =
-    useContext(Context) as TContextType;
+  const {
+    activeTab,
+    setActiveTab,
+    setAccMode,
+    setShowCart,
+    user,
+    setUser,
+    userType,
+  } = useContext(Context) as TContextType;
+  console.log(userType);
 
   const handleAccount = (mode: string) => {
     setAccMode(mode);
@@ -35,7 +42,7 @@ const Navbar: React.FC = () => {
         <div
           className="navLogo"
           onClick={() => {
-            navigate("/");
+            userType === "provider" ? navigate("/dash") : navigate("/");
           }}
         >
           Logo

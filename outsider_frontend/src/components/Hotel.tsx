@@ -27,6 +27,7 @@ const Hotel: React.FC = () => {
   const [dlRoomAmt, setDlRoomAmt] = useState<number>(item?.deluxeAmt as number);
 
   const { category, id } = useParams();
+  console.log(category);
 
   useEffect(() => {
     setDlRoomAmt(() => {
@@ -68,7 +69,7 @@ const Hotel: React.FC = () => {
       providerId: item?.id as number,
       id: item?._id as number,
       name: item?.name as string,
-      category: category as string,
+      category: "hotel",
       stRooms,
       dlRooms,
       stStartDate: stStartDate as Date,

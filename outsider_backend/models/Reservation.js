@@ -6,6 +6,7 @@ const reservationHotelSchema = mongoose.Schema({
     customerEmail: String,
     customerPhone: String,
     providerId: String,
+    category: String,
     id: String,
     stRooms: Number,
     dlRooms: Number,
@@ -21,6 +22,7 @@ const reservationBanquetSchema = mongoose.Schema({
     customerEmail: String,
     customerPhone: String,
     providerId: String,
+    category: String,
     id: String,
     halls: Number,
     date: Date
@@ -32,6 +34,7 @@ const reservationCateringSchema = mongoose.Schema({
     customerEmail: String,
     customerPhone: String,
     providerId: String,
+    category: String,
     id: String,
     bsGuests: Number,
     prGuests: Number,
