@@ -97,7 +97,7 @@ const Catering: React.FC = () => {
       </div>
       <div className="cateringMid">
         <div className="cateringImgs">
-          <img src={catering} alt="catering-img" className="cateingMainImg" />
+          <img src={catering} alt="catering-img" className="cateringMainImg" />
           <div className="imgRoll">
             <img src={catering} className="imgItem" />
             <img src={catering} className="imgItem" />
