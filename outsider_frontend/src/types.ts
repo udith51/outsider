@@ -70,7 +70,13 @@ export type TInfoProvider={
     deluxeAmt?: number,
     standardRooms?: number,
     deluxeRooms?:number
-}   
+} 
+
+export type TAmenities={
+    label:string,
+    value:string,
+    disabled?:undefined
+}
 
 export type TCartItem={
     customerId:number,

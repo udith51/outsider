@@ -1,31 +1,55 @@
 import React, { useContext, useEffect, useState } from "react";
-import "../assets/css/InfoProvider.css";
-import { TContextType, TInfoProvider } from "../types";
+import { MultiSelect } from "react-multi-select-component";
 import { useNavigate } from "react-router-dom";
+import "../assets/css/InfoProvider.css";
+import { TAmenities, TContextType, TInfoProvider } from "../types";
 import { Context } from "../App";
+import {
+  banquetAmenities,
+  cateringAmenities,
+  hotelAmenities,
+} from "../lib/utils";
 
 const InfoProvider: React.FC = () => {
+  const navigate = useNavigate();
   const { user } = useContext(Context) as TContextType;
   const cat = user?.category as string;
   const id = user?.id;
   const category = cat?.charAt(0).toUpperCase() + cat?.slice(1);
-  const navigate = useNavigate();
   const [oldUser, setOldUser] = useState<boolean>(false);
 
+  // const [pictures, setPictures] = useState<File>();
+  const [opt, setOpt] = useState<TAmenities[]>([]);
+  const [selected, setSelected] = useState<TAmenities[]>([]);
+
   useEffect(() => {
-    async function details() {
-      await fetch(`http://localhost:3000/provider/info/${category}/${id}`)
-        .then((val) => {
-          return val.json();
-        })
-        .then((res) => {
-          setForm(res[0]);
-          setOldUser(true);
-        })
-        .catch((e) => console.log(e));
-    }
-    details();
+    setOpt(() => {
+      var curr;
+      if (cat === "hotel") curr = hotelAmenities;
+      else if (cat === "catering") curr = cateringAmenities;
+      else curr = banquetAmenities;
+      return curr.map((amm) => {
+        return { label: amm, value: amm };
+      });
+    });
   }, []);
+
+  // useEffect(() => {
+  //   async function details() {
+  //     await fetch(`http://localhost:3000/provider/info/${category}/${id}`)
+  //       .then((val) => {
+  //         return val.json();
+  //       })
+  //       .then((res) => {
+  //         console.log(res);
+
+  //         // if (res.size !== 0) setForm(res[0]);
+  //         // setOldUser(true);
+  //       })
+  //       .catch((e) => console.log(e));
+  //   }
+  //   details();
+  // }, []);
 
   const [form, setForm] = useState<TInfoProvider>({
     name: "",
@@ -37,8 +61,7 @@ const InfoProvider: React.FC = () => {
     zipcode: 0,
     accomodation: 0,
     price: 0,
-    facilities: [],
-    pictures: [],
+    amenities: [],
     basicAmt: 0,
     premiumAmt: 0,
     premiumPlusAmt: 0,
@@ -49,6 +72,14 @@ const InfoProvider: React.FC = () => {
     deluxeRooms: 0,
     assured: 0,
   });
+
+  // const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { files } = event.target;
+  //   const selectedFiles = files as FileList;
+
+  //   setPictures(selectedFiles?.[0]);
+  //   console.log(pictures);
+  // };
 
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -61,7 +92,6 @@ const InfoProvider: React.FC = () => {
       e.target.style.borderColor = "red";
       e.target.style.borderStyle = "solid";
     }
-
     setForm((prev) => {
       return {
         ...prev,
@@ -69,7 +99,6 @@ const InfoProvider: React.FC = () => {
       };
     });
     console.log(form);
-
     if (e.target.name === "zipcode" && e.target.value.length === 6) {
       await fetch(`https://api.postalpincode.in/pincode/${e.target.value}`)
         .then((val) => {
@@ -95,46 +124,52 @@ const InfoProvider: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!oldUser) {
-      const assured = Math.floor(Math.random() * 10000);
-      const response = await fetch(
-        `http://localhost:3000/provider/register/${category}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ...form, id, assured }),
-        }
-      );
-      if (response.statusText === "OK") {
-        const val = await response.json();
-        console.log(val);
-        navigate("/dash");
-      } else {
-        const val = await response.json();
-        console.log(val);
+    // if (!oldUser) {
+    const assured = Math.floor(Math.random() * 10000);
+    const amenities = selected.map((item) => {
+      return item.value;
+    });
+    // console.log({ ...form, id, assured, amenities });
+    console.log(form);
+
+    const response = await fetch(
+      `http://localhost:3000/provider/register/${category}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...form, id, assured, amenities }),
       }
+    );
+    if (response.statusText === "OK") {
+      const val = await response.json();
+      console.log(val);
+      navigate("/dash");
     } else {
-      const response = await fetch(
-        `http://localhost:3000/provider/info/${category}/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ...form }),
-        }
-      );
-      if (response.statusText === "OK") {
-        const val = await response.json();
-        console.log(val);
-        navigate("/dash");
-      } else {
-        const val = await response.json();
-        console.log(val);
-      }
+      const val = await response.json();
+      console.log(val);
     }
+    // } else {
+    //   const response = await fetch(
+    //     `http://localhost:3000/provider/info/${category}/${id}`,
+    //     {
+    //       method: "PUT",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({ ...form }),
+    //     }
+    //   );
+    //   if (response.statusText === "OK") {
+    //     const val = await response.json();
+    //     console.log(val);
+    //     navigate("/dash");
+    //   } else {
+    //     const val = await response.json();
+    //     console.log(val);
+    //   }
+    // }
   };
 
   return (
@@ -213,14 +248,6 @@ const InfoProvider: React.FC = () => {
             onChange={handleChange}
             placeholder="Enter description in 200 words"
           />
-          {/* <input
-            type="text"
-            id="description"
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            placeholder="Enter description in 100 words"
-          /> */}
         </div>
 
         {category === "Banquet" && (
@@ -250,16 +277,28 @@ const InfoProvider: React.FC = () => {
           </div>
         )}
 
-        <div className="bar">
-          <label htmlFor="pictures">{category} Images</label>
-          <input
+        <div className="w2">
+          <div className="bar">
+            <label htmlFor="amenities">{category} Amenities</label>
+            <MultiSelect
+              options={opt}
+              value={selected}
+              onChange={setSelected}
+              labelledBy="Select"
+            />
+          </div>
+          <div className="bar">
+            <label htmlFor="pictures">{category} Images</label>
+            {/* <input
             type="text"
             id="pictures"
             name="pictures"
             value={form.pictures}
             placeholder="Enter Image"
             onChange={handleChange}
-          />
+          /> */}
+            {/* <input type="file" onChange={selectFile} /> */}
+          </div>
         </div>
 
         {category === "Catering" && (

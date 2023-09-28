@@ -50,7 +50,6 @@ const App: React.FC = () => {
           setRqdAmenities,
         }}
       >
-        {/* {!showCart && <Navbar />} */}
         <Routes>
           <Route path="/:category/:id" element={<Details />} />
           <Route path="/bookings" element={<Booking />} />

@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
           {!user ? (
             <div className="navAccount">
               <div className="dropbtn">My Account</div>
-              <div className="dropdown-content">
+              <div className="dropdown-Content">
                 <div
                   onClick={() => {
                     handleAccount("signup");
@@ -131,7 +131,7 @@ const Navbar: React.FC = () => {
           ) : (
             <div className="navAccount">
               <div className="dropbtn">Hi {user.name.split(" ")[0]}</div>
-              <div className="dropdown-content">
+              <div className="dropdown-Content">
                 <div
                   onClick={() => {
                     setUser(undefined);

@@ -86,7 +86,7 @@
     font-weight: 500;
 }
 
-.dropdown-content {
+.dropdown-Content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
@@ -94,19 +94,19 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-.dropdown-content div {
+.dropdown-Content div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content div:hover {
+.dropdown-Content div:hover {
     background-color: #ddd;
     color: #435c10;
 }
 
-.navAccount:hover .dropdown-content {
+.navAccount:hover .dropdown-Content {
     display: block;
 }
 
