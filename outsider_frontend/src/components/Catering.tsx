@@ -116,7 +116,11 @@ const Catering: React.FC = () => {
             {Math.floor(Math.random() * 10)} hours ago
           </div>
           <div className="br"></div>
-          <div className="cateringAmenities"></div>
+          <div className="cateringAmenities">
+            {item?.amenities?.map((amenity) => (
+              <div className="amenity">{amenity}</div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="cateringOverview">

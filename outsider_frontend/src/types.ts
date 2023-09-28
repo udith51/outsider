@@ -13,11 +13,11 @@ export type TLogForm={
 
 export type TUser={
     name:string,
-        email:string,
-        id:number,
-        category:string,
-        phone:string,
-        userType:string
+    email:string,
+    id:number,
+    category:string,
+    phone:string,
+    userType:string
 }
 
 export type TContextType = {
@@ -38,7 +38,9 @@ export type TContextType = {
     assured:boolean,
     setAssured:React.Dispatch<React.SetStateAction<boolean>>,
     search:string,
-    setSearch:React.Dispatch<React.SetStateAction<string>>
+    setSearch:React.Dispatch<React.SetStateAction<string>>,
+    rqdAmenities:string[],
+    setRqdAmenities:React.Dispatch<React.SetStateAction<string[]>>
 };
 
 export type TInfoProvider={
@@ -55,7 +57,7 @@ export type TInfoProvider={
     zipcode?:number,
     accomodation?:number,
     price?:number,
-    facilities?: string[],
+    amenities?: string[],
     // pictures?:string[],
     pictures?: File
 

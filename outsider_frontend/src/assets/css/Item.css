@@ -1,7 +1,6 @@
 .item{
     background-color: #fff;
     height: 235px;
-    /* position: relative; */
     margin: 20px;
     transition: all 0.5s;
 }
@@ -58,6 +57,7 @@
 }
 .itemFacilities{
     display: flex;
+    align-items: center;
 }
 
 

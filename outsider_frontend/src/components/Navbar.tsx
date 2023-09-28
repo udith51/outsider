@@ -21,7 +21,6 @@ const Navbar: React.FC = () => {
     setUser,
     userType,
   } = useContext(Context) as TContextType;
-  console.log(userType);
 
   const handleAccount = (mode: string) => {
     setAccMode(mode);

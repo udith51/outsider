@@ -23,7 +23,7 @@ export const runFireworks = () => {
     }, 250);
 }
 
-export const hotelAmenities = ["Parking", "Gym", "Lounge", "Swimming Pool", "Garden", "Centralized A.C.", "Bar", "Jacuzzi", "WiFi", "Room Service", "Laundry Service"]
+export const hotelAmenities = ["Parking", "Gym", "Lounge", "Swimming Pool", "Garden", "Centralized A.C.", "Bar", "Jacuzzi", "Wifi", "Room Service", "Laundry Service"]
 
 export const cateringAmenities = ["Jain Food", "Appetizer Station", "Salad Bar", "Sushi Bar", "Pasta Station", "Seafood Bar", "Cheese and Charcuterie Station", "Beverage Bar", "Dessert Station"]
 

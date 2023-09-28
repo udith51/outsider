@@ -11,8 +11,6 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({ item }) => {
-  console.log(item);
-
   const { activeTab } = useContext(Context) as TContextType;
   const [price, setPrice] = useState<number>(0);
   const navigate = useNavigate();
@@ -41,27 +39,15 @@ const Item: React.FC<ItemProps> = ({ item }) => {
                 {item.city}, {item.state}
               </>
             </div>
-            {activeTab === "catering" && item.mocktailAmt && (
-              <div className="itemMocktails">
-                Mocktails <TiTick />
-              </div>
-            )}
-            {activeTab === "banquet" && (
-              <div className="itemAccomodation">
-                Accomodates: {item.accomodation}
-              </div>
-            )}
-            {activeTab === "hotel" && (
-              <div className="itemFacilities">
-                {item.facilities?.map((facility) => {
-                  return (
-                    <div className="itemFacility" key={facility}>
-                      {facility}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+            <div className="itemFacilities">
+              {item.amenities?.map((amenity) => {
+                return (
+                  <div className="itemFacility" key={amenity}>
+                    {amenity}
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="itemRight">
             <div className="itemPrev">
@@ -69,7 +55,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
             </div>
             <div className="itemPriceInfo">Starting from</div>
             <div className="itemPrice">
-              <div className="striked">&#8377; {price + 1000}</div>
+              <div className="striked">&#8377; {price + 0.15 * price}</div>
               <div className="actual">&#8377; {price}</div>
             </div>
           </div>

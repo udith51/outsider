@@ -92,7 +92,11 @@ const Banquet: React.FC = () => {
             <b>TOTAL HALLS:</b> 5
           </div>
           <div className="br"></div>
-          <div className="banquetAmenities">Amenities</div>
+          <div className="banquetAmenities">
+            {item?.amenities?.map((amenity) => (
+              <div className="amenity">{amenity}</div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="banquetOverview">

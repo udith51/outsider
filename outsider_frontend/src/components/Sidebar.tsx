@@ -9,9 +9,8 @@ import {
 } from "../lib/utils";
 
 const Sidebar: React.FC = () => {
-  const { assured, setAssured, activeTab, search, setSearch } = useContext(
-    Context
-  ) as TContextType;
+  const { assured, setAssured, activeTab, search, setSearch, setRqdAmenities } =
+    useContext(Context) as TContextType;
 
   var am = new Array(11).fill("amenity");
   const [amenityArr, setAmenityArr] = useState<string[]>(am);
@@ -22,6 +21,7 @@ const Sidebar: React.FC = () => {
     else if (activeTab === "catering") setAmenities(cateringAmenities);
     else if (activeTab === "banquet") setAmenities(banquetAmenities);
     setAmenityArr(am);
+    setRqdAmenities([]);
   }, [activeTab]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +70,15 @@ const Sidebar: React.FC = () => {
                   temp[index] =
                     temp[index] === "amenity" ? "activeAmenity" : "amenity";
                   setAmenityArr(temp);
+                  setRqdAmenities((amts) => {
+                    var tempAmm = amts.slice();
+                    if (tempAmm.find((t) => t === amenity)) {
+                      return tempAmm.filter((t) => {
+                        return t !== amenity;
+                      });
+                    }
+                    return [...amts, amenity];
+                  });
                 }}
               >
                 {amenity}

@@ -23,6 +23,7 @@ const App: React.FC = () => {
   const [cartItem, setCartItem] = useState<TCartItem[]>([]);
   const [assured, setAssured] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
+  const [rqdAmenities, setRqdAmenities] = useState<string[]>([]);
   return (
     <div className="App">
       <Context.Provider
@@ -45,6 +46,8 @@ const App: React.FC = () => {
           setAssured,
           search,
           setSearch,
+          rqdAmenities,
+          setRqdAmenities,
         }}
       >
         {/* {!showCart && <Navbar />} */}

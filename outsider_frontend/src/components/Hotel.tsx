@@ -79,7 +79,6 @@ const Hotel: React.FC = () => {
       standardAmt: item?.standardAmt as number,
       deluxeAmt: item?.deluxeAmt as number,
     };
-    console.log(rsv);
 
     setCartItem((items) => [...items, rsv]);
     setShowCart(true);
@@ -119,7 +118,11 @@ const Hotel: React.FC = () => {
             <b>CHECKOUT:</b> 11:00 A.M.
           </div>
           <div className="br"></div>
-          <div className="hotelAmenities">AMENITIES</div>
+          <div className="hotelAmenities">
+            {item?.amenities?.map((amenity) => (
+              <div className="amenity">{amenity}</div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="hotelOverview">
