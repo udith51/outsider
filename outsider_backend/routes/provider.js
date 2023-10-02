@@ -1,8 +1,12 @@
 const router = require('express').Router();
 const { ProviderHotel, ProviderCatering, ProviderBanquet } = require("../models/Provider")
+var multer = require("multer");
+var upload = multer({ dest: 'uploads/' })
 
-router.post('/register/:category', async (req, res) => {
+router.post('/register/:category', upload.array("pictures"), async (req, res) => {
     try {
+        console.log(req.body);
+        console.log(req.files);
         const category = req.params.category.toLowerCase();
         var newProvider;
         if (category === "hotel")
@@ -11,8 +15,9 @@ router.post('/register/:category', async (req, res) => {
             newProvider = await new ProviderCatering(req.body);
         else if (category === "banquet")
             newProvider = await new ProviderBanquet(req.body);
-        const savedProvider = await newProvider.save();
-        return res.status(200).json(savedProvider);
+        // const savedProvider = await newProvider.save();
+        return res.status(200).json(newProvider);
+        // return res.status(200).json(savedProvider);
     } catch (e) {
         return res.status(500).json(e);
     }

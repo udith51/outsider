@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import axios from "axios";
 import { TContextType, TRegForm } from "../types";
 import { Context } from "../App";
 import { useNavigate } from "react-router-dom";
@@ -26,25 +27,30 @@ const Registration: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:3000/auth/register`, {
-      method: "POST",
+    console.log(form);
+
+    const config = {
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
       },
-      body: JSON.stringify({ ...form, userType }),
-    });
-    if (response.statusText === "OK") {
-      const val = await response.json();
-
-      setUser(val);
-      if (val.userType === "provider") navigate("/info");
-      else navigate("/");
-    } else {
-      // TODO
-      const val = await response.json();
-      console.log(val);
-    }
-
+    };
+    await axios
+      .post(
+        `http://localhost:3000/auth/register`,
+        { ...form, userType }
+        // config
+      )
+      .then((response) => {
+        if (response.statusText === "OK") {
+          setUser(response.data);
+          if (response.data.userType === "provider") navigate("/info");
+          else navigate("/");
+        }
+      })
+      .catch((val) => {
+        console.log(val);
+        // TODO
+      });
     setForm(() => ({
       name: "",
       phone: "",

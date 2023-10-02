@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import { MultiSelect } from "react-multi-select-component";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/InfoProvider.css";
@@ -7,6 +8,7 @@ import { Context } from "../App";
 import {
   banquetAmenities,
   cateringAmenities,
+  getPin,
   hotelAmenities,
 } from "../lib/utils";
 
@@ -16,9 +18,7 @@ const InfoProvider: React.FC = () => {
   const cat = user?.category as string;
   const id = user?.id;
   const category = cat?.charAt(0).toUpperCase() + cat?.slice(1);
-  const [oldUser, setOldUser] = useState<boolean>(false);
-
-  // const [pictures, setPictures] = useState<File>();
+  const [pictures, setPictures] = useState<FileList | null>();
   const [opt, setOpt] = useState<TAmenities[]>([]);
   const [selected, setSelected] = useState<TAmenities[]>([]);
 
@@ -29,27 +29,13 @@ const InfoProvider: React.FC = () => {
       else if (cat === "catering") curr = cateringAmenities;
       else curr = banquetAmenities;
       return curr.map((amm) => {
-        return { label: amm, value: amm };
+        return {
+          label: amm,
+          value: amm,
+        };
       });
     });
   }, []);
-
-  // useEffect(() => {
-  //   async function details() {
-  //     await fetch(`http://localhost:3000/provider/info/${category}/${id}`)
-  //       .then((val) => {
-  //         return val.json();
-  //       })
-  //       .then((res) => {
-  //         console.log(res);
-
-  //         // if (res.size !== 0) setForm(res[0]);
-  //         // setOldUser(true);
-  //       })
-  //       .catch((e) => console.log(e));
-  //   }
-  //   details();
-  // }, []);
 
   const [form, setForm] = useState<TInfoProvider>({
     name: "",
@@ -61,7 +47,6 @@ const InfoProvider: React.FC = () => {
     zipcode: 0,
     accomodation: 0,
     price: 0,
-    amenities: [],
     basicAmt: 0,
     premiumAmt: 0,
     premiumPlusAmt: 0,
@@ -73,13 +58,30 @@ const InfoProvider: React.FC = () => {
     assured: 0,
   });
 
-  // const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { files } = event.target;
-  //   const selectedFiles = files as FileList;
+  const setFormData = () => {
+    var formData = new FormData();
+    selected.forEach((item) => {
+      formData.append("amenity", item.value);
+    });
 
-  //   setPictures(selectedFiles?.[0]);
-  //   console.log(pictures);
-  // };
+    if (pictures) {
+      for (let i = 0; i < pictures.length; i++) {
+        formData.append("pictures", pictures[i]);
+      }
+    }
+    for (const key in form) {
+      if (typeof form[key as keyof TInfoProvider] === "number") {
+      } else if (typeof form[key as keyof TInfoProvider] === "string") {
+        formData.append(key, form[key as keyof TInfoProvider] as string);
+      }
+    }
+    formData.append("assured", String(Math.floor(Math.random() * 10000)));
+    return formData;
+  };
+  const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target;
+    setPictures(files);
+  };
 
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -98,7 +100,7 @@ const InfoProvider: React.FC = () => {
         [e.target.name]: e.target.value,
       };
     });
-    console.log(form);
+
     if (e.target.name === "zipcode" && e.target.value.length === 6) {
       await fetch(`https://api.postalpincode.in/pincode/${e.target.value}`)
         .then((val) => {
@@ -124,57 +126,52 @@ const InfoProvider: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (!oldUser) {
-    const assured = Math.floor(Math.random() * 10000);
-    const amenities = selected.map((item) => {
-      return item.value;
+    var formData = new FormData();
+    selected.forEach((item) => {
+      formData.append("amenity", item.value);
     });
-    // console.log({ ...form, id, assured, amenities });
-    console.log(form);
 
-    const response = await fetch(
-      `http://localhost:3000/provider/register/${category}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...form, id, assured, amenities }),
+    if (pictures) {
+      for (let i = 0; i < pictures.length; i++) {
+        formData.append("pictures", pictures[i]);
       }
-    );
-    if (response.statusText === "OK") {
-      const val = await response.json();
-      console.log(val);
-      navigate("/dash");
-    } else {
-      const val = await response.json();
-      console.log(val);
     }
-    // } else {
-    //   const response = await fetch(
-    //     `http://localhost:3000/provider/info/${category}/${id}`,
-    //     {
-    //       method: "PUT",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ ...form }),
-    //     }
-    //   );
-    //   if (response.statusText === "OK") {
-    //     const val = await response.json();
-    //     console.log(val);
-    //     navigate("/dash");
-    //   } else {
-    //     const val = await response.json();
-    //     console.log(val);
-    //   }
-    // }
+    for (const key in form) {
+      if (typeof form[key as keyof TInfoProvider] === "number") {
+      } else if (typeof form[key as keyof TInfoProvider] === "string") {
+        formData.append(key, form[key as keyof TInfoProvider] as string);
+      }
+    }
+    formData.append("assured", String(Math.floor(Math.random() * 10000)));
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    // const formData = setFormData();
+    await axios
+      .post(
+        `http://localhost:3000/provider/register/${category}`,
+        formData,
+        config
+      )
+      .then((response) => {
+        if (response.statusText === "OK") {
+          console.log(response.data);
+          navigate("/dash");
+        } else {
+          console.log(response);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div className="infoProvider">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="application/form-data">
         <div className="bar">
           <label htmlFor="name">{category} Name</label>
           <input
@@ -297,7 +294,7 @@ const InfoProvider: React.FC = () => {
             placeholder="Enter Image"
             onChange={handleChange}
           /> */}
-            {/* <input type="file" onChange={selectFile} /> */}
+            <input type="file" onChange={selectFile} multiple />
           </div>
         </div>
 
@@ -397,7 +394,8 @@ const InfoProvider: React.FC = () => {
           </div>
         )}
         <button type="submit" className="infoSub">
-          {oldUser ? "Update" : "Save"}
+          Save
+          {/* {oldUser ? "Update" : "Save"} */}
         </button>
       </form>
     </div>
