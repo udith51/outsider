@@ -45,6 +45,7 @@ const InfoProvider: React.FC = () => {
     state: "",
     description: "",
     zipcode: 0,
+    pictures: [],
     accomodation: 0,
     price: 0,
     basicAmt: 0,
@@ -61,7 +62,7 @@ const InfoProvider: React.FC = () => {
   const setFormData = () => {
     var formData = new FormData();
     selected.forEach((item) => {
-      formData.append("amenity", item.value);
+      formData.append("", item.value);
     });
 
     if (pictures) {
@@ -128,7 +129,7 @@ const InfoProvider: React.FC = () => {
     e.preventDefault();
     var formData = new FormData();
     selected.forEach((item) => {
-      formData.append("amenity", item.value);
+      formData.append("amenities", item.value);
     });
 
     if (pictures) {
@@ -149,7 +150,6 @@ const InfoProvider: React.FC = () => {
         "content-type": "multipart/form-data",
       },
     };
-    // const formData = setFormData();
     await axios
       .post(
         `http://localhost:3000/provider/register/${category}`,
@@ -286,14 +286,6 @@ const InfoProvider: React.FC = () => {
           </div>
           <div className="bar">
             <label htmlFor="pictures">{category} Images</label>
-            {/* <input
-            type="text"
-            id="pictures"
-            name="pictures"
-            value={form.pictures}
-            placeholder="Enter Image"
-            onChange={handleChange}
-          /> */}
             <input type="file" onChange={selectFile} multiple />
           </div>
         </div>

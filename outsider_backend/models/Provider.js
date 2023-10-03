@@ -14,7 +14,10 @@ const providerBanquetSchema = mongoose.Schema(
         price: Number,
         assured: Number,
         amenities: [String],
-        pictures: [String],
+        pictures: [{
+            url: String,
+            filename: String
+        }],
         reservations: [{
             cId: String,
             fDate: Date,
@@ -36,8 +39,11 @@ const providerCateringSchema = mongoose.Schema(
         basicAmt: Number,
         premiumAmt: Number,
         premiumPlusAmt: Number,
-        mocktailAmt: String,
-        pictures: [String],
+        mocktailAmt: Number,
+        pictures: [{
+            url: String,
+            filename: String
+        }],
         assured: String,
         amenities: [String],
         reservations: [{
@@ -69,7 +75,10 @@ const providerHotelSchema = mongoose.Schema(
         deluxeRooms: Number,
         assured: Number,
         amenities: [String],
-        pictures: [String],
+        pictures: [{
+            url: String,
+            filename: String
+        }],
         reservations: [{
             cId: String,
             fDate: Date,
