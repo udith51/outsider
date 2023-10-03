@@ -12,11 +12,14 @@
 }
 
 .itemImg{
-    height: 100%;
+    height: 235px;
     width: 235px;
-    background-color: aquamarine;
     float: left;
+    object-fit:cover
+    
 }
+
+
 
 .sb{
     display: flex;

@@ -24,6 +24,8 @@ const Catering: React.FC = () => {
   const [bsSerAmt, setBsSerAmt] = useState<number>(0);
   const [prSerAmt, setPrSerAmt] = useState<number>(0);
   const [prPSerAmt, setPrPSerAmt] = useState<number>(0);
+  const [currentImg, setCurrentImg] = useState<string>("");
+  const { category, id } = useParams();
 
   useEffect(() => {
     setBsSerAmt(() => {
@@ -36,8 +38,6 @@ const Catering: React.FC = () => {
       return prPGuests * (item?.premiumPlusAmt as number);
     });
   }, [bsGuests, prGuests, prPGuests]);
-
-  const { category, id } = useParams();
 
   useEffect(() => {
     async function getData(): Promise<void> {
@@ -56,7 +56,10 @@ const Catering: React.FC = () => {
     }
     getData();
   }, []);
-  console.log(item);
+
+  useEffect(() => {
+    item?.pictures && setCurrentImg(item.pictures[0].url);
+  }, [item]);
 
   const addToCart = () => {
     const rsv: TCartItem = {
@@ -97,13 +100,25 @@ const Catering: React.FC = () => {
       </div>
       <div className="cateringMid">
         <div className="cateringImgs">
-          <img src={catering} alt="catering-img" className="cateringMainImg" />
+          <img
+            src={currentImg}
+            alt="catering-img"
+            className="cateringMainImg"
+          />
           <div className="imgRoll">
-            <img src={catering} className="imgItem" />
-            <img src={catering} className="imgItem" />
-            <img src={catering} className="imgItem" />
-            <img src={catering} className="imgItem" />
-            <img src={catering} className="imgItem" />
+            {item?.pictures?.map((pic, index) => {
+              return (
+                <img
+                  src={pic.url}
+                  key={index}
+                  className="imgItem"
+                  alt="banquet-img"
+                  onClick={() => {
+                    setCurrentImg(pic.url);
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="cateringRight">
@@ -126,25 +141,7 @@ const Catering: React.FC = () => {
       <div className="cateringOverview">
         <b>OVERVIEW</b>
         <div className="pb5"></div>
-        {item?.description || (
-          <div className="">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
-            natus blanditiis quasi at non quia sit neque, incidunt consequatur
-            necessitatibus. Alias deleniti inventore, id adipisci nesciunt iusto
-            recusandae dolores facere laudantium quaerat. Sunt reiciendis
-            blanditiis totam ut a ratione temporibus doloremque excepturi,
-            dignissimos nisi animi deleniti inventore fuga error aut quam
-            voluptas aperiam ullam sed tenetur mollitia quia facilis optio
-            eaque. Culpa, explicabo labore sequi nisi hic omnis? Nesciunt quasi
-            aliquam animi accusamus aperiam exercitationem dolor sit qui
-            aliquid! Perspiciatis explicabo consequuntur non labore assumenda,
-            iste consectetur ex nobis exercitationem cupiditate nulla, corrupti
-            fugiat. Voluptates sunt eum distinctio quia, dolores quod facilis
-            architecto molestiae provident. Eaque distinctio tenetur ullam, sit
-            dolor eligendi exercitationem dolorem assumenda iste eius eum esse
-            voluptas cum?
-          </div>
-        )}
+        {item?.description || <div className="">{item?.description}</div>}
       </div>
       <div className="pb20"></div>
       <b>CHOOSE SERVICE</b>

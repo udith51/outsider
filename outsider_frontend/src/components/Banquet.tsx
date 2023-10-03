@@ -16,7 +16,7 @@ const Banquet: React.FC = () => {
   const [date, setDate] = useState<Date>(new Date());
   const [halls, setHalls] = useState<number>(1);
   const [hallAmt, setHallAmt] = useState<number>(0);
-
+  const [currentImg, setCurrentImg] = useState<string>("");
   const { category, id } = useParams();
 
   useEffect(() => {
@@ -43,9 +43,12 @@ const Banquet: React.FC = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    item?.pictures && setCurrentImg(item.pictures[0].url);
+  }, [item]);
+
   const addToCart = () => {
     window.scrollTo(0, 0);
-    console.log(user);
 
     const rsv: TCartItem = {
       customerId: user?.id as number,
@@ -74,7 +77,22 @@ const Banquet: React.FC = () => {
       </div>
       <div className="banquetMid">
         <div className="banquetImgs">
-          <img src={banquet} alt="banquetImg" className="banquetMainImg" />
+          <img src={currentImg} alt="banquet-img" className="banquetMainImg" />
+          <div className="imgRoll">
+            {item?.pictures.map((pic, index) => {
+              return (
+                <img
+                  src={pic.url}
+                  key={index}
+                  className="imgItem"
+                  alt="banquet-img"
+                  onClick={() => {
+                    setCurrentImg(pic.url);
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="banquetRight">
           <div className="banquetView pb5">
@@ -93,8 +111,10 @@ const Banquet: React.FC = () => {
           </div>
           <div className="br"></div>
           <div className="banquetAmenities">
-            {item?.amenities?.map((amenity) => (
-              <div className="amenity">{amenity}</div>
+            {item?.amenities?.map((amenity, index) => (
+              <div className="amenity" key={index}>
+                {amenity}
+              </div>
             ))}
           </div>
         </div>
@@ -102,30 +122,15 @@ const Banquet: React.FC = () => {
       <div className="banquetOverview">
         <b>OVERVIEW</b>
         <div className="pb5"></div>
-        {item?.description || (
-          <div className="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
-            nisi possimus modi. Repellendus facilis eius autem, facere dolore
-            distinctio placeat quas magni, mollitia amet quidem nisi asperiores
-            natus libero numquam? Reprehenderit, hic eius aliquid dignissimos
-            quibusdam at quae quis facere aperiam non ratione, ut maxime sed
-            dolorum possimus aut quisquam neque quasi sapiente quia fuga! Quasi
-            error veniam magnam quam! Perferendis ut unde distinctio libero vel
-            nisi blanditiis architecto eos officiis a est, error sint officia,
-            doloribus dolore quaerat nam magni praesentium. Neque alias
-            similique molestiae illo itaque voluptatum eius? Aspernatur
-            asperiores voluptatum sit enim, alias nihil reprehenderit animi quas
-            consequuntur? Commodi necessitatibus odit voluptatem itaque minima.
-            Possimus laudantium deleniti perferendis culpa! Praesentium placeat
-            eius sequi. Pariatur, dolor? Qui, quaerat.
-          </div>
-        )}
+        {item?.description || <div className="">{item?.description}</div>}
       </div>
+      <div className="pb20"></div>
+      <b>CHOOSE SERVICE</b>
       <div className="pb20"></div>
       <div className="banquetBooking">
         <div className="hall">
           <div className="hallLeft">
-            <img src={banquet} alt="" className="imgSml" />
+            <img src={currentImg} alt="" className="imgSml" />
           </div>
           <div className="hallMid">
             <div className="col">

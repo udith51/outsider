@@ -25,9 +25,8 @@ const Hotel: React.FC = () => {
     item?.standardAmt as number
   );
   const [dlRoomAmt, setDlRoomAmt] = useState<number>(item?.deluxeAmt as number);
-
+  const [currentImg, setCurrentImg] = useState<string>("");
   const { category, id } = useParams();
-  console.log(category);
 
   useEffect(() => {
     setDlRoomAmt(() => {
@@ -59,6 +58,11 @@ const Hotel: React.FC = () => {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    item?.pictures && setCurrentImg(item.pictures[0].url);
+    console.log(item?.pictures);
+  }, [item]);
 
   const addToCart = () => {
     const rsv: TCartItem = {
@@ -94,13 +98,21 @@ const Hotel: React.FC = () => {
       </div>
       <div className="hotelMid">
         <div className="hotelImgs">
-          <img src={hotel} alt="hotel-img" className="hotelMainImg" />
+          <img src={currentImg} alt="hotel-img" className="hotelMainImg" />
           <div className="imgRoll">
-            <img src={hotel} className="imgItem" />
-            <img src={hotel} className="imgItem" />
-            <img src={hotel} className="imgItem" />
-            <img src={hotel} className="imgItem" />
-            <img src={hotel} className="imgItem" />
+            {item?.pictures.map((pic, index) => {
+              return (
+                <img
+                  src={pic.url}
+                  key={index}
+                  className="imgItem"
+                  alt="banquet-img"
+                  onClick={() => {
+                    setCurrentImg(pic.url);
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
         <div className="hotelRight">
@@ -130,11 +142,11 @@ const Hotel: React.FC = () => {
         <div className="pb5"></div>
         {item?.description || (
           <div className="">
-            Situated within walking distance from Colva, one of the finest
-            beaches, The Golden Palms offers guests luxurious accommodation.
-            Previously known as Pearl Oceanique Resort, this 4-star property
-            features everything from a fully-equipped gymnasium to
-            state-of-the-art conference halls, business centre, swimming pool
+            {item?.description} || Situated within walking distance from Colva,
+            one of the finest beaches, The Golden Palms offers guests luxurious
+            accommodation. Previously known as Pearl Oceanique Resort, this
+            4-star property features everything from a fully-equipped gymnasium
+            to state-of-the-art conference halls, business centre, swimming pool
             and parking area. /n/nThere are 50 well-appointed rooms available
             with cosy beds and large windows spanning from floor to ceiling.
             Impressive portraits, beautiful curtains and elegant light fittings

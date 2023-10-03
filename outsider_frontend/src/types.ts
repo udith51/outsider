@@ -6,6 +6,11 @@ export type TRegForm={
     category?:string
 }
 
+export type TPicture={
+    url:string,
+    filename:string
+}
+
 export type TLogForm={
     email:string,
     password:string
@@ -58,8 +63,7 @@ export type TInfoProvider={
     accomodation?:number,
     price?:number,
     amenities?: string[],
-    // pictures?:string[],
-    pictures?: File
+    pictures:TPicture[],
 
     basicAmt?:number,
     premiumAmt?: number,

@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { TContextType, TInfoProvider } from "../types";
 import "../assets/css/Item.css";
 import { HiLocationMarker } from "react-icons/hi";
-import { TiTick } from "react-icons/ti";
 import { Context } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +13,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
   const { activeTab } = useContext(Context) as TContextType;
   const [price, setPrice] = useState<number>(0);
   const navigate = useNavigate();
+  const [currentImg, setCurrentImg] = useState<string>("");
 
   useEffect(() => {
     if (activeTab === "hotel") setPrice(item.standardAmt as number);
@@ -21,12 +21,16 @@ const Item: React.FC<ItemProps> = ({ item }) => {
     else if (activeTab === "catering") setPrice(item.basicAmt as number);
   }, []);
 
+  useEffect(() => {
+    item?.pictures && setCurrentImg(item.pictures[0].url);
+  }, [item]);
+
   const handleClick = () => {
     navigate(`/${activeTab}/${item._id}`);
   };
   return (
     <div className="item">
-      <div className="itemImg"></div>
+      <img src={currentImg} alt="" className="itemImg" />
       <div className="sb">
         <div className="itemInfo">
           <div className="itemLeft">
