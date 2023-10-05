@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../assets/css/Service.css";
-import banquet from "../assets/imgs/banquet.jpg";
 import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

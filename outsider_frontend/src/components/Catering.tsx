@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../App";
 import { TCartItem, TContextType, TInfoProvider } from "../types";
 import { useParams } from "react-router-dom";
-import catering from "../assets/imgs/catering.jpeg";
 import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 
@@ -132,8 +131,10 @@ const Catering: React.FC = () => {
           </div>
           <div className="br"></div>
           <div className="cateringAmenities">
-            {item?.amenities?.map((amenity) => (
-              <div className="amenity">{amenity}</div>
+            {item?.amenities?.map((amenity, index) => (
+              <div className="amenity" key={index}>
+                {amenity}
+              </div>
             ))}
           </div>
         </div>

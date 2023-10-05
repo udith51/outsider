@@ -1,3 +1,4 @@
+import axios from 'axios';
 import confetti from 'canvas-confetti';
 
 export const runFireworks = () => {
@@ -17,7 +18,6 @@ export const runFireworks = () => {
         }
 
         var particleCount = 50 * (timeLeft / duration);
-        // since particles fall down, start a bit higher than random
         confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
         confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
     }, 250);
@@ -28,3 +28,24 @@ export const hotelAmenities = ["Parking", "Gym", "Lounge", "Swimming Pool", "Gar
 export const cateringAmenities = ["Jain Food", "Appetizer Station", "Salad Bar", "Sushi Bar", "Pasta Station", "Seafood Bar", "Cheese and Charcuterie Station", "Beverage Bar", "Dessert Station"]
 
 export const banquetAmenities = ["AV Equipment", "Parking", "Restrooms", "Stage", "Microphone", "Power Backup/Generator", "Garden", "Roof Top"]
+
+export const getPin = async (val) => {
+    try {
+        const response = await axios.get(`https://api.postalpincode.in/pincode/${val}`);
+
+        if (response.data && response.data[0].PostOffice) {
+            return {
+                city: response.data[0].PostOffice[0].District,
+                state: response.data[0].PostOffice[0].State
+            };
+        } else {
+            throw new Error("Not found");
+        }
+    } catch (error) {
+        console.error(error);
+        return {
+            city: "",
+            state: ""
+        };
+    }
+};

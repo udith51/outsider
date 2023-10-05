@@ -19,7 +19,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
     if (activeTab === "hotel") setPrice(item.standardAmt as number);
     else if (activeTab === "banquet") setPrice(item.price as number);
     else if (activeTab === "catering") setPrice(item.basicAmt as number);
-  }, []);
+  }, [activeTab]);
 
   useEffect(() => {
     item?.pictures && setCurrentImg(item.pictures[0].url);

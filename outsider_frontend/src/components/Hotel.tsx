@@ -131,8 +131,10 @@ const Hotel: React.FC = () => {
           </div>
           <div className="br"></div>
           <div className="hotelAmenities">
-            {item?.amenities?.map((amenity) => (
-              <div className="amenity">{amenity}</div>
+            {item?.amenities?.map((amenity, index) => (
+              <div className="amenity" key={index}>
+                {amenity}
+              </div>
             ))}
           </div>
         </div>

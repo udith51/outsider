@@ -35,7 +35,7 @@ const InfoProvider: React.FC = () => {
         };
       });
     });
-  }, []);
+  }, [cat]);
 
   const [form, setForm] = useState<TInfoProvider>({
     name: "",
@@ -59,75 +59,12 @@ const InfoProvider: React.FC = () => {
     assured: 0,
   });
 
-  const setFormData = () => {
-    var formData = new FormData();
-    selected.forEach((item) => {
-      formData.append("", item.value);
-    });
-
-    if (pictures) {
-      for (let i = 0; i < pictures.length; i++) {
-        formData.append("pictures", pictures[i]);
-      }
-    }
-    for (const key in form) {
-      if (typeof form[key as keyof TInfoProvider] === "number") {
-      } else if (typeof form[key as keyof TInfoProvider] === "string") {
-        formData.append(key, form[key as keyof TInfoProvider] as string);
-      }
-    }
-    formData.append("assured", String(Math.floor(Math.random() * 10000)));
-    return formData;
-  };
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     setPictures(files);
   };
 
-  const handleChange = async (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    if (e.target.value.length) {
-      e.target.style.border = "0.5";
-      e.target.style.borderColor = "green";
-      e.target.style.borderStyle = "solid";
-    } else {
-      e.target.style.borderColor = "red";
-      e.target.style.borderStyle = "solid";
-    }
-    setForm((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-
-    if (e.target.name === "zipcode" && e.target.value.length === 6) {
-      await fetch(`https://api.postalpincode.in/pincode/${e.target.value}`)
-        .then((val) => {
-          return val.json();
-        })
-        .then((res) => {
-          if (res[0].PostOffice)
-            setForm((prev) => {
-              return {
-                ...prev,
-                city: res[0].PostOffice[0].District,
-                state: res[0].PostOffice[0].State,
-              };
-            });
-        })
-        .catch(() => {
-          setForm((prev) => {
-            return { ...prev };
-          });
-        });
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    var formData = new FormData();
+  const setFormData = (formData: FormData): FormData => {
     selected.forEach((item) => {
       formData.append("amenities", item.value);
     });
@@ -144,6 +81,48 @@ const InfoProvider: React.FC = () => {
       }
     }
     formData.append("assured", String(Math.floor(Math.random() * 10000)));
+    return formData;
+  };
+
+  const handleChange = async (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (e.target.value.length) {
+      e.target.style.border = "0.5";
+      e.target.style.borderColor = "green";
+      e.target.style.borderStyle = "solid";
+    } else {
+      e.target.style.borderColor = "red";
+      e.target.style.borderStyle = "solid";
+    }
+
+    setForm((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+
+    if (e.target.name === "zipcode" && e.target.value.length === 6) {
+      getPin(e.target.value)
+        .then((place) => {
+          setForm((prev) => {
+            return {
+              ...prev,
+              city: place.city,
+              state: place.state,
+            };
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    var formData = setFormData(new FormData());
 
     const config = {
       headers: {

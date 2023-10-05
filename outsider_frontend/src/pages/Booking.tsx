@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from "react";
-import Navbar from "../components/Navbar";
 import "../assets/css/Booking.css";
 import ReserveBox from "../components/ReserveBox";
 import { Context } from "../App";

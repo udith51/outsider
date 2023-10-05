@@ -27,19 +27,8 @@ const Registration: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
-
-    const config = {
-      headers: {
-        "content-type": "application/json",
-      },
-    };
     await axios
-      .post(
-        `http://localhost:3000/auth/register`,
-        { ...form, userType }
-        // config
-      )
+      .post(`http://localhost:3000/auth/register`, { ...form, userType })
       .then((response) => {
         if (response.statusText === "OK") {
           setUser(response.data);
@@ -126,7 +115,7 @@ const Registration: React.FC = () => {
             defaultValue=""
             onChange={onChange}
           >
-            <option disabled value="">
+            <option disabled value="" className="aOptions">
               Select a category
             </option>
             {options.map((option) => (
@@ -135,14 +124,6 @@ const Registration: React.FC = () => {
               </option>
             ))}
           </select>
-          {/* <input
-            type=""
-            placeholder="Enter category"
-            value={form.category}
-            name="category"
-            id="category"
-            onChange={onChange}
-          /> */}
         </div>
       )}
       <button type="submit" className="accSubmit">
