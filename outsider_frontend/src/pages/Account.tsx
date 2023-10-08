@@ -6,13 +6,13 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 
 const Account: React.FC = () => {
-  const { setPath, accMode, userType, setUserType, setShowCart } = useContext(
-    Context
-  ) as TContextType;
+  const { setPath, accMode, userType, setUserType, setShowCart, setCartItem } =
+    useContext(Context) as TContextType;
 
   useEffect(() => {
+    setCartItem([]);
     setShowCart(false);
-    setUserType("provider");
+    setUserType("customer");
   }, []);
 
   return (

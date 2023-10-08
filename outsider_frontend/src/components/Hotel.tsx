@@ -4,7 +4,7 @@ import hotel from "../assets/imgs/hotel.jpg";
 import { AiOutlineEye, AiOutlineClockCircle } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TCartItem, TContextType, TInfoProvider } from "../types";
 import { Context } from "../App";
 
@@ -64,28 +64,38 @@ const Hotel: React.FC = () => {
     console.log(item?.pictures);
   }, [item]);
 
-  const addToCart = () => {
-    const rsv: TCartItem = {
-      customerId: user?.id as number,
-      customerName: user?.name as string,
-      customerEmail: user?.email as string,
-      customerPhone: user?.phone as string,
-      providerId: item?.id as number,
-      id: item?._id as number,
-      name: item?.name as string,
-      category: "hotel",
-      stRooms,
-      dlRooms,
-      stStartDate: stStartDate as Date,
-      stEndDate: stEndDate as Date,
-      dlStartDate: dlStartDate as Date,
-      dlEndDate: dlEndDate as Date,
-      standardAmt: item?.standardAmt as number,
-      deluxeAmt: item?.deluxeAmt as number,
-    };
+  const navigate = useNavigate();
 
-    setCartItem((items) => [...items, rsv]);
-    setShowCart(true);
+  const addToCart = () => {
+    if (user) {
+      const rsv: TCartItem = {
+        picture: item?.pictures[0].url || "",
+        customerId: user?.id as number,
+        customerName: user?.name as string,
+        customerEmail: user?.email as string,
+        customerPhone: user?.phone as string,
+        providerId: item?.id as number,
+        id: item?._id as number,
+        name: item?.name as string,
+        category: "hotel",
+        stRooms,
+        dlRooms,
+        stStartDate: stStartDate as Date,
+        stEndDate: stEndDate as Date,
+        dlStartDate: dlStartDate as Date,
+        dlEndDate: dlEndDate as Date,
+        standardAmt: item?.standardAmt as number,
+        deluxeAmt: item?.deluxeAmt as number,
+      };
+
+      setCartItem((items) => {
+        const finCart = items.filter((item) => item.id !== rsv.id);
+        return [rsv, ...finCart];
+      });
+      setShowCart(true);
+    } else {
+      navigate("/account");
+    }
   };
 
   return (

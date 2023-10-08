@@ -83,6 +83,7 @@ export type TAmenities={
 }
 
 export type TCartItem={
+    picture:string
     customerId:number,
     customerName:string,
     customerEmail:string,

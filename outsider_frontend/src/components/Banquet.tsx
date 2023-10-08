@@ -4,7 +4,7 @@ import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { TCartItem, TContextType, TInfoProvider } from "../types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../App";
 const Banquet: React.FC = () => {
   const { setShowCart, setCartItem, user } = useContext(
@@ -46,24 +46,29 @@ const Banquet: React.FC = () => {
     item?.pictures && setCurrentImg(item.pictures[0].url);
   }, [item]);
 
-  const addToCart = () => {
-    window.scrollTo(0, 0);
+  const navigate = useNavigate();
 
-    const rsv: TCartItem = {
-      customerId: user?.id as number,
-      customerName: user?.name as string,
-      customerEmail: user?.email as string,
-      customerPhone: user?.phone as string,
-      providerId: item?.id as number,
-      id: item?._id as number,
-      name: item?.name as string,
-      category: "banquet",
-      halls,
-      date,
-      price: item?.price,
-    };
-    setCartItem((items) => [...items, rsv]);
-    setShowCart(true);
+  const addToCart = () => {
+    if (user) {
+      const rsv: TCartItem = {
+        picture: item?.pictures[0].url || "",
+        customerId: user?.id as number,
+        customerName: user?.name as string,
+        customerEmail: user?.email as string,
+        customerPhone: user?.phone as string,
+        providerId: item?.id as number,
+        id: item?._id as number,
+        name: item?.name as string,
+        category: "banquet",
+        halls,
+        date,
+        price: item?.price,
+      };
+      setCartItem((items) => [...items, rsv]);
+      setShowCart(true);
+    } else {
+      navigate("/account");
+    }
   };
 
   return (
@@ -172,7 +177,7 @@ const Banquet: React.FC = () => {
         </div>
         <div className="pb20"></div>
         <div className="bookNow" onClick={addToCart}>
-          BOOK NOW
+          CONFIRM DETAILS
         </div>
       </div>
     </div>

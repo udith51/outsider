@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../App";
 import { TCartItem, TContextType, TInfoProvider } from "../types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineClockCircle, AiOutlineEye } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 
@@ -60,33 +60,40 @@ const Catering: React.FC = () => {
     item?.pictures && setCurrentImg(item.pictures[0].url);
   }, [item]);
 
-  const addToCart = () => {
-    const rsv: TCartItem = {
-      customerId: user?.id as number,
-      customerName: user?.name as string,
-      customerEmail: user?.email as string,
-      customerPhone: user?.phone as string,
-      providerId: item?.id as number,
-      id: item?._id as number,
-      name: item?.name as string,
-      category: "catering",
-      bsGuests,
-      prGuests,
-      prPGuests,
-      basicAmt: item?.basicAmt as number,
-      premiumAmt: item?.premiumAmt as number,
-      premiumPlusAmt: item?.premiumPlusAmt as number,
-      bsStartDate,
-      bsEndDate,
-      prStartDate,
-      prEndDate,
-      prPStartDate,
-      prPEndDate,
-    };
-    console.log(rsv);
+  const navigate = useNavigate();
 
-    setCartItem((items) => [...items, rsv]);
-    setShowCart(true);
+  const addToCart = () => {
+    if (user) {
+      const rsv: TCartItem = {
+        picture: item?.pictures[0].url || "",
+        customerId: user?.id as number,
+        customerName: user?.name as string,
+        customerEmail: user?.email as string,
+        customerPhone: user?.phone as string,
+        providerId: item?.id as number,
+        id: item?._id as number,
+        name: item?.name as string,
+        category: "catering",
+        bsGuests,
+        prGuests,
+        prPGuests,
+        basicAmt: item?.basicAmt as number,
+        premiumAmt: item?.premiumAmt as number,
+        premiumPlusAmt: item?.premiumPlusAmt as number,
+        bsStartDate,
+        bsEndDate,
+        prStartDate,
+        prEndDate,
+        prPStartDate,
+        prPEndDate,
+      };
+      console.log(rsv);
+
+      setCartItem((items) => [...items, rsv]);
+      setShowCart(true);
+    } else {
+      navigate("/account");
+    }
   };
 
   return (

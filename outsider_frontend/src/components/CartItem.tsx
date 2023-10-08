@@ -1,31 +1,26 @@
-import React from "react";
-import { TCartItem } from "../types";
-import hotel from "../assets/imgs/hotel.jpg";
-// import "../assets/css/Cart.css";
+import React, { useContext } from "react";
+import { TCartItem, TContextType } from "../types";
+import { month } from "../lib/utils";
+import "../assets/css/Cart.css";
+import { Context } from "../App";
 
 interface IItemProps {
   item: TCartItem;
 }
 
 const CartItem: React.FC<IItemProps> = ({ item }) => {
-  const month = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
+  const { setCartItem, setShowCart, user } = useContext(
+    Context
+  ) as TContextType;
+  const removeCartItem = (id: number): void => {
+    setCartItem((items) => {
+      return items.filter((item) => item.id !== id);
+    });
+  };
 
   return (
     <div className="cartItem">
-      <img src={hotel} className="cartItemImg" />
+      <img src={item.picture} className="cartItemImg" alt="thumbImg" />
       <div className="cartItemDetails">
         <div className="cartItemName">
           <div className="">{item.name.toUpperCase()}</div>
@@ -70,10 +65,19 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 </div>
               )}
             </div>
-            <div className="cartItemTotal">
-              &#8377;{" "}
-              {(item.stRooms as number) * (item?.standardAmt as number) +
-                (item.dlRooms as number) * (item?.deluxeAmt as number)}
+            <div className="cartItemLower">
+              <div className="space"></div>
+              <div
+                className="cartItemRemove"
+                onClick={() => removeCartItem(item.id)}
+              >
+                Remove
+              </div>
+              <div className="cartItemTotal">
+                &#8377;{" "}
+                {(item.stRooms as number) * (item?.standardAmt as number) +
+                  (item.dlRooms as number) * (item?.deluxeAmt as number)}
+              </div>
             </div>
           </>
         )}
@@ -133,11 +137,20 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 </div>
               )}
             </div>
-            <div className="cartItemTotal">
-              &#8377;{" "}
-              {(item.basicAmt as number) * (item?.bsGuests as number) +
-                (item.premiumAmt as number) * (item?.prGuests as number) +
-                (item.premiumPlusAmt as number) * (item?.prPGuests as number)}
+            <div className="cartItemLower">
+              <div className="space"></div>
+              <div
+                className="cartItemRemove"
+                onClick={() => removeCartItem(item.id)}
+              >
+                Remove
+              </div>
+              <div className="cartItemTotal">
+                &#8377;{" "}
+                {(item.basicAmt as number) * (item?.bsGuests as number) +
+                  (item.premiumAmt as number) * (item?.prGuests as number) +
+                  (item.premiumPlusAmt as number) * (item?.prPGuests as number)}
+              </div>
             </div>
           </>
         )}
@@ -155,8 +168,17 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 </div>
               </div>
             </div>
-            <div className="cartItemTotal">
-              &#8377; {(item.halls as number) * (item?.price as number)}
+            <div className="cartItemLower">
+              <div className="space"></div>
+              <div
+                className="cartItemRemove"
+                onClick={() => removeCartItem(item.id)}
+              >
+                Remove
+              </div>
+              <div className="cartItemTotal">
+                &#8377; {(item.halls as number) * (item?.price as number)}
+              </div>
             </div>
           </>
         )}

@@ -22,7 +22,6 @@ const Cart: React.FC = () => {
       },
       body: JSON.stringify({ cartItem }),
     });
-    // console.log(cartItem);
     if (response.statusText === "OK") {
       navigate("/success");
       setShowCart(false);
@@ -35,16 +34,27 @@ const Cart: React.FC = () => {
   return (
     <div className="cartWrapper">
       <div className="cartContainer">
-        <button
-          type="button"
-          className="cartHeading"
-          onClick={() => setShowCart(false)}
-        >
-          <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
-          <span className="cartNumItems">({cartItem.length} items)</span>
-        </button>
-
+        <div className="cartHeaders">
+          <button
+            type="button"
+            className="cartHeading"
+            onClick={() => setShowCart(false)}
+          >
+            <AiOutlineLeft />
+            <span className="heading">Your Cart</span>
+            <span className="cartNumItems">({cartItem.length} items)</span>
+          </button>
+          {cartItem.length !== 0 && (
+            <div
+              className="clearCart"
+              onClick={() => {
+                setCartItem([]);
+              }}
+            >
+              Clear Cart
+            </div>
+          )}
+        </div>
         {cartItem.length < 1 && (
           <div className="emptyCart">
             <AiOutlineShopping size={150} />

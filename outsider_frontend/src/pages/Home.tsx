@@ -28,10 +28,7 @@ const Home: React.FC = () => {
           console.log(e);
         });
     }
-    if (!user) console.log("No user");
-    else {
-      getData();
-    }
+    getData();
   }, [activeTab, user]);
 
   useEffect(() => {
@@ -45,44 +42,33 @@ const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      {user ? (
-        <>
-          <div
-            className="home"
-            ref={ref as React.MutableRefObject<HTMLDivElement>}
-          >
-            <div className="homeLeft">
-              <Sidebar />
-            </div>
-            <div className="homeRight">
-              {items?.map((item) => {
-                if (
-                  (item?.name?.toLowerCase() as string).search(
-                    search.toLowerCase()
-                  ) !== -1 ||
-                  (item?.city?.toLowerCase() as string).search(
-                    search.toLowerCase()
-                  ) !== -1
-                ) {
-                  if (
-                    rqdAmenities.every((am) => item.amenities?.includes(am))
-                  ) {
-                    if (assured) {
-                      if (item.assured ? item.assured >= 5000 : 0)
-                        return <Item item={item} key={item._id} />;
-                    } else {
-                      return <Item item={item} key={item._id} />;
-                    }
-                  }
+      <div className="home" ref={ref as React.MutableRefObject<HTMLDivElement>}>
+        <div className="homeLeft">
+          <Sidebar />
+        </div>
+        <div className="homeRight">
+          {items?.map((item) => {
+            if (
+              (item?.name?.toLowerCase() as string).search(
+                search.toLowerCase()
+              ) !== -1 ||
+              (item?.city?.toLowerCase() as string).search(
+                search.toLowerCase()
+              ) !== -1
+            ) {
+              if (rqdAmenities.every((am) => item.amenities?.includes(am))) {
+                if (assured) {
+                  if (item.assured ? item.assured >= 5000 : 0)
+                    return <Item item={item} key={item._id} />;
+                } else {
+                  return <Item item={item} key={item._id} />;
                 }
-              })}
-            </div>
-          </div>
-          {showCart && <Cart />}
-        </>
-      ) : (
-        <div className="plain">Home</div>
-      )}
+              }
+            }
+          })}
+        </div>
+      </div>
+      {user && showCart && <Cart />}
     </>
   );
 };

@@ -29,6 +29,8 @@ export const cateringAmenities = ["Jain Food", "Appetizer Station", "Salad Bar",
 
 export const banquetAmenities = ["AV Equipment", "Parking", "Restrooms", "Stage", "Microphone", "Power Backup/Generator", "Garden", "Roof Top"]
 
+export const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 export const getPin = async (val) => {
     try {
         const response = await axios.get(`https://api.postalpincode.in/pincode/${val}`);
