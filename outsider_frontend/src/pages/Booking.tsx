@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 const Booking: React.FC = () => {
   const { user, setUser } = useContext(Context) as TContextType;
   const [reservations, setReservation] = useState<TCartItem[]>([]);
-  console.log(reservations);
 
   useEffect(() => {
     async function getData() {

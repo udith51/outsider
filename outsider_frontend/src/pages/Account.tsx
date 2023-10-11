@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import "../assets/css/Account.css";
 import Registration from "../components/Registration";
 import Login from "../components/Login";
@@ -6,7 +6,7 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 
 const Account: React.FC = () => {
-  const { setPath, accMode, userType, setUserType, setShowCart, setCartItem } =
+  const { accMode, userType, setUserType, setShowCart, setCartItem } =
     useContext(Context) as TContextType;
 
   useEffect(() => {

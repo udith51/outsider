@@ -12,7 +12,6 @@ const Hotel: React.FC = () => {
   const { setCartItem, setShowCart, user } = useContext(
     Context
   ) as TContextType;
-  console.log(user);
 
   const [item, setItem] = useState<TInfoProvider | null>();
   const [stStartDate, setStStartDate] = useState<Date>();

@@ -36,7 +36,6 @@ const ReserveBox: React.FC<ReservationProps> = ({ reservation }) => {
     halls,
     date,
   } = reservation;
-  console.log(reservation);
 
   return (
     <div className="res">

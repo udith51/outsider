@@ -23,7 +23,6 @@ router.post('/', async (req, res) => {
 router.get("/:category/:id", async (req, res) => {
     try {
         const category = req.params.category.toLowerCase();
-        console.log(req.params.id);
         var booking;
         if (category === "hotel")
             booking = await ReserveHotel.find({ providerId: req.params.id })

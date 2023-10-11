@@ -11,9 +11,14 @@
 .homeLeft{
     flex: 1;
     padding: 30px 0px 30px 10px;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }
 
 .homeRight{
     flex: 4;
     padding: 10px;
+    overflow-y: auto; 
 }

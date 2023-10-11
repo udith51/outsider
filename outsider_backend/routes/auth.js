@@ -25,7 +25,6 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password, userType } = req.body;
         const user = await User.findOne({ email });
-        console.log(user);
         if (!user) return res.status(500).json("User does not exist");
         const regUserType = await user.userType;
         if (regUserType !== userType) return res.status(500).json("Not a valid user");
