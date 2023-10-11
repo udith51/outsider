@@ -26,7 +26,7 @@ const Banquet: React.FC = () => {
 
   useEffect(() => {
     async function getData(): Promise<void> {
-      await fetch(`http://localhost:3000/provider/${category}/${id}`, {
+      await fetch(`http://localhost:3000/provider/info/${category}/${id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -52,19 +52,24 @@ const Banquet: React.FC = () => {
     if (user) {
       const rsv: TCartItem = {
         picture: item?.pictures[0].url || "",
-        customerId: user?.id as number,
+        customerId: user?.userId as string,
         customerName: user?.name as string,
         customerEmail: user?.email as string,
         customerPhone: user?.phone as string,
-        providerId: item?.id as number,
-        id: item?._id as number,
+        providerId: item?.providerId as string,
+        serviceId: item?.serviceId as string,
         name: item?.name as string,
         category: "banquet",
         halls,
         date,
         price: item?.price,
       };
-      setCartItem((items) => [...items, rsv]);
+      setCartItem((items) => {
+        const finCart = items.filter(
+          (item) => item.serviceId !== rsv.serviceId
+        );
+        return [rsv, ...finCart];
+      });
       setShowCart(true);
     } else {
       navigate("/account");

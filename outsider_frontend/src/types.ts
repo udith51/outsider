@@ -19,7 +19,7 @@ export type TLogForm={
 export type TUser={
     name:string,
     email:string,
-    id:number,
+    userId:string,
     category:string,
     phone:string,
     userType:string
@@ -49,13 +49,13 @@ export type TContextType = {
 };
 
 export type TInfoProvider={
-    _id?:number,
-    id?:number,
+    serviceId:string,
     name?:string,
     city?:string,
     state?:string,
     assured?:number,
     description?:string,
+    providerId:string
 
     add1?:string,
     add2?:string,
@@ -84,12 +84,12 @@ export type TAmenities={
 
 export type TCartItem={
     picture:string
-    customerId:number,
+    customerId:string,
     customerName:string,
     customerEmail:string,
     customerPhone:string,
-    providerId:number,
-    id:number,
+    providerId:string,
+    serviceId:string,
     name: string,
     category:string,
     stRooms?:number,

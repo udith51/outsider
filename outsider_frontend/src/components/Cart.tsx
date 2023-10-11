@@ -4,7 +4,6 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 import { AiOutlineLeft, AiOutlineShopping } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { TiDeleteOutline } from "react-icons/ti";
 import CartItem from "./CartItem";
 
 const Cart: React.FC = () => {
@@ -73,7 +72,7 @@ const Cart: React.FC = () => {
         {cartItem.length !== 0 && (
           <div className="productContainer">
             {cartItem.map((item) => (
-              <CartItem item={item} key={item.id} />
+              <CartItem item={item} key={item.serviceId} />
             ))}
           </div>
         )}

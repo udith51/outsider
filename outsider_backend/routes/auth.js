@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
             name, email, password: hashedPwd, userType, category, phone
         })
         const user = await newUser.save();
-        return res.status(200).json({ name: user.name, email: user.email, category: user.category, userType: user.userType, phone: user.phone, id: user._id });
+        return res.status(200).json({ name: user.name, email: user.email, category: user.category, userType: user.userType, phone: user.phone, userId: user._id });
 
     } catch (e) {
         if (e.code === 11000)
@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
         if (regUserType !== userType) return res.status(500).json("Not a valid user");
         const validPsd = await bcrypt.compare(password, user.password);
         if (!validPsd) return res.status(500).json("Wrong Password");
-        return res.status(200).json({ name: user.name, email: user.email, category: user.category, userType: user.userType, phone: user.phone, id: user._id });
+        return res.status(200).json({ name: user.name, email: user.email, category: user.category, userType: user.userType, phone: user.phone, userId: user._id });
     } catch (e) {
         return res.status(500).json(e);
     }

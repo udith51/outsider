@@ -9,12 +9,10 @@ interface IItemProps {
 }
 
 const CartItem: React.FC<IItemProps> = ({ item }) => {
-  const { setCartItem, setShowCart, user } = useContext(
-    Context
-  ) as TContextType;
-  const removeCartItem = (id: number): void => {
+  const { setCartItem } = useContext(Context) as TContextType;
+  const removeCartItem = (id: string): void => {
     setCartItem((items) => {
-      return items.filter((item) => item.id !== id);
+      return items.filter((item) => item.serviceId !== id);
     });
   };
 
@@ -69,7 +67,7 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
               <div className="space"></div>
               <div
                 className="cartItemRemove"
-                onClick={() => removeCartItem(item.id)}
+                onClick={() => removeCartItem(item.serviceId)}
               >
                 Remove
               </div>
@@ -141,7 +139,7 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
               <div className="space"></div>
               <div
                 className="cartItemRemove"
-                onClick={() => removeCartItem(item.id)}
+                onClick={() => removeCartItem(item.serviceId)}
               >
                 Remove
               </div>
@@ -172,7 +170,7 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
               <div className="space"></div>
               <div
                 className="cartItemRemove"
-                onClick={() => removeCartItem(item.id)}
+                onClick={() => removeCartItem(item.serviceId)}
               >
                 Remove
               </div>

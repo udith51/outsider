@@ -59,9 +59,9 @@ const Home: React.FC = () => {
               if (rqdAmenities.every((am) => item.amenities?.includes(am))) {
                 if (assured) {
                   if (item.assured ? item.assured >= 5000 : 0)
-                    return <Item item={item} key={item._id} />;
+                    return <Item item={item} key={item.serviceId} />;
                 } else {
-                  return <Item item={item} key={item._id} />;
+                  return <Item item={item} key={item.serviceId} />;
                 }
               }
             }

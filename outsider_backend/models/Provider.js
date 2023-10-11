@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const providerBanquetSchema = mongoose.Schema(
     {
-        id: String,
+        serviceId: String,
+        providerId: String,
         name: String,
         add1: String,
         add2: String,
@@ -31,7 +32,8 @@ const providerBanquetSchema = mongoose.Schema(
 
 const providerCateringSchema = mongoose.Schema(
     {
-        id: String,
+        serviceId: String,
+        providerId: String,
         name: String,
         city: String,
         state: String,
@@ -61,7 +63,8 @@ const providerCateringSchema = mongoose.Schema(
 
 const providerHotelSchema = mongoose.Schema(
     {
-        id: String,
+        serviceId: String,
+        providerId: String,
         name: String,
         add1: String,
         add2: String,

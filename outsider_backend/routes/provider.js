@@ -28,12 +28,11 @@ router.get('/info/:category/:id', async (req, res) => {
         const category = req.params.category.toLowerCase();
         var provider;
         if (category === "hotel")
-            provider = await ProviderHotel.find({ id: req.params.id })
+            provider = await ProviderHotel.findOne({ serviceId: req.params.id })
         else if (category === "catering")
-            provider = await ProviderCatering.find({ id: req.params.id });
+            provider = await ProviderCatering.findOne({ serviceId: req.params.id });
         else if (category === "banquet")
-            provider = await ProviderBanquet.find({ id: req.params.id });
-        console.log(provider);
+            provider = await ProviderBanquet.findOne({ serviceId: req.params.id });
         return res.status(200).json(provider);
     } catch (e) {
         return res.status(500).json(e);

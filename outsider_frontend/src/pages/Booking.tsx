@@ -13,7 +13,7 @@ const Booking: React.FC = () => {
   useEffect(() => {
     async function getData() {
       await fetch(
-        `http://localhost:3000/reserve/${user?.category}/${user?.id}`,
+        `http://localhost:3000/reserve/${user?.category}/${user?.userId}`,
         {
           method: "GET",
           headers: {
@@ -48,7 +48,7 @@ const Booking: React.FC = () => {
           </div>
           <div className="navAccount">
             <div className="dropbtn">Hi {user?.name.split(" ")[0]}</div>
-            <div className="dropdown-content">
+            <div className="dropdown-Content">
               <div
                 onClick={() => {
                   setUser(undefined);

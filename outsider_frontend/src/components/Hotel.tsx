@@ -43,7 +43,7 @@ const Hotel: React.FC = () => {
 
   useEffect(() => {
     async function getData(): Promise<void> {
-      await fetch(`http://localhost:3000/provider/${category}/${id}`, {
+      await fetch(`http://localhost:3000/provider/info/${category}/${id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -61,7 +61,6 @@ const Hotel: React.FC = () => {
 
   useEffect(() => {
     item?.pictures && setCurrentImg(item.pictures[0].url);
-    console.log(item?.pictures);
   }, [item]);
 
   const navigate = useNavigate();
@@ -70,12 +69,12 @@ const Hotel: React.FC = () => {
     if (user) {
       const rsv: TCartItem = {
         picture: item?.pictures[0].url || "",
-        customerId: user?.id as number,
+        customerId: user?.userId as string,
         customerName: user?.name as string,
         customerEmail: user?.email as string,
         customerPhone: user?.phone as string,
-        providerId: item?.id as number,
-        id: item?._id as number,
+        providerId: item?.providerId as string,
+        serviceId: item?.serviceId as string,
         name: item?.name as string,
         category: "hotel",
         stRooms,
@@ -89,7 +88,9 @@ const Hotel: React.FC = () => {
       };
 
       setCartItem((items) => {
-        const finCart = items.filter((item) => item.id !== rsv.id);
+        const finCart = items.filter(
+          (item) => item.serviceId !== rsv.serviceId
+        );
         return [rsv, ...finCart];
       });
       setShowCart(true);
@@ -152,28 +153,7 @@ const Hotel: React.FC = () => {
       <div className="hotelOverview">
         <b>OVERVIEW</b>
         <div className="pb5"></div>
-        {item?.description || (
-          <div className="">
-            {item?.description} || Situated within walking distance from Colva,
-            one of the finest beaches, The Golden Palms offers guests luxurious
-            accommodation. Previously known as Pearl Oceanique Resort, this
-            4-star property features everything from a fully-equipped gymnasium
-            to state-of-the-art conference halls, business centre, swimming pool
-            and parking area. /n/nThere are 50 well-appointed rooms available
-            with cosy beds and large windows spanning from floor to ceiling.
-            Impressive portraits, beautiful curtains and elegant light fittings
-            adorn the interiors of the rooms. Rooms at ground floor are open to
-            the private lawn, while rooms at the first floor have balconies that
-            overlook the pool. Air-conditioner, working desk, LCD TV,
-            mini-refrigerator, tea/coffee maker and Wi-Fi internet are some of
-            the amenities that are available in each room./n/nBuilt in an area
-            of 1305 sq ft, the on-site restaurant called The Bamboo Top is one
-            of the main highlights of the hotel. Wood and glass panels on the
-            walls beautify the interiors of the restaurant. Apart from
-            mouth-watering delicacies, a variety of domestic and international
-            alcoholic beverages are also served at the restaurant.
-          </div>
-        )}
+        {item?.description || <div className="">{item?.description}</div>}
       </div>
       <div className="pb20"></div>
       <b>CHOOSE ROOM</b>

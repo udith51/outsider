@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { uid } from "uid";
 import { MultiSelect } from "react-multi-select-component";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/InfoProvider.css";
@@ -16,7 +17,6 @@ const InfoProvider: React.FC = () => {
   const navigate = useNavigate();
   const { user } = useContext(Context) as TContextType;
   const cat = user?.category as string;
-  const id = user?.id;
   const category = cat?.charAt(0).toUpperCase() + cat?.slice(1);
   const [pictures, setPictures] = useState<FileList | null>();
   const [opt, setOpt] = useState<TAmenities[]>([]);
@@ -38,12 +38,14 @@ const InfoProvider: React.FC = () => {
   }, [cat]);
 
   const [form, setForm] = useState<TInfoProvider>({
+    serviceId: uid(),
     name: "",
     add1: "",
     add2: "",
     city: "",
     state: "",
     description: "",
+    providerId: user?.userId as string,
     zipcode: 0,
     pictures: [],
     accomodation: 0,
@@ -56,7 +58,7 @@ const InfoProvider: React.FC = () => {
     deluxeAmt: 0,
     standardRooms: 0,
     deluxeRooms: 0,
-    assured: 0,
+    assured: Math.floor(Math.random() * 10000),
   });
 
   const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,12 +77,13 @@ const InfoProvider: React.FC = () => {
       }
     }
     for (const key in form) {
+      const value = form[key as keyof TInfoProvider] as string;
       if (typeof form[key as keyof TInfoProvider] === "number") {
+        formData.append(key, value.toString());
       } else if (typeof form[key as keyof TInfoProvider] === "string") {
-        formData.append(key, form[key as keyof TInfoProvider] as string);
+        formData.append(key, value);
       }
     }
-    formData.append("assured", String(Math.floor(Math.random() * 10000)));
     return formData;
   };
 
@@ -122,14 +125,14 @@ const InfoProvider: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    var formData = setFormData(new FormData());
 
+    var formData = setFormData(new FormData());
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
-    await axios
+    axios
       .post(
         `http://localhost:3000/provider/register/${category}`,
         formData,
