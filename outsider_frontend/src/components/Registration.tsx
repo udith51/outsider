@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Registration: React.FC = () => {
   const { userType, setAccMode, setUser } = useContext(Context) as TContextType;
   const navigate = useNavigate();
+  const [message, setMessage] = useState<string>("");
 
   const [form, setForm] = useState<TRegForm>({
     name: "",
@@ -37,8 +38,7 @@ const Registration: React.FC = () => {
         }
       })
       .catch((val) => {
-        console.log(val);
-        // TODO
+        setMessage(val.response.data);
       });
     setForm(() => ({
       name: "",
@@ -126,6 +126,7 @@ const Registration: React.FC = () => {
           </select>
         </div>
       )}
+      <div className="message">{message}</div>
       <button type="submit" className="accSubmit">
         Register
       </button>

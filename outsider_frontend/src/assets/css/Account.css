@@ -116,3 +116,9 @@ label{
     text-align: center;
     cursor: pointer;
 }
+
+.message{
+    text-align: center;
+    color: red;
+    font-weight: 600;
+}

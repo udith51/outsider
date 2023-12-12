@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Login: React.FC = () => {
   const { userType, setAccMode, setUser } = useContext(Context) as TContextType;
   const navigate = useNavigate();
+  const [message, setMessage] = useState<string>("");
 
   const [form, setForm] = useState<TLogForm>({
     email: "",
@@ -37,7 +38,7 @@ const Login: React.FC = () => {
       else navigate("/");
     } else {
       const val = await response.json();
-      console.log(val);
+      setMessage(val);
     }
 
     setForm({
@@ -45,6 +46,7 @@ const Login: React.FC = () => {
       password: "",
     });
   };
+  console.log(message);
 
   return (
     <form className="" onSubmit={onSubmit}>
@@ -72,6 +74,7 @@ const Login: React.FC = () => {
           onChange={onChange}
         />
       </div>
+      <div className="message">{message}</div>
       <button type="submit" className="accSubmit">
         Login
       </button>
