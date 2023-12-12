@@ -8,6 +8,7 @@ import { BsBusFrontFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
 import { TContextType } from "../types";
+import logo from "../assets/imgs/logo-color.png";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Navbar: React.FC = () => {
             userType === "provider" ? navigate("/dash") : navigate("/");
           }}
         >
-          Logo
+          <img src={logo} className="logo" />
         </div>
 
         <div className="navIcons">

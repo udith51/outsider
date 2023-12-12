@@ -20,7 +20,13 @@
 
 .navLogo{
     cursor: pointer;
+    max-width: 100px;
 }
+
+.logo{
+    width: 100%;
+}
+
 .navIcons{
     display: flex;
     align-self: center;
