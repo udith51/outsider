@@ -136,6 +136,7 @@ const Navbar: React.FC = () => {
                 <div
                   onClick={() => {
                     setUser(undefined);
+                    localStorage.removeItem("user");
                     navigate("/");
                   }}
                 >

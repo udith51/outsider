@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
         if (phone.length !== 10)
             return res.status(400).json("Incorrect Phone number.")
         var validRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (email.match(validRegEx) !== true)
+        if (validRegEx.test(email) !== true)
             return res.status(400).json("Incorrect email address.")
         const salt = await bcrypt.genSalt(10);
         const hashedPwd = await bcrypt.hash(password, salt);

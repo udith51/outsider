@@ -40,6 +40,10 @@ input, .rmsc .dropdown-container{
   font-size: 14px;
 }
 
+.w2>.bar{
+  max-width: 45%;
+}
+
 .rmsc .dropdown-heading{
   height: 100%;
 }

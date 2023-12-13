@@ -21,6 +21,43 @@ const InfoProvider: React.FC = () => {
   const [pictures, setPictures] = useState<FileList | null>();
   const [opt, setOpt] = useState<TAmenities[]>([]);
   const [selected, setSelected] = useState<TAmenities[]>([]);
+  const [oldUser, setOldUser] = useState<boolean>(false);
+  const userStore = localStorage.getItem("user");
+  var id = "";
+  if (userStore) {
+    const userData = JSON.parse(userStore);
+    id = userData.userId;
+  }
+
+  useEffect(() => {
+    async function getData(): Promise<void> {
+      await fetch(
+        `http://localhost:3000/provider/update-info/${category}/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then(async (response) => {
+          const val = await response.json();
+          if (val) {
+            const amm = val.amenities.map(
+              (val: { label: string; value: string }) => {
+                return { label: val, value: val };
+              }
+            );
+            setSelected(amm);
+            setForm(val);
+            setOldUser(true);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+    getData();
+  }, []);
 
   useEffect(() => {
     setOpt(() => {
@@ -42,11 +79,11 @@ const InfoProvider: React.FC = () => {
     name: "",
     add1: "",
     add2: "",
+    pincode: "",
     city: "",
     state: "",
     description: "",
     providerId: user?.userId as string,
-    zipcode: 0,
     pictures: [],
     accomodation: 0,
     price: 0,
@@ -106,7 +143,7 @@ const InfoProvider: React.FC = () => {
       };
     });
 
-    if (e.target.name === "zipcode" && e.target.value.length === 6) {
+    if (e.target.name === "pincode" && e.target.value.length === 6) {
       getPin(e.target.value)
         .then((place) => {
           setForm((prev) => {
@@ -125,30 +162,51 @@ const InfoProvider: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     var formData = setFormData(new FormData());
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
-    axios
-      .post(
-        `http://localhost:3000/provider/register/${category}`,
-        formData,
-        config
-      )
-      .then((response) => {
-        if (response.statusText === "OK") {
-          console.log(response.data);
-          navigate("/dash");
-        } else {
-          console.log(response);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log(oldUser);
+    if (oldUser) {
+      console.log(formData.get("pictures"));
+      axios
+        .patch(
+          `http://localhost:3000/provider/update-info/${category}/${id}`,
+          formData,
+          config
+        )
+        .then((response) => {
+          if (response.statusText === "OK") {
+            console.log(response.data);
+            navigate("/dash");
+          } else {
+            console.log(response);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .post(
+          `http://localhost:3000/provider/register/${category}`,
+          formData,
+          config
+        )
+        .then((response) => {
+          if (response.statusText === "OK") {
+            console.log(response.data);
+            navigate("/dash");
+          } else {
+            console.log(response);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -192,10 +250,10 @@ const InfoProvider: React.FC = () => {
             {category !== "Catering" && (
               <input
                 type="text"
-                id="zip"
-                name="zipcode"
-                value={form.zipcode ? form.zipcode : ""}
-                placeholder="Enter ZipCode"
+                id="pincode"
+                name="pincode"
+                value={form.pincode ? form.pincode : ""}
+                placeholder="Enter Pinode"
                 onChange={handleChange}
               />
             )}
@@ -368,8 +426,7 @@ const InfoProvider: React.FC = () => {
           </div>
         )}
         <button type="submit" className="infoSub">
-          Save
-          {/* {oldUser ? "Update" : "Save"} */}
+          {oldUser ? "Update" : "Save"}
         </button>
       </form>
     </div>

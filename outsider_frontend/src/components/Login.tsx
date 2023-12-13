@@ -34,6 +34,7 @@ const Login: React.FC = () => {
     if (response.status === 200) {
       const val = await response.json();
       setUser(val);
+      localStorage.setItem("user", JSON.stringify(val));
       if (val.userType === "provider") navigate("/dash");
       else navigate("/");
     } else {

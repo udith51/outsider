@@ -33,6 +33,7 @@ const Registration: React.FC = () => {
       .then((response) => {
         if (response.statusText === "OK") {
           setUser(response.data);
+          localStorage.setItem("user", JSON.stringify(response.data));
           if (response.data.userType === "provider") navigate("/info");
           else navigate("/");
         }

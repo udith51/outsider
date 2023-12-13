@@ -9,7 +9,7 @@ const providerBanquetSchema = mongoose.Schema(
         add2: String,
         city: String,
         state: String,
-        zipcode: String,
+        pincode: String,
         description: String,
         accomodation: Number,
         price: Number,

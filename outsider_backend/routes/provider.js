@@ -39,10 +39,49 @@ router.get('/info/:category/:id', async (req, res) => {
     }
 })
 
+router.get('/update-info/:category/:pid', async (req, res) => {
+    try {
+        const category = req.params.category.toLowerCase();
+        var provider;
+        if (category === "hotel")
+            provider = await ProviderHotel.findOne({ providerId: req.params.pid })
+        else if (category === "catering")
+            provider = await ProviderCatering.findOne({ providerId: req.params.pid });
+        else if (category === "banquet")
+            provider = await ProviderBanquet.findOne({ providerId: req.params.pid });
+        return res.status(200).json(provider);
+    } catch (e) {
+        return res.status(500).json(e);
+    }
+})
+
+router.patch('/update-info/:category/:pid', upload.array("pictures", 12), async (req, res) => {
+    try {
+        const category = req.params.category.toLowerCase();
+        if (req.files.length !== 0)
+            var provider;
+        if (category === "hotel")
+            provider = await ProviderHotel.findOne({ providerId: req.params.pid });
+        else if (category === "catering")
+            provider = await ProviderCatering.findOne({ providerId: req.params.pid });
+        else if (category === "banquet")
+            provider = await ProviderBanquet.findOne({ providerId: req.params.pid });
+        await provider.updateOne(req.body);
+        if (req.files.length !== 0)
+            await provider.updateOne({
+                $set: {
+                    pictures: req.files.map(f => ({ url: f.path, filename: f.filename }))
+                }
+            });
+        return res.status(200).json("Details updated");
+    } catch (e) {
+        console.log(e);
+    }
+})
+
 router.put('/info/:category/:id', async (req, res) => {
     try {
         const updatedObj = req.body;
-        console.log(updatedObj);
         const { category } = req.params;
         var provider;
         if (category === "hotel")
@@ -51,7 +90,6 @@ router.put('/info/:category/:id', async (req, res) => {
             provider = await ProviderCatering.updateOne({ id: req.params.id }, { $set: updatedObj });
         else if (category === "banquet")
             provider = await ProviderBanquet.updateOne({ id: req.params.id }, { $set: updatedObj });
-        console.log(provider);
         return res.status(200).json(provider);
     } catch (e) {
         return res.status(500).json(e);

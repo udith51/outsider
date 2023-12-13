@@ -53,13 +53,13 @@ export type TInfoProvider={
     name?:string,
     city?:string,
     state?:string,
+    pincode?:string,
     assured?:number,
     description?:string,
     providerId:string
 
     add1?:string,
     add2?:string,
-    zipcode?:number,
     accomodation?:number,
     price?:number,
     amenities?: string[],
