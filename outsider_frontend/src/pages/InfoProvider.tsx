@@ -32,7 +32,7 @@ const InfoProvider: React.FC = () => {
   useEffect(() => {
     async function getData(): Promise<void> {
       await fetch(
-        `http://localhost:3000/provider/update-info/${category}/${id}`,
+        `https://outsider-backend.onrender.com/provider/update-info/${category}/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const InfoProvider: React.FC = () => {
       console.log(formData.get("pictures"));
       axios
         .patch(
-          `http://localhost:3000/provider/update-info/${category}/${id}`,
+          `https://outsider-backend.onrender.com/provider/update-info/${category}/${id}`,
           formData,
           config
         )
@@ -191,7 +191,7 @@ const InfoProvider: React.FC = () => {
     } else {
       axios
         .post(
-          `http://localhost:3000/provider/register/${category}`,
+          `https://outsider-backend.onrender.com/provider/register/${category}`,
           formData,
           config
         )

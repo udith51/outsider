@@ -13,7 +13,7 @@ const Booking: React.FC = () => {
   useEffect(() => {
     async function getData() {
       await fetch(
-        `http://localhost:3000/reserve/${user?.category}/${user?.userId}`,
+        `https://outsider-backend.onrender.com/reserve/${user?.category}/${user?.userId}`,
         {
           method: "GET",
           headers: {

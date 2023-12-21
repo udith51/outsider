@@ -42,11 +42,14 @@ const Hotel: React.FC = () => {
 
   useEffect(() => {
     async function getData(): Promise<void> {
-      await fetch(`http://localhost:3000/provider/info/${category}/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      await fetch(
+        `https://outsider-backend.onrender.com/provider/info/${category}/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then(async (response) => {
           const val = await response.json();
           setItem(val);

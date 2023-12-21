@@ -24,13 +24,16 @@ const Login: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:3000/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...form, userType }),
-    });
+    const response = await fetch(
+      `https://outsider-backend.onrender.com/auth/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...form, userType }),
+      }
+    );
     if (response.status === 200) {
       const val = await response.json();
       setUser(val);

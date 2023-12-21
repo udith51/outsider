@@ -15,11 +15,14 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function getData(): Promise<void> {
-      await fetch(`http://localhost:3000/provider/all/${activeTab}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      await fetch(
+        `https://outsider-backend.onrender.com/provider/all/${activeTab}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then(async (response) => {
           const val = await response.json();
           setItems(val);

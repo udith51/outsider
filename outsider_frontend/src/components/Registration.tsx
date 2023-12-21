@@ -29,7 +29,10 @@ const Registration: React.FC = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios
-      .post(`http://localhost:3000/auth/register`, { ...form, userType })
+      .post(`https://outsider-backend.onrender.com/auth/register`, {
+        ...form,
+        userType,
+      })
       .then((response) => {
         if (response.statusText === "OK") {
           setUser(response.data);
