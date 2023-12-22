@@ -121,6 +121,55 @@
     color: #435c10;
 }
 
+.tdropbtn,.tabSupport{
+    display: none;
+}
+
+.navAccount:hover .tdropbtn{
+    color: #435c10;
+}
+
 .navSupport, .navCart{
     font-weight: 500;
+}
+
+
+
+@media screen and (max-width: 800px){
+    .navContents{
+        width: 90%;
+    }
+    .navIcons{
+        display: none;
+    }
+
+    .navbar{
+        height: 60px;
+    }
+    .navPrime{
+        height: 50px;
+    }
+}
+@media screen and (max-width: 600px){
+    .dropbtn,.lapSupport{
+        display: none
+    }
+    .tdropbtn,.tabSupport{
+        display: block;
+    }
+    .dropdown-Content{
+        right: 0;
+    }
+    .navPrime{
+        font-size: 12px;
+        width: 50px;
+    }   
+    .navRight{
+        gap: 10px;
+    }
+
+    .dropdown-Content div{
+        padding: 9px 12px;
+        font-size: 14px;
+    }
 }

@@ -1,7 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../assets/css/Navbar.css";
 import { GiPartyFlags } from "react-icons/gi";
-import { MdHotel } from "react-icons/md";
+import {
+  MdHotel,
+  MdOutlineAccountCircle,
+  MdOutlineSupportAgent,
+} from "react-icons/md";
 import { IoFastFood } from "react-icons/io5";
 import { BiHomeHeart } from "react-icons/bi";
 import { BsBusFrontFill } from "react-icons/bs";
@@ -112,6 +116,9 @@ const Navbar: React.FC = () => {
           {!user ? (
             <div className="navAccount">
               <div className="dropbtn">My Account</div>
+              <div className="tdropbtn">
+                <MdOutlineAccountCircle className="w26 h26" />
+              </div>
               <div className="dropdown-Content">
                 <div
                   onClick={() => {
@@ -152,7 +159,10 @@ const Navbar: React.FC = () => {
               navigate("/support");
             }}
           >
-            Support
+            <div className="lapSupport">Support</div>
+            <div className="tabSupport">
+              <MdOutlineSupportAgent className="w26 h26" />
+            </div>
           </div>
           {user?.userType === "customer" && (
             <div className="navCart" onClick={handleCart}>
