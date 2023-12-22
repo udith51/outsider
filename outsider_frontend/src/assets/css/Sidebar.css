@@ -53,3 +53,16 @@
     cursor: pointer;
     font-weight: 600;
 }
+
+@media screen and (max-width: 1000px) {
+    .sideAmenity>.amenity{
+        margin: 6px 4px;
+    }
+    .sideSearch>input{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:800px){
+    
+}

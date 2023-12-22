@@ -61,6 +61,7 @@
 .itemFacilities{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 
@@ -70,7 +71,7 @@
     padding: 3px 5px;
     color: #333;
     font-size: 12px;
-    margin-right: 5px;
+    margin: 0 5px 5px 0;
 }
 
 .itemPrev{
@@ -94,12 +95,14 @@
 .striked{
     color: #999999;
     text-decoration: line-through;
-    font-size: 14px
+    font-size: 14px;
+    text-wrap: nowrap;
 }
 
 .actual{
     font-weight: 600;
     font-size: 24px;
+    text-wrap: nowrap;
 }
 
 
@@ -116,4 +119,122 @@
     border-radius: 7px;
     cursor: pointer;
     float: right;
+}
+
+.itemRight{
+    min-width: 135px;
+}
+
+@media screen and (max-width:800px) {
+    .item{
+        height: 185px;
+        position: relative;
+    }
+    .itemImg{
+        height: 185px;
+        width: 185px;
+    }
+    .itemName, .actual{
+        font-size: 20px;
+    }
+    .itemLocation{
+        margin-bottom: 10px;
+    }
+    .bottom{
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+@media screen and (min-width:600px) {
+    .mobItem{
+        display: none;
+    }
+}
+
+
+@media screen and (max-width:600px) {
+    .item{
+        display: none;
+    }
+    .mobItem{
+        padding: 10px;
+        margin: 15px;
+        background-color: #fff;
+    }
+    .mobItem:hover{
+        -webkit-box-shadow: 0px 0px 9px 1px rgba(128,125,128,1);
+        -moz-box-shadow: 0px 0px 9px 1px rgba(128,125,128,1);
+        box-shadow: 0px 0px 9px 1px rgba(128,125,128,1);
+    }
+    .mobItemTop{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .mobItemName{
+        font-weight: 600;
+        font-size: 18px;
+    }   
+    .mobStriked{
+        color: #999999;
+        text-decoration: line-through;
+        font-size: 12px;
+    }
+    .mobActual{
+        font-weight: 600;
+        font-size: 18px;
+        text-wrap: nowrap;
+    }
+    .mobItemMid{
+        height: 120px;
+    }
+    .mobItemImg{
+        height: 115px;
+        width: 115px;
+        float: left;
+        object-fit:cover;
+        margin-right: 5px;
+    }
+    .mobItemMidRight{
+    }
+
+    .mobLoc{
+        color: #999999;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    .mobAmenities{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .mobAssured{
+        float: right;
+        font-size: 12px;
+        color: #56C247;
+        text-align: right;
+    }
+    .mobItemFacility{
+        border: 1px solid #333;
+        border-radius: 15px;
+        padding: 2px 3px;
+        color: #333;
+        font-size: 10px;
+        margin: 0 4px 4px 0;
+    }
+    .mobItemBtm{
+        padding: 4px;
+        background-color: #EA2330;
+        color: #fff;
+        border-radius: 7px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+    }
 }

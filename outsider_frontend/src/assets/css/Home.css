@@ -22,3 +22,24 @@
     padding: 10px;
     overflow-y: auto; 
 }
+
+.homeSearch{
+    margin: 0 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    .homeRight{
+        padding: 0;
+    }
+}
+
+@media screen and (max-width:800px){
+    .homeLeft{
+        display: none;
+    }
+}
+@media screen and (min-width:800px){
+    .homeSearch{
+        display: none;
+    }
+}

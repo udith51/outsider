@@ -29,48 +29,83 @@ const Item: React.FC<ItemProps> = ({ item }) => {
     navigate(`/${activeTab}/${item.serviceId}`);
   };
   return (
-    <div className="item">
-      <img src={currentImg} alt="" className="itemImg" />
-      <div className="sb">
-        <div className="itemInfo">
-          <div className="itemLeft">
-            <div className="itemName">{item.name}</div>
-            <div className="itemLocation">
-              <>
-                <HiLocationMarker />
-              </>
-              <>
-                {item.city}, {item.state}
-              </>
+    <>
+      <div className="item">
+        <img src={currentImg} alt="" className="itemImg" />
+        <div className="sb">
+          <div className="itemInfo">
+            <div className="itemLeft">
+              <div className="itemName">{item.name}</div>
+              <div className="itemLocation">
+                <>
+                  <HiLocationMarker />
+                </>
+                <>
+                  {item.city}, {item.state}
+                </>
+              </div>
+              <div className="itemFacilities">
+                {item.amenities?.map((amenity) => {
+                  return (
+                    <div className="itemFacility" key={amenity}>
+                      {amenity}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="itemFacilities">
+            <div className="itemRight">
+              <div className="itemPrev">
+                Assured by: <b>{item.assured ? item.assured : 1278}</b>
+              </div>
+              <div className="itemPriceInfo">Starting from</div>
+              <div className="itemPrice">
+                <div className="striked">&#8377; {price + 0.15 * price}</div>
+                <div className="actual">&#8377; {price}</div>
+              </div>
+            </div>
+          </div>
+          <div className="bottom">
+            <div className="itemDetails" onClick={handleClick}>
+              View Details
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="mobItem">
+        <div className="mobItemTop">
+          <div className="mobItemName">{item.name}</div>
+          <div className="mobItemPrice">
+            <div className="mobStriked">&#8377; {price + 0.15 * price}</div>
+            <div className="mobActual">&#8377; {price}</div>
+          </div>
+        </div>
+        <div className="mobItemMid">
+          <img src={currentImg} alt="" className="mobItemImg" />
+          <div className="mobAssured">
+            Assured by: <b>{item.assured ? item.assured : 1278}</b>
+          </div>
+          <div className="mobItemMidRight">
+            <div className="mobLoc">
+              <HiLocationMarker />
+              {item.city}, {item.state}
+            </div>
+            <div className="mobAmenities">
               {item.amenities?.map((amenity) => {
                 return (
-                  <div className="itemFacility" key={amenity}>
+                  <div className="mobItemFacility" key={amenity}>
                     {amenity}
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="itemRight">
-            <div className="itemPrev">
-              Assured by: <b>{item.assured ? item.assured : 1278}</b>
-            </div>
-            <div className="itemPriceInfo">Starting from</div>
-            <div className="itemPrice">
-              <div className="striked">&#8377; {price + 0.15 * price}</div>
-              <div className="actual">&#8377; {price}</div>
-            </div>
-          </div>
         </div>
-        <div className="bottom">
-          <div className="itemDetails" onClick={handleClick}>
-            View Details
-          </div>
+        <div className="mobItemBtm" onClick={handleClick}>
+          View Details
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

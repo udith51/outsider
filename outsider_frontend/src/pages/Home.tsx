@@ -6,10 +6,18 @@ import "../assets/css/Home.css";
 import Cart from "../components/Cart";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import BottomBar from "../components/BottomBar";
 
 const Home: React.FC = () => {
-  const { activeTab, showCart, user, assured, search, rqdAmenities } =
-    useContext(Context) as TContextType;
+  const {
+    activeTab,
+    showCart,
+    user,
+    assured,
+    search,
+    rqdAmenities,
+    setSearch,
+  } = useContext(Context) as TContextType;
   const [items, setItems] = useState<TInfoProvider[] | null>();
   const ref = useRef<HTMLDivElement>();
 
@@ -50,6 +58,18 @@ const Home: React.FC = () => {
           <Sidebar />
         </div>
         <div className="homeRight">
+          <div className="homeSearch">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              value={search}
+              placeholder="Search by name or city"
+            />
+          </div>
           {items?.map((item) => {
             if (
               (item?.name?.toLowerCase() as string).search(
@@ -72,6 +92,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       {user && showCart && <Cart />}
+      <BottomBar />
     </>
   );
 };
