@@ -129,19 +129,28 @@ const Hotel: React.FC = () => {
           </div>
         </div>
         <div className="hotelRight">
-          <div className="hotelView pb5">
-            <AiOutlineEye className="green f20" />{" "}
-            {Math.floor(Math.random() * 100)} viewing
-          </div>
-          <div className="hotelBooked pb5">
-            <AiOutlineClockCircle className="green f20" /> Last booked:{" "}
-            {Math.floor(Math.random() * 10)} hours ago
+          <div className="spread">
+            <div className="hotelView pb5">
+              <AiOutlineEye className="green f20" />{" "}
+              {Math.floor(Math.random() * 100)} viewing
+            </div>
+
+            <div className="hotelBooked pb5">
+              <AiOutlineClockCircle className="green f20" /> Last booked:{" "}
+              {Math.floor(Math.random() * 10)} hours ago
+            </div>
           </div>
           <div className="br"></div>
           <div className="hotelTimings">
-            <b>CHECKIN:</b> 1:00 P.M. <div className="pb5"></div>
-            <b>CHECKOUT:</b> 11:00 A.M.
+            <div>
+              <b>CHECKIN:</b> 1:00 P.M.{" "}
+            </div>
+            <div className="pb5"></div>
+            <div>
+              <b>CHECKOUT:</b> 11:00 A.M.
+            </div>
           </div>
+
           <div className="br"></div>
           <div className="hotelAmenities">
             {item?.amenities?.map((amenity, index) => (
@@ -164,7 +173,7 @@ const Hotel: React.FC = () => {
         <b>STANDARD ROOM</b>
         <div className="hotelStandard">
           <div className="roomLeft">
-            <img src={hotel} alt="" className="imgSml" />
+            <img src={item?.pictures[0].url} alt="" className="imgSml" />
           </div>
           <div className="roomMid">
             <div className="col">
@@ -226,7 +235,7 @@ const Hotel: React.FC = () => {
         <b>DELUXE ROOM</b>
         <div className="hotelDeluxe">
           <div className="roomLeft">
-            <img src={hotel} alt="" className="imgSml" />
+            <img src={item?.pictures[0].url} alt="" className="imgSml" />
           </div>
           <div className="roomMid">
             <div className="col">

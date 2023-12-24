@@ -27,7 +27,6 @@
 }
 
 .hotelImgs,.banquetImgs,.cateringImgs{
-    /* flex:4; */
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -106,6 +105,7 @@
 .hotelOverview,.banquetOverview,.cateringOverview{
     background-color: #fff;
     padding: 20px;
+    text-align: justify;
 }
 
 .pb20{
@@ -127,7 +127,7 @@
 }
 
 .roomLeft, .hallLeft, .cateringServiceLeft{
-    flex: 3;
+    flex: 2;
 }
 
 .cateringServiceLeft{
@@ -138,22 +138,23 @@
 }
 
 .cateringServiceLeft>.col{
-    width: 45%;
+    /* width: 45%; */
     color: #605e5e;
     font-weight: 500;
+    font-size: 14px;
 }
 
 .imgSml{
     width: 100%;
     height: 100%;
-    object-fit:contain
+    object-fit:cover
 }
 
 .roomMid, .hallMid, .cateringServiceMid{
     flex: 4;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
     gap: 10px;
 }
@@ -161,8 +162,9 @@
 .hallMid>.col, .roomMid>.col, .cateringServiceMid>.col{
     width: 80%;
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     font-weight: 500;
     flex-wrap: wrap;
 }
@@ -178,7 +180,7 @@
 }
 
 .roomRight, .hallRight, .cateringServiceRight{
-    flex: 2;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -191,6 +193,7 @@
     font-weight: 600;
     display: flex;
     align-items: baseline;
+    text-wrap: nowrap;
 }
 
 .small{
@@ -224,6 +227,7 @@
 }
 .minus,.plus{
     height: 100%;
+    width: 100%;
     flex: 1;
     display: flex;
     align-items: center;
@@ -239,4 +243,129 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (max-width: 1000px){
+    .hotelMain,.banquetMain,.cateringMain{
+        width: 90%;
+    }
+    .hotelImgs,.banquetImgs,.cateringImgs{
+        width: 70%;
+    }
+    .hotelMainImg,.banquetMainImg,.cateringMainImg{
+        max-height: 400px;
+    }
+    .imgItem{
+        height: 120px;
+        width: 120px;
+    }
+    .date, .hallNo, .roomNo{
+        width: 135px;
+        height: 26px;
+        margin: 0;
+        padding: 0;
+    }
+    .count{
+        width: 135px;
+        height: 26px;
+    }
+}
+
+@media screen and (max-width:850px){
+    .hallMid>.col, .roomMid>.col, .cateringServiceMid>.col{
+        width: 100%;
+    }
+    .roomMid, .hallMid, .cateringServiceMid{
+        flex: 3;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .hallMid>.col, .roomMid>.col, .cateringServiceMid>.col{
+        flex-direction: column;
+    }
+    .hotelMainImg,.banquetMainImg,.cateringMainImg{
+        max-height: 300px;
+    }
+    .hotelRight,.banquetRight,.cateringRight{
+        font-size: 14px;
+    }
+    .amenity{
+        font-size: 12px;
+        padding: 3px;
+    }
+    .hotelMain, .banquetMain, .cateringMain{
+        font-size: 15px;
+    }
+    
+    .hotelOverview,.banquetOverview,.cateringOverview{
+        font-size: 14px;
+    }
+    .hotelStandard, .hotelDeluxe, .hall, .cateringBasic, .cateringPremium, .cateringPremiumPlus{
+        font-size: 14px;
+        padding: 10px;
+    }
+    .finalAmt{
+        font-size: 18px;
+    }
+    
+    .minus,.plus{
+        flex:2
+    }
+    .val{
+        flex: 3;
+    }
+    .hotelMid, .banquetMid, .cateringMid{
+        gap: 10px;
+    }
+    .bookNow{
+        font-size: 14px;
+    }
+    .cateringServiceLeft{
+        gap: 5px;
+    }
+    .cateringServiceLeft{
+        flex: 3;
+    }
+}
+@media screen and (max-width: 600px){
+    .hotelMid, .banquetMid, .cateringMid{
+        flex-direction: column;
+    }
+    .hotelImgs, .banquetImgs, .cateringImgs{
+        width: 100%;
+    }
+    .spread,.hotelTimings,.banquetInfo{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .hotelMain, .banquetMain, .cateringMain{
+        width: 95%;
+        
+    }
+    .hotelName,.banquetName,.cateringName{
+        font-size: 18px;
+    }
+    .hotelAdd,.banquetAdd,.cateringAdd{
+        font-size: 14px;
+    }
+    .roomLeft, .hallLeft, .cateringServiceLeft{
+        display: none;
+    }
+    .hotelRoom, .banquetBooking, .cateringBooking{
+        font-size: 14px;
+    }
+    .bookNow{
+        width: 100%;
+    }
+    .finalAmt{
+        font-size: 14px;
+    }
+    .small{
+        font-size: 12px;
+    }
+    .hotelRight,.banquetRight,.cateringRight{
+        font-size: 12px;
+    }
 }

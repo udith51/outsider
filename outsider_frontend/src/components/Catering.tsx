@@ -136,13 +136,15 @@ const Catering: React.FC = () => {
           </div>
         </div>
         <div className="cateringRight">
-          <div className="cateringView pb5">
-            <AiOutlineEye className="green f20" />{" "}
-            {Math.floor(Math.random() * 100)} viewing
-          </div>
-          <div className="hotelBooked pb5">
-            <AiOutlineClockCircle className="green f20" /> Last booked:{" "}
-            {Math.floor(Math.random() * 10)} hours ago
+          <div className="spread">
+            <div className="cateringView pb5">
+              <AiOutlineEye className="green f20" />{" "}
+              {Math.floor(Math.random() * 100)} viewing
+            </div>
+            <div className="hotelBooked pb5">
+              <AiOutlineClockCircle className="green f20" /> Last booked:{" "}
+              {Math.floor(Math.random() * 10)} hours ago
+            </div>
           </div>
           <div className="br"></div>
           <div className="cateringAmenities">

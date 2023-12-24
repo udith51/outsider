@@ -107,19 +107,26 @@ const Banquet: React.FC = () => {
           </div>
         </div>
         <div className="banquetRight">
-          <div className="banquetView pb5">
-            <AiOutlineEye className="green f20" />{" "}
-            {Math.floor(Math.random() * 100)} viewing
-          </div>
-          <div className="banquetBooked pb5">
-            <AiOutlineClockCircle className="green f20" /> Last booked:{" "}
-            {Math.floor(Math.random() * 10)} hours ago
+          <div className="spread">
+            <div className="banquetView pb5">
+              <AiOutlineEye className="green f20" />{" "}
+              {Math.floor(Math.random() * 100)} viewing
+            </div>
+            <div className="banquetBooked pb5">
+              <AiOutlineClockCircle className="green f20" /> Last booked:{" "}
+              {Math.floor(Math.random() * 10)} hours ago
+            </div>
           </div>
           <div className="br"></div>
           <div className="banquetInfo">
-            <b>ACCOMODATION:</b> Upto {item?.accomodation as string | 1500}{" "}
-            people <div className="pb5"></div>
-            <b>TOTAL HALLS:</b> 5
+            <div>
+              <b>ACCOMODATION:</b> Upto {item?.accomodation as string | 1500}{" "}
+              people
+            </div>
+            <div className="pb5"></div>
+            <div>
+              <b>TOTAL HALLS:</b> 5
+            </div>
           </div>
           <div className="br"></div>
           <div className="banquetAmenities">
