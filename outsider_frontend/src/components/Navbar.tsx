@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import { IoFastFood } from "react-icons/io5";
 import { BiHomeHeart } from "react-icons/bi";
-import { BsBusFrontFill } from "react-icons/bs";
+import { BsBusFrontFill, BsCart2 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
 import { TContextType } from "../types";
@@ -139,6 +139,9 @@ const Navbar: React.FC = () => {
           ) : (
             <div className="navAccount">
               <div className="dropbtn">Hi {user.name.split(" ")[0]}</div>
+              <div className="tdropbtn">
+                <MdOutlineAccountCircle className="w26 h26" />
+              </div>
               <div className="dropdown-Content">
                 <div
                   onClick={() => {
@@ -166,8 +169,10 @@ const Navbar: React.FC = () => {
           </div>
           {user?.userType === "customer" && (
             <div className="navCart" onClick={handleCart}>
-              {" "}
-              My Cart
+              <div className="lapCart">My Cart</div>
+              <div className="tabCart">
+                <BsCart2 className="w26 h26" />
+              </div>
             </div>
           )}
         </div>

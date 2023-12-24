@@ -121,7 +121,7 @@
     color: #435c10;
 }
 
-.tdropbtn,.tabSupport{
+.tdropbtn,.tabSupport,.tabCart{
     display: none;
 }
 
@@ -151,10 +151,10 @@
     }
 }
 @media screen and (max-width: 600px){
-    .dropbtn,.lapSupport{
+    .dropbtn,.lapSupport,.lapCart{
         display: none
     }
-    .tdropbtn,.tabSupport{
+    .tdropbtn,.tabSupport,.tabCart{
         display: block;
     }
     .dropdown-Content{
@@ -165,11 +165,16 @@
         width: 50px;
     }   
     .navRight{
-        gap: 10px;
+        gap: 15px;
     }
 
     .dropdown-Content div{
         padding: 9px 12px;
         font-size: 14px;
+    }
+}
+@media screen and (max-width: 350px){
+    .navPrime{
+        display: none;
     }
 }
