@@ -139,7 +139,8 @@
     position: fixed;
     top: 0;
     z-index: 2;
-    background-color: rgba(0, 0, 0, 0.653);
+    background-color: #1A1A4E;
+    /* background-color: rgba(0, 0, 0, 0.653); */
     color: white;
     font-family: 'Exo';
 }
@@ -190,4 +191,17 @@
 .dashTab:hover{
     scale: 1.05;
     background-color: antiquewhite;
+}
+.white{
+    color: white;
+}
+
+@media screen and (max-width: 600px){
+    .dashTabs{
+        flex-direction: column;
+    }
+    .dashTab{
+        width: 300px;
+        height: 220px;
+    }
 }

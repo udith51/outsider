@@ -1,6 +1,6 @@
 .bookingsWrapper{
     padding-top: 90px;
-    width: 80vw;
+    width: 90vw;
     min-height: 100vh;
     margin: auto;
 }
@@ -10,23 +10,35 @@
     align-items: center;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    gap: 10px;
 }
 
 .res{
     display: flex;
     align-items: flex-start;
-    gap: 4px;
+    margin: 10px;
     flex-direction: column;
-    background-color: aquamarine;
-    padding: 15px;
+    background-color: #9EA2F3;
+    padding: 15px 25px;
     border-radius: 10px;
     font-weight: 500;
     word-spacing: 1px;
     font-size: 20px;
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.568);
 }
 
 a{
     text-decoration: none;
     color: #000;
+}
+
+@media screen and (max-width: 800px){
+    /* .bookingsWrapper{
+        width: 90vw;
+    } */
+}
+
+@media screen and (max-width: 600px){
+    .res{
+        font-size: 14px;
+    }
 }

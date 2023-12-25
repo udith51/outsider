@@ -3,7 +3,8 @@ import { Context } from "../App";
 import { TContextType } from "../types";
 import "../assets/css/Dashboard.css";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/imgs/logo-no-background.png";
+import logo from "../assets/imgs/logo-no-background1.png";
+import { MdOutlineAccountCircle } from "react-icons/md";
 
 const Dashboard: React.FC = () => {
   const { user, setUser } = useContext(Context) as TContextType;
@@ -24,6 +25,9 @@ const Dashboard: React.FC = () => {
             </div>
             <div className="navAccount">
               <div className="dropbtn">Hi {user?.name.split(" ")[0]}</div>
+              <div className="tdropbtn">
+                <MdOutlineAccountCircle className="w26 h26" />
+              </div>
               <div className="dropdown-Content">
                 <div
                   onClick={() => {

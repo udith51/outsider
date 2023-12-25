@@ -4,7 +4,8 @@ import ReserveBox from "../components/ReserveBox";
 import { Context } from "../App";
 import { TCartItem, TContextType } from "../types";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/imgs/logo-no-background.png";
+import logo from "../assets/imgs/logo-no-background1.png";
+import { MdOutlineAccountCircle } from "react-icons/md";
 
 const Booking: React.FC = () => {
   const { user, setUser } = useContext(Context) as TContextType;
@@ -48,6 +49,9 @@ const Booking: React.FC = () => {
           </div>
           <div className="navAccount">
             <div className="dropbtn">Hi {user?.name.split(" ")[0]}</div>
+            <div className="tdropbtn">
+              <MdOutlineAccountCircle className="w26 h26" />
+            </div>
             <div className="dropdown-Content">
               <div
                 onClick={() => {
