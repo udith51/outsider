@@ -32,12 +32,12 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 <div className="col">
                   <div>Standard Rooms (X{item.stRooms})</div>
                   <div className="dateCart">
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.stStartDate?.getMonth() as number]}{" "}
                       {item.stStartDate?.getDate()},{" "}
                       {item.stStartDate?.getFullYear()}
                     </div>
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.stEndDate?.getMonth() as number]}{" "}
                       {item.stEndDate?.getDate()},{" "}
                       {item.stEndDate?.getFullYear()}
@@ -49,12 +49,12 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 <div className="col">
                   <div>Deluxe Rooms (X{item.dlRooms})</div>
                   <div className="dateCart">
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.dlStartDate?.getMonth() as number]}{" "}
                       {item.dlStartDate?.getDate()},{" "}
                       {item.dlStartDate?.getFullYear()}
                     </div>
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.dlEndDate?.getMonth() as number]}{" "}
                       {item.dlEndDate?.getDate()},{" "}
                       {item.dlEndDate?.getFullYear()}
@@ -87,12 +87,12 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 <div className="col">
                   <div>Basic Plan (X{item.bsGuests})</div>
                   <div className="dateCart">
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.bsStartDate?.getMonth() as number]}{" "}
                       {item.bsStartDate?.getDate()},{" "}
                       {item.bsStartDate?.getFullYear()}
                     </div>
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.bsEndDate?.getMonth() as number]}{" "}
                       {item.bsEndDate?.getDate()},{" "}
                       {item.bsEndDate?.getFullYear()}
@@ -104,12 +104,12 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 <div className="col">
                   <div>Premium Plan (X{item.prGuests})</div>
                   <div className="dateCart">
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.prStartDate?.getMonth() as number]}{" "}
                       {item.prStartDate?.getDate()},{" "}
                       {item.prStartDate?.getFullYear()}
                     </div>
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.prEndDate?.getMonth() as number]}{" "}
                       {item.prEndDate?.getDate()},{" "}
                       {item.prEndDate?.getFullYear()}
@@ -121,12 +121,12 @@ const CartItem: React.FC<IItemProps> = ({ item }) => {
                 <div className="col">
                   <div>Premium Plus Plan (X{item.prPGuests})</div>
                   <div className="dateCart">
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.prPStartDate?.getMonth() as number]}{" "}
                       {item.prPStartDate?.getDate()},{" "}
                       {item.prPStartDate?.getFullYear()}
                     </div>
-                    <div className="">
+                    <div className="nowrap">
                       {month[item.prPEndDate?.getMonth() as number]}{" "}
                       {item.prPEndDate?.getDate()},{" "}
                       {item.prPEndDate?.getFullYear()}

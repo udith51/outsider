@@ -227,7 +227,8 @@
         margin: 0 4px 4px 0;
     }
     .mobItemBtm{
-        padding: 4px;
+        padding: 8px 4px;
+        margin-top: 10px;
         background-color: #EA2330;
         color: #fff;
         border-radius: 7px;

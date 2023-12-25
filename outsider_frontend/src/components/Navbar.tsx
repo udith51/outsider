@@ -12,7 +12,7 @@ import { BsBusFrontFill, BsCart2 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../App";
 import { TContextType } from "../types";
-import logo from "../assets/imgs/logo-color.png";
+import logo from "../assets/imgs/logo-no-background.png";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();

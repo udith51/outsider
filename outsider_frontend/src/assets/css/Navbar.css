@@ -121,6 +121,10 @@
     color: #435c10;
 }
 
+.lapSupport:hover{
+    color: #435c10;
+}
+
 .tdropbtn,.tabSupport,.tabCart{
     display: none;
 }

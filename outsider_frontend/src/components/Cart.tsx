@@ -14,16 +14,13 @@ const Cart: React.FC = () => {
   const navigate = useNavigate();
 
   const handleConfirmation = async () => {
-    const response = await fetch(
-      `https://outsider-backend.onrender.com/reserve`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cartItem }),
-      }
-    );
+    const response = await fetch(`http://localhost:3000/reserve`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cartItem }),
+    });
     if (response.statusText === "OK") {
       navigate("/success");
       setShowCart(false);
@@ -65,7 +62,7 @@ const Cart: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowCart(false)}
-                className="btn emptyBtn"
+                className="emptyBtn"
               >
                 Continue Browsing
               </button>

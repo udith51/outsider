@@ -53,3 +53,22 @@
 .successBtn:hover{
     scale: 1.05;
 }
+
+@media screen and (max-width: 600px){
+    .successWrapper{
+        padding: 20px;
+    }
+    .successWrapper h2{
+        margin-top: 5px;
+        font-size: 28px;
+    }
+    .successWrapper .description{
+        font-size: 14px;
+    }
+    .successBtn{
+        width: 200px;
+        padding: 8px 12px;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+}

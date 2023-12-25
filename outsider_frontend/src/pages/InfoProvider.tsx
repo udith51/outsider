@@ -178,7 +178,7 @@ const InfoProvider: React.FC = () => {
           config
         )
         .then((response) => {
-          if (response.statusText === "OK") {
+          if (response.status === 200) {
             console.log(response.data);
             navigate("/dash");
           } else {
@@ -196,7 +196,7 @@ const InfoProvider: React.FC = () => {
           config
         )
         .then((response) => {
-          if (response.statusText === "OK") {
+          if (response.status === 200) {
             console.log(response.data);
             navigate("/dash");
           } else {
