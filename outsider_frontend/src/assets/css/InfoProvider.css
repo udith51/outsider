@@ -136,3 +136,47 @@ input, .rmsc .dropdown-container{
   color: black;
   scale: 1.1;
 }
+
+@media screen and (max-width: 1000px){
+  .infoProvider>form{
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 800px){
+  .infoProvider>form{
+    width: 90vw;
+  }
+}
+@media screen and (max-width: 600px){
+  .infoProvider{
+    font-size: 14px;
+  }
+  .w4>input{
+    width: 47%;
+  }
+
+  .wEq, .w2,.w4{
+    flex-direction: column;
+  }
+
+  .wEq{
+    margin: 0 4px;
+  }
+
+  .w2,.w4>input{
+    width: 100%;
+  }
+
+  .w2>.bar{
+    max-width: none;
+  }
+
+  .infoSub{
+    width: 90%;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 12px;
+  } 
+}

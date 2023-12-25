@@ -50,10 +50,9 @@ const Login: React.FC = () => {
       password: "",
     });
   };
-  console.log(message);
 
   return (
-    <form className="" onSubmit={onSubmit}>
+    <form className="authForm" onSubmit={onSubmit}>
       <div className="bar">
         <label htmlFor="email">Email</label>
         <input

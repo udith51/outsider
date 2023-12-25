@@ -34,7 +34,7 @@ const Registration: React.FC = () => {
         userType,
       })
       .then((response) => {
-        if (response.statusText === "OK") {
+        if (response.status === 200) {
           setUser(response.data);
           localStorage.setItem("user", JSON.stringify(response.data));
           if (response.data.userType === "provider") navigate("/info");
@@ -114,9 +114,9 @@ const Registration: React.FC = () => {
           <label htmlFor="category">Category</label>
           <select
             className="aInput"
+            value={form.category}
             name="category"
             id="category"
-            defaultValue=""
             onChange={onChange}
           >
             <option disabled value="" className="aOptions">

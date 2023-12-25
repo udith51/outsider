@@ -63,7 +63,7 @@
     width: 500px;
 }
 
-.bar{
+.authForm>.bar{
     margin-bottom: 15px;
 }
 
@@ -74,12 +74,13 @@ label{
 
 .aInput{
     width: 100%;
-    padding: 8px;
+    padding: 4px 8px;
     outline: none;
     border: none;
     border-radius: 15px;
     letter-spacing: 1px;
     font-weight: 500;
+    height: 30px;
 }
 
 
@@ -121,4 +122,30 @@ label{
     text-align: center;
     color: red;
     font-weight: 600;
+}
+
+@media screen and (max-width: 600px){
+    .accForm{
+        width: 390px;
+        padding: 10px 20px 15px 20px;
+    }
+    .authForm>.bar{
+        margin: 15px;
+    }
+    .accSubmit{
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+    .aInput{
+        margin: 0;
+    }
+    .btmText{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .accForm{
+        width: 300px;
+    }
 }
