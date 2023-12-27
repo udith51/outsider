@@ -28,6 +28,7 @@ const InfoProvider: React.FC = () => {
     const userData = JSON.parse(userStore);
     id = userData.userId;
   }
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getData(): Promise<void> {
@@ -162,50 +163,49 @@ const InfoProvider: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     var formData = setFormData(new FormData());
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
-    console.log(oldUser);
-    if (oldUser) {
-      console.log(formData.get("pictures"));
-      axios
-        .patch(
+
+    try {
+      if (oldUser) {
+        console.log(formData.get("pictures"));
+        console.log(loading);
+        const response = await axios.patch(
           `https://outsider-backend.onrender.com/provider/update-info/${category}/${id}`,
           formData,
           config
-        )
-        .then((response) => {
-          if (response.status === 200) {
-            console.log(response.data);
-            navigate("/dash");
-          } else {
-            console.log(response);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      axios
-        .post(
+        );
+
+        if (response.status === 200) {
+          console.log(response.data);
+          navigate("/dash");
+        } else {
+          console.log(response);
+        }
+      } else {
+        const response = await axios.post(
           `https://outsider-backend.onrender.com/provider/register/${category}`,
           formData,
           config
-        )
-        .then((response) => {
-          if (response.status === 200) {
-            console.log(response.data);
-            navigate("/dash");
-          } else {
-            console.log(response);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        );
+
+        if (response.status === 200) {
+          console.log(response.data);
+          navigate("/dash");
+        } else {
+          console.log(response);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      console.log(loading);
     }
   };
 
@@ -425,9 +425,16 @@ const InfoProvider: React.FC = () => {
             </div>
           </div>
         )}
-        <button type="submit" className="infoSub">
-          {oldUser ? "Update" : "Save"}
-        </button>
+
+        {loading ? (
+          <div className="spinner">
+            <span className="loader"></span>
+          </div>
+        ) : (
+          <button type="submit" className="infoSub">
+            {oldUser ? "Update" : "Save"}
+          </button>
+        )}
       </form>
     </div>
   );

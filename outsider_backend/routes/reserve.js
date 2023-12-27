@@ -13,8 +13,8 @@ router.post('/', async (req, res) => {
                 newReservation = await new ReserveCatering(req.body.cartItem[idx]);
             else if (category === "banquet")
                 newReservation = await new ReserveBanquet(req.body.cartItem[idx]);
-            sendClientMessage(req.body.cartItem[idx].name);
-            sendProviderMessage(req.body.cartItem[idx].customerName);
+            // sendClientMessage(req.body.cartItem[idx].name);
+            // sendProviderMessage(req.body.cartItem[idx].customerName);
             await newReservation.save();
         } return res.status(200).send("Done");
     } catch (e) {

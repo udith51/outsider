@@ -22,7 +22,7 @@ const Item: React.FC<ItemProps> = ({ item }) => {
   }, [activeTab]);
 
   useEffect(() => {
-    item?.pictures && setCurrentImg(item.pictures[0].url);
+    item?.pictures && setCurrentImg(item.pictures[0]?.url);
   }, [item]);
 
   const handleClick = () => {

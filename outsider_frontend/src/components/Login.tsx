@@ -7,6 +7,7 @@ const Login: React.FC = () => {
   const { userType, setAccMode, setUser } = useContext(Context) as TContextType;
   const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState<TLogForm>({
     email: "",
@@ -24,6 +25,7 @@ const Login: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const response = await fetch(
       `https://outsider-backend.onrender.com/auth/login`,
       {
@@ -44,6 +46,7 @@ const Login: React.FC = () => {
       const val = await response.json();
       setMessage(val);
     }
+    setLoading(false);
 
     setForm({
       email: "",
@@ -78,17 +81,25 @@ const Login: React.FC = () => {
         />
       </div>
       <div className="message">{message}</div>
-      <button type="submit" className="accSubmit">
-        Login
-      </button>
-      <div
-        className="btmText"
-        onClick={() => {
-          setAccMode("signup");
-        }}
-      >
-        Not a registered user?
-      </div>
+      {loading ? (
+        <div className="spinner">
+          <span className="loader"></span>
+        </div>
+      ) : (
+        <button type="submit" className="accSubmit">
+          Login
+        </button>
+      )}
+      {!loading && (
+        <div
+          className="btmText"
+          onClick={() => {
+            setAccMode("signup");
+          }}
+        >
+          Not a registered user?
+        </div>
+      )}
     </form>
   );
 };

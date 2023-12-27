@@ -8,6 +8,7 @@ const Registration: React.FC = () => {
   const { userType, setAccMode, setUser } = useContext(Context) as TContextType;
   const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState<TRegForm>({
     name: "",
@@ -28,6 +29,7 @@ const Registration: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     await axios
       .post(`https://outsider-backend.onrender.com/auth/register`, {
         ...form,
@@ -44,6 +46,7 @@ const Registration: React.FC = () => {
       .catch((val) => {
         setMessage(val.response.data);
       });
+    setLoading(false);
     setForm(() => ({
       name: "",
       phone: "",
@@ -131,17 +134,26 @@ const Registration: React.FC = () => {
         </div>
       )}
       <div className="message">{message}</div>
-      <button type="submit" className="accSubmit">
-        Register
-      </button>
-      <div
-        className="btmText"
-        onClick={() => {
-          setAccMode("login");
-        }}
-      >
-        Already a registered user?
-      </div>
+      {loading ? (
+        <div className="spinner">
+          <span className="loader"></span>
+        </div>
+      ) : (
+        <button type="submit" className="accSubmit">
+          Register
+        </button>
+      )}
+
+      {!loading && (
+        <div
+          className="btmText"
+          onClick={() => {
+            setAccMode("login");
+          }}
+        >
+          Already a registered user?
+        </div>
+      )}
     </form>
   );
 };
