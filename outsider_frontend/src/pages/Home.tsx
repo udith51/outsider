@@ -20,9 +20,11 @@ const Home: React.FC = () => {
   } = useContext(Context) as TContextType;
   const [items, setItems] = useState<TInfoProvider[] | null>();
   const ref = useRef<HTMLDivElement>();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getData(): Promise<void> {
+      setLoading(true);
       await fetch(
         `https://outsider-backend.onrender.com/provider/all/${activeTab}`,
         {
@@ -34,6 +36,7 @@ const Home: React.FC = () => {
         .then(async (response) => {
           const val = await response.json();
           setItems(val);
+          setLoading(false);
         })
         .catch((e) => {
           console.log(e);
@@ -53,44 +56,53 @@ const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="home" ref={ref as React.MutableRefObject<HTMLDivElement>}>
-        <div className="homeLeft">
-          <Sidebar />
+      {loading ? (
+        <div className="spinnerMain">
+          <span className="loaderMain"></span>
         </div>
-        <div className="homeRight">
-          <div className="homeSearch">
-            <input
-              type="text"
-              name="search"
-              id="search"
-              onChange={(e) => {
-                setSearch(e.target.value);
-              }}
-              value={search}
-              placeholder="Search by name or city"
-            />
+      ) : (
+        <div
+          className="home"
+          ref={ref as React.MutableRefObject<HTMLDivElement>}
+        >
+          <div className="homeLeft">
+            <Sidebar />
           </div>
-          {items?.map((item) => {
-            if (
-              (item?.name?.toLowerCase() as string).search(
-                search.toLowerCase()
-              ) !== -1 ||
-              (item?.city?.toLowerCase() as string).search(
-                search.toLowerCase()
-              ) !== -1
-            ) {
-              if (rqdAmenities.every((am) => item.amenities?.includes(am))) {
-                if (assured) {
-                  if (item.assured ? item.assured >= 5000 : 0)
+          <div className="homeRight">
+            <div className="homeSearch">
+              <input
+                type="text"
+                name="search"
+                id="search"
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                value={search}
+                placeholder="Search by name or city"
+              />
+            </div>
+            {items?.map((item) => {
+              if (
+                (item?.name?.toLowerCase() as string).search(
+                  search.toLowerCase()
+                ) !== -1 ||
+                (item?.city?.toLowerCase() as string).search(
+                  search.toLowerCase()
+                ) !== -1
+              ) {
+                if (rqdAmenities.every((am) => item.amenities?.includes(am))) {
+                  if (assured) {
+                    if (item.assured ? item.assured >= 5000 : 0)
+                      return <Item item={item} key={item.serviceId} />;
+                  } else {
                     return <Item item={item} key={item.serviceId} />;
-                } else {
-                  return <Item item={item} key={item.serviceId} />;
+                  }
                 }
               }
-            }
-          })}
+            })}
+          </div>
         </div>
-      </div>
+      )}
       {user && showCart && <Cart />}
       <BottomBar />
     </>
