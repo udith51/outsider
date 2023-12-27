@@ -152,6 +152,10 @@ input, .rmsc .dropdown-container{
   .infoProvider{
     font-size: 14px;
   }
+  input{
+    font-size: 12px;
+    height: 24px;
+  }
   .w4>input{
     width: 47%;
   }

@@ -177,7 +177,63 @@ const Catering: React.FC = () => {
             <div className="col">Desserts & Beverage (8)</div>
           </div>
           <div className="cateringServiceMid">
-            <div className="col">
+            <table className="serviceMid">
+              <tr>
+                <td>From Date</td>
+                <td>
+                  <DatePicker
+                    selectsStart
+                    selected={bsStartDate}
+                    onChange={(date) => setBsStartDate(date as Date)}
+                    startDate={bsStartDate}
+                    placeholderText="MM/DD/YYYY"
+                    className="date"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>To Date</td>
+                <td>
+                  <DatePicker
+                    selectsEnd
+                    selected={bsEndDate}
+                    onChange={(date) => setBsEndDate(date as Date)}
+                    endDate={bsEndDate}
+                    startDate={bsStartDate}
+                    minDate={bsStartDate}
+                    placeholderText="MM/DD/YYYY"
+                    className="date"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Enter Guests</td>
+                <td>
+                  <div className="count">
+                    <div
+                      className="minus"
+                      onClick={() => {
+                        setBsGuests((guests) =>
+                          guests === 0 ? guests : guests - 100
+                        );
+                      }}
+                    >
+                      -
+                    </div>
+                    <div className="val">{bsGuests}</div>
+                    <div
+                      className="plus"
+                      onClick={() => {
+                        setBsGuests((guests) => guests + 100);
+                      }}
+                    >
+                      +
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            {/* <div className="col">
               From Date
               <DatePicker
                 selectsStart
@@ -187,8 +243,8 @@ const Catering: React.FC = () => {
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
-            </div>
-            <div className="col">
+            </div> */}
+            {/* <div className="col">
               To Date
               <DatePicker
                 selectsEnd
@@ -200,8 +256,8 @@ const Catering: React.FC = () => {
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
-            </div>
-            <div className="col">
+            </div> */}
+            {/* <div className="col">
               Enter Guests
               <div className="count">
                 <div
@@ -224,7 +280,7 @@ const Catering: React.FC = () => {
                   +
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="cateringServiceRight">
             <div className="finalAmt">
@@ -246,7 +302,63 @@ const Catering: React.FC = () => {
             <div className="col">Desserts & Beverage (10)</div>
           </div>
           <div className="cateringServiceMid">
-            <div className="col">
+            <table className="serviceMid">
+              <tr>
+                <td>From Date</td>
+                <td>
+                  <DatePicker
+                    selectsStart
+                    selected={prStartDate}
+                    onChange={(date) => setPrStartDate(date as Date)}
+                    startDate={prStartDate}
+                    placeholderText="MM/DD/YYYY"
+                    className="date"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>To Date</td>
+                <td>
+                  <DatePicker
+                    selectsEnd
+                    selected={prEndDate}
+                    onChange={(date) => setPrEndDate(date as Date)}
+                    endDate={prEndDate}
+                    startDate={prStartDate}
+                    minDate={prStartDate}
+                    placeholderText="MM/DD/YYYY"
+                    className="date"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Enter Guests</td>
+                <td>
+                  <div className="count">
+                    <div
+                      className="minus"
+                      onClick={() => {
+                        setPrGuests((guests) =>
+                          guests === 0 ? guests : guests - 100
+                        );
+                      }}
+                    >
+                      -
+                    </div>
+                    <div className="val">{prGuests}</div>
+                    <div
+                      className="plus"
+                      onClick={() => {
+                        setPrGuests((guests) => guests + 100);
+                      }}
+                    >
+                      +
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            {/* <div className="col">
               From Date
               <DatePicker
                 selectsStart
@@ -256,8 +368,8 @@ const Catering: React.FC = () => {
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
-            </div>
-            <div className="col">
+            </div> */}
+            {/* <div className="col">
               To Date
               <DatePicker
                 selectsEnd
@@ -269,8 +381,8 @@ const Catering: React.FC = () => {
                 placeholderText="MM/DD/YYYY"
                 className="date"
               />
-            </div>
-            <div className="col">
+            </div> */}
+            {/* <div className="col">
               Enter Guests
               <div className="count">
                 <div
@@ -293,7 +405,7 @@ const Catering: React.FC = () => {
                   +
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="cateringServiceRight">
             <div className="finalAmt">
@@ -316,7 +428,65 @@ const Catering: React.FC = () => {
             <div className="col">Desserts & Beverage (12)</div>
           </div>
           <div className="cateringServiceMid">
-            <div className="col">
+            <table className="serviceMid">
+              <tbody>
+                <tr>
+                  <td>From Date</td>
+                  <td>
+                    <DatePicker
+                      selectsStart
+                      selected={prPStartDate}
+                      onChange={(date) => setPrPStartDate(date as Date)}
+                      startDate={prPStartDate}
+                      placeholderText="MM/DD/YYYY"
+                      className="date"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>To Date</td>
+                  <td>
+                    <DatePicker
+                      selectsEnd
+                      selected={prPEndDate}
+                      onChange={(date) => setPrPEndDate(date as Date)}
+                      endDate={prPEndDate}
+                      startDate={prPStartDate}
+                      minDate={prPStartDate}
+                      placeholderText="MM/DD/YYYY"
+                      className="date"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Enter Guests</td>
+                  <td>
+                    <div className="count">
+                      <div
+                        className="minus"
+                        onClick={() => {
+                          setPrPGuests((guests) =>
+                            guests === 0 ? guests : guests - 100
+                          );
+                        }}
+                      >
+                        -
+                      </div>
+                      <div className="val">{prPGuests}</div>
+                      <div
+                        className="plus"
+                        onClick={() => {
+                          setPrPGuests((guests) => guests + 100);
+                        }}
+                      >
+                        +
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <div className="col">
               From Date
               <DatePicker
                 selectsStart
@@ -363,7 +533,7 @@ const Catering: React.FC = () => {
                   +
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="cateringServiceRight">
             <div className="finalAmt">

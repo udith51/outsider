@@ -69,7 +69,8 @@
 .filterTab{
     width: 150px;
     position: fixed;
-    height: 400px;
+    /* min-height: ; */
+    /* height: 400px; */
     bottom: 50px;
     right: 10px;
     background-color: white;
@@ -83,5 +84,11 @@
     }
     .filterTab{
         display: none;
+    }
+}
+
+@media screen and(max-width:800px){
+    .sideAmenity{
+        margin-top: 0px;
     }
 }

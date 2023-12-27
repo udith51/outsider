@@ -176,7 +176,65 @@ const Hotel: React.FC = () => {
             <img src={item?.pictures[0].url} alt="" className="imgSml" />
           </div>
           <div className="roomMid">
-            <div className="col">
+            <table className="serviceMid">
+              <tr>
+                <td>Enter CheckIn Date</td>
+                <td>
+                  <DatePicker
+                    selectsStart
+                    selected={stStartDate}
+                    onChange={(date) => setStStartDate(date as Date)}
+                    startDate={stStartDate}
+                    placeholderText="MM/DD/YYYY"
+                    className="date"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Enter CheckOut Date</td>
+                <td>
+                  <DatePicker
+                    selectsEnd
+                    selected={stEndDate}
+                    onChange={(date) => setStEndDate(date as Date)}
+                    endDate={stEndDate}
+                    startDate={stStartDate}
+                    minDate={stStartDate}
+                    placeholderText="MM/DD/YYYY"
+                    className="date"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Enter no. of Rooms</td>
+                <td>
+                  <div className="count">
+                    <div
+                      className="minus"
+                      onClick={() => {
+                        setStRooms((rooms) =>
+                          rooms === 0 ? rooms : rooms - 1
+                        );
+                      }}
+                    >
+                      -
+                    </div>
+                    <div className="val">{stRooms}</div>
+                    <div
+                      className="plus"
+                      onClick={() => {
+                        setStRooms((rooms) =>
+                          rooms === item?.standardRooms ? rooms : rooms + 1
+                        );
+                      }}
+                    >
+                      +
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+            {/* <div className="col">
               Enter CheckIn Date
               <DatePicker
                 selectsStart
@@ -223,7 +281,7 @@ const Hotel: React.FC = () => {
                   +
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="roomRight">
             <div className="finalAmt">
@@ -238,7 +296,69 @@ const Hotel: React.FC = () => {
             <img src={item?.pictures[0].url} alt="" className="imgSml" />
           </div>
           <div className="roomMid">
-            <div className="col">
+            <table className="serviceMid">
+              <tbody>
+                <tr>
+                  <td>Enter CheckIn Date</td>
+                  <td>
+                    <DatePicker
+                      selectsEnd
+                      selected={dlEndDate}
+                      onChange={(date) => setDlEndDate(date as Date)}
+                      endDate={dlEndDate}
+                      startDate={dlStartDate}
+                      minDate={dlStartDate}
+                      placeholderText="MM/DD/YYYY"
+                      className="date"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Enter CheckOut Date</td>
+                  <td>
+                    <DatePicker
+                      selectsEnd
+                      selected={dlEndDate}
+                      onChange={(date) => setDlEndDate(date as Date)}
+                      endDate={dlEndDate}
+                      startDate={dlStartDate}
+                      minDate={dlStartDate}
+                      placeholderText="MM/DD/YYYY"
+                      className="date"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Enter no. of Rooms</td>
+                  <td>
+                    <div className="count">
+                      <div
+                        className="minus"
+                        onClick={() => {
+                          setDlRooms((rooms) =>
+                            rooms === 0 ? rooms : rooms - 1
+                          );
+                        }}
+                      >
+                        -
+                      </div>
+                      <div className="val">{dlRooms}</div>
+                      <div
+                        className="plus"
+                        onClick={() => {
+                          setDlRooms((rooms) =>
+                            rooms === item?.deluxeRooms ? rooms : rooms + 1
+                          );
+                        }}
+                      >
+                        +
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <div className="col">
               Enter CheckIn Date
               <DatePicker
                 selectsStart
@@ -285,7 +405,7 @@ const Hotel: React.FC = () => {
                   +
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="roomRight">
             <div className="finalAmt">

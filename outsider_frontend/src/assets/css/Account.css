@@ -63,7 +63,7 @@
     width: 500px;
 }
 
-.authForm>.bar{
+.authForm .bar{
     margin-bottom: 15px;
 }
 
@@ -128,6 +128,7 @@ label{
 }
 
 .message{
+    margin-top: 10px;
     text-align: center;
     color: red;
     font-weight: 600;
@@ -171,6 +172,7 @@ label{
     .accForm{
         width: 390px;
         padding: 10px 20px 15px 20px;
+        font-size: 14px;
     }
     .authForm>.bar{
         margin: 15px;
@@ -188,12 +190,21 @@ label{
     .loader{
         font-size: 5px;
     }
+    .message{
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 400px){
     .accForm{
         width: 300px;
+        font-size: 12px;
     }
+    .aInput{
+        font-size: 12px;
+        height: 24px;
+    }
+    /* .a */
     .loader{
         font-size: 3px;
     }
@@ -203,6 +214,9 @@ label{
     .accSubmit{
         font-size: 14px;
         padding: 5px 16px;
+    }
+    .message{
+        font-size: 12px;
     }
 }
       

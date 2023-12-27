@@ -63,6 +63,14 @@
     }
 }
 
-@media screen and (max-width:800px){
-    
+@media screen and (max-width: 800px) {
+    .sideAmenity{
+        margin-top: 0px;
+    }
+    .sideAmenity>.amenity{
+        font-size: 12px;
+        margin: 3px;
+
+    }
 }
+

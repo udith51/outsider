@@ -152,7 +152,50 @@ const Banquet: React.FC = () => {
             <img src={currentImg} alt="" className="imgSml" />
           </div>
           <div className="hallMid">
-            <div className="col">
+            <table className="serviceMid">
+              <tbody>
+                <tr>
+                  <td>Enter Event Date</td>
+                  <td>
+                    <DatePicker
+                      selected={date}
+                      onChange={(date) => setDate(date as Date)}
+                      className="date"
+                      placeholderText="MM/DD/YYYY"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Enter no. of Halls</td>
+                  <td>
+                    <div className="count">
+                      <div
+                        className="minus"
+                        onClick={() => {
+                          setHalls((halls) =>
+                            halls === 1 ? halls : halls - 1
+                          );
+                        }}
+                      >
+                        -
+                      </div>
+                      <div className="val">{halls}</div>
+                      <div
+                        className="plus"
+                        onClick={() => {
+                          setHalls((halls) =>
+                            halls === 5 ? halls : halls + 1
+                          );
+                        }}
+                      >
+                        +
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <div className="col">
               Enter Event Date
               <DatePicker
                 selected={date}
@@ -182,7 +225,7 @@ const Banquet: React.FC = () => {
                   +
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="hallRight">
             <div className="finalAmt">
