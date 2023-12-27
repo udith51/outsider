@@ -5,15 +5,6 @@ const bcrypt = require('bcrypt');
 router.post('/register', async (req, res) => {
     try {
         const { name, email, password, userType, category, phone } = req.body;
-        if (!name || !email || !password || (userType === "provider" && !category))
-            return res.status(404).json("All the fields are required!");
-        if (password.length < 8)
-            return res.status(400).json("Password length should be greater than 8 characters.")
-        if (phone.length !== 10)
-            return res.status(400).json("Incorrect Phone number.")
-        var validRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (validRegEx.test(email) !== true)
-            return res.status(400).json("Incorrect email address.")
         const salt = await bcrypt.genSalt(10);
         const hashedPwd = await bcrypt.hash(password, salt);
         const newUser = new User({

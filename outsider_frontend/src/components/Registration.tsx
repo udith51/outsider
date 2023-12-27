@@ -29,6 +29,29 @@ const Registration: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (
+      !form.email ||
+      !form.password ||
+      !form.phone ||
+      !form.name ||
+      (userType === "provider" && !form.category)
+    ) {
+      setMessage("All the fields are required.");
+      return;
+    }
+    if (form.password.length < 8) {
+      setMessage("Password length should be greater than 8 characters.");
+      return;
+    }
+    if (form.phone.length !== 10) {
+      setMessage("Incorrect Phone number.");
+      return;
+    }
+    var validRegEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (validRegEx.test(form.email) !== true) {
+      setMessage("Incorrect email address.");
+      return;
+    }
     setLoading(true);
     await axios
       .post(`https://outsider-backend.onrender.com/auth/register`, {
@@ -63,7 +86,7 @@ const Registration: React.FC = () => {
   ];
 
   return (
-    <form className="" onSubmit={onSubmit}>
+    <form className="authForm" onSubmit={onSubmit}>
       <div className="bar">
         <label htmlFor="name">Name</label>
         <input

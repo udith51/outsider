@@ -25,6 +25,10 @@ const Login: React.FC = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!form.email || !form.password) {
+      setMessage("All the fields are required.");
+      return;
+    }
     setLoading(true);
     const response = await fetch(
       `https://outsider-backend.onrender.com/auth/login`,
